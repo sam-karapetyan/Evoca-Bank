@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoImg from '../../assets/evocabank.png';
+import { FaBars } from 'react-icons/fa';
+import logo2Img from '../../assets/Logo2.png';
 
-function Headernerqev() {
+function Headernerqev({ onOpenBurger }) {
   return (
     <>
       <style>{`
@@ -10,15 +11,16 @@ function Headernerqev() {
 
         .HeaderNerqevContainer {
           width: 100%;
-          height: 100px;
+          height: 90px;
           background-color: #ffffff;
           display: flex;
           align-items: center;
           justify-content: space-between;
           padding: 0 40px;
           box-sizing: border-box;
-          box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
           font-family: 'Nunito Sans', sans-serif;
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+          transition: box-shadow 0.3s ease;
         }
 
         .HeaderLeftSection {
@@ -28,21 +30,20 @@ function Headernerqev() {
         }
 
         .HeaderLogo {
-          width: 195px;
+          width: 55px;
           height: auto;
-          max-height: 80px;
+          max-height: 50px;
           object-fit: contain;
-          mix-blend-mode: multiply;
         }
 
         .HeaderNavLinks {
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: 18px;
         }
 
         .HeaderNavLink {
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 800;
           color: #121216;
           text-decoration: none;
@@ -55,13 +56,19 @@ function Headernerqev() {
           color: #a855f7;
         }
 
+        .HeaderRightSection {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+
         .EvocaOnlineBtn {
           background-color: #6c11d9;
           color: #ffffff;
-          padding: 12px 28px;
+          padding: 10px 24px;
           border-radius: 30px;
           text-decoration: none;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 800;
           white-space: nowrap;
           transition: background-color 0.2s ease, transform 0.1s ease;
@@ -71,12 +78,29 @@ function Headernerqev() {
           background-color: #580cb8;
           transform: translateY(-1px);
         }
+
+        .BurgerBtn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          font-size: 20px;
+          color: #121216;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 5px;
+          transition: color 0.2s ease;
+        }
+
+        .BurgerBtn:hover {
+          color: #6c11d9;
+        }
       `}</style>
 
       <div className="HeaderNerqevContainer">
         <div className="HeaderLeftSection">
           <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={logoImg} alt="Evoca Logo" className="HeaderLogo" />
+            <img src={logo2Img} alt="Logo2" className="HeaderLogo" />
           </Link>
 
           <nav className="HeaderNavLinks">
@@ -91,9 +115,14 @@ function Headernerqev() {
           </nav>
         </div>
 
-        <Link to="/online" className="EvocaOnlineBtn">
-          EvocaONLINE
-        </Link>
+        <div className="HeaderRightSection">
+          <Link to="/online" className="EvocaOnlineBtn">
+            EvocaONLINE
+          </Link>
+          <button className="BurgerBtn" onClick={onOpenBurger}>
+            <FaBars />
+          </button>
+        </div>
       </div>
     </>
   );

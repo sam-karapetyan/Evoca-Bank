@@ -142,8 +142,7 @@ function Headeriverev() {
 
       <div className='Container'>
         <div className='Link'>
-          <NavLink to="/" end><span>Գլխավոր</span></NavLink>
-          <NavLink to="/individual"><span>Անհատ</span></NavLink>
+          <NavLink to="/" end><span>Անհատ</span></NavLink>
           <NavLink to="/business"><span>Բիզնես</span></NavLink>
           <NavLink to="/instant-payments"><span>Ակնթարթային վճարումներ</span></NavLink>
           <NavLink to="/about"><span>Մեր մասին</span></NavLink>
