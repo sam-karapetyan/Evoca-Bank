@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "title": "Օնլայն ավանդ EvocaTOUCH հավելվածով",
+    "description": "Դի'ր ավանդ Evocabank-ում բարձր, շա'տ բարձր տոկոսներով:",
+    "btnText": "Ծանոթանալ պայմաններին",
+    "btnLink": "/deposits",
+    "bg": "#fde8f0",
+    "textColor": "#121216",
+    "btnBg": "#6c11d9",
+    "btnColor": "#ffffff"
+  },
+  {
+    "id": 2,
+    "title": "Evoca Travel Card",
+    "description": "Այս քարտն իր բազմաթիվ առավելություններով կդառնա քո ճամփորդական անբաժան ընկերը:",
+    "btnText": "Իմանալ ավելին",
+    "btnLink": "/travel-card",
+    "bg": "#e4e4e7",
+    "textColor": "#121216",
+    "btnBg": "#6c11d9",
+    "btnColor": "#ffffff"
+  },
+  {
+    "id": 3,
+    "title": "Evoca Աշխատավարձային նախագիծ",
+    "description": "Բեր աշխատավարձդ Evoca: Տար շատ ավելին...",
+    "btnText": "Իմանալ ավելին",
+    "btnLink": "/salary-project",
+    "bg": "#6400DC",
+    "textColor": "#ffffff",
+    "btnBg": "#ffffff",
+    "btnColor": "#6c11d9"
+  },
+  {
+    "id": 4,
+    "title": "Առցանց վարկեր ակնթարթորեն",
+    "description": "Ստացիր վարկ առանց բանկ գնալու, ուղղակիորեն հավելվածից:",
+    "btnText": "Ստանալ վարկ",
+    "btnLink": "/loans",
+    "bg": "#e0f2fe",
+    "textColor": "#0f172a",
+    "btnBg": "#0284c7",
+    "btnColor": "#ffffff"
+  },
+  {
+    "id": 5,
+    "title": "Evoca Cashback Քարտեր",
+    "description": "Վճարիր քարտով և ստացիր գումարի մի մասը ետ՝ Cashback-ի տեսքով:",
+    "btnText": "Պատվիրել քարտ",
+    "btnLink": "/cards",
+    "bg": "#fef3c7",
+    "textColor": "#1f2937",
+    "btnBg": "#d97706",
+    "btnColor": "#ffffff"
+  },
+  {
+    "id": 6,
+    "title": "Բիզնես վարկեր ձեր հաջողության համար",
+    "description": "Զարգացրեք ձեր բիզնեսը մեր նոր և շահավետ վարկային պայմաններով:",
+    "btnText": "Բիզնեսի համար",
+    "btnLink": "/business",
+    "bg": "#ede9fe",
+    "textColor": "#2e1065",
+    "btnBg": "#7c3aed",
+    "btnColor": "#ffffff"
+  },
+  {
+    "id": 7,
+    "title": "Անվտանգ և արագ փոխանցումներ",
+    "description": "Կատարեք աշխարհի ցանկացած կետ արագ և ապահով դրամական փոխանցումներ:",
+    "btnText": "Փոխանցել",
+    "btnLink": "/transfers",
+    "bg": "#ccfbf1",
+    "textColor": "#042f2e",
+    "btnBg": "#0d9488",
+    "btnColor": "#ffffff"
+  },
+  {
+    "id": 8,
+    "title": "Արժեթղթեր և Ներդրումներ",
+    "description": "Կատարեք շահավետ ներդրումներ և աճեցրեք ձեր կապիտալը մեզ հետ:",
+    "btnText": "Ներդրումներ",
+    "btnLink": "/investments",
+    "bg": "#ffedd5",
+    "textColor": "#431407",
+    "btnBg": "#c2410c",
+    "btnColor": "#ffffff"
+  }
+]
