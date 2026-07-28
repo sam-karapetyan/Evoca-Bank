@@ -1,0 +1,51 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# Dependency-ներ (ամենակարևորը, որպեսզի չծանրաբեռնի repository-ն)
+node_modules/
+
+# Build/Production թղթապանակներ
+dist/
+build/
+
+# Environment ֆայլեր (գաղտնի բանալիներ/տվյալներ)
+.env
+.env.local
+
+# IDE / Editor ֆայլեր
+.vscode/
+.idea/
+
+# OS-ի ավելորդ ֆայլեր
+.DS_Store
+Thumbs.db
+# Visual Studio / IDE
+.vs/
+bin/
+obj/
+
+# Executable ֆայլեր
+*.exe
+*.out
+*.app
