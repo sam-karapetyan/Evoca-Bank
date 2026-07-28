@@ -1,240 +1,271 @@
 import React, { useState, useEffect } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase'; // Ճշգրտիր ուղին ըստ քո ֆայլերի դասավորության
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { ref, onValue } from 'firebase/database';
+import { useNavigate } from 'react-router-dom';
+import { db } from '../../firebase';
 
-import main1 from '../../../assets/main1.png';
-import main2 from '../../../assets/main2.png';
-import main3 from '../../../assets/main3.png';
-import main4 from '../../../assets/main4.png';
-import main5 from '../../../assets/main5.png';
-import main6 from '../../../assets/main6.png';
-import main7 from '../../../assets/main7.png';
-import main8 from '../../../assets/main8.png';
+import main1 from '../../assets/main1.png';
+import main2 from '../../assets/main2.png';
+import main3 from '../../assets/main3.png';
+import main4 from '../../assets/main4.png';
+import main5 from '../../assets/main5.png';
+import main6 from '../../assets/main6.png';
+import main7 from '../../assets/main7.png';
 
-const imagesMap = [main1, main2, main3, main4, main5, main6, main7, main8];
+const imagesMap = [main1, main2, main3, main4, main5, main6, main7];
+
+const initialSlides = [
+  {
+    id: 1,
+    title: "Օնլայն ավանդ EvocaTOUCH հավելվածով",
+    description: "Դի'ր ավանդ Evocabank-ում` բարձր, չա'տ բարձր տոկոսներով:",
+    btnText: "Ծանոթանալ պայմաններին",
+    btnLink: "/deposits",
+    bg: "#fde8f0",
+    textColor: "#121216",
+    btnBg: "#6c11d9",
+    btnColor: "#ffffff",
+    img: main6
+  },
+  {
+    id: 2,
+    title: "UnionPay Gold",
+    description: "Ամբողջ աշխարհում քո արագ և հարմար վճարումների ուղեկիցը",
+    btnText: "Իմանալ ավելին",
+    btnLink: "/unionpay",
+    bg: "#bca84f",
+    textColor: "#ffffff",
+    btnBg: "#5925a2",
+    btnColor: "#ffffff",
+    img: main7
+  },
+  {
+    id: 3,
+    title: "Հիփոթեքային վարկեր Evocabank-ում` ամենահարմար պայմաններով",
+    description: "Ձեռք բեր քո երազանքի բնակարանը` ցածր տոկոսադրույքով:",
+    btnText: "Իմանալ ավելին",
+    btnLink: "/mortgage",
+    bg: "#e6dfff",
+    textColor: "#121216",
+    btnBg: "#6c11d9",
+    btnColor: "#ffffff",
+    img: main6
+  },
+  {
+    id: 4,
+    title: "Visa Infinite",
+    description: "Ձեռք բեր Visa վճարային համակարգի ամենաբարձր դասի քարտը հենց հիմա",
+    btnText: "Իմանալ ավելին",
+    btnLink: "/visa-infinite",
+    bg: "#000000",
+    textColor: "#ffffff",
+    btnBg: "#ffffff",
+    btnColor: "#5925a2",
+    img: main5
+  },
+  {
+    id: 5,
+    title: "Visa Vision",
+    description: "Ձեռք բեր Visa Vision քարտ քո նախընտրած գույնով, դիզայնով ու ոճով և օգտվիր բազմաթիվ առավելություններից",
+    btnText: "Իմանալ ավելին",
+    btnLink: "/visa-vision",
+    bg: "#26272b",
+    textColor: "#ffffff",
+    btnBg: "#ffffff",
+    btnColor: "#5925a2",
+    img: main4
+  },
+  {
+    id: 6,
+    title: "Evoca Աշխատավարձային Նախագիծ",
+    description: "Բեր աշխատավարձդ Evoca: Տար շատ ավելին...",
+    btnText: "Իմանալ ավելին",
+    btnLink: "/payroll",
+    bg: "#5925a2",
+    textColor: "#ffffff",
+    btnBg: "#ffffff",
+    btnColor: "#5925a2",
+    img: main2
+  },
+  {
+    id: 7,
+    title: "Կարճ հեռախոսահամար` 8444",
+    description: "Բարի գալուստ, Evocabank: Մենք սպասում ենք Ձեր զանգին...",
+    btnText: "Իմանալ ավելին",
+    btnLink: "/contact",
+    bg: "#000000",
+    textColor: "#ffffff",
+    btnBg: "#ffffff",
+    btnColor: "#5925a2",
+    img: main3
+  }
+];
 
 function Nkarker() {
-  const [slidesData, setSlidesData] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [slides, setSlides] = useState(initialSlides);
+  const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * initialSlides.length));
+  
+  const [fade, setFade] = useState(true);
+  const navigate = useNavigate();
 
-  // Հարցում Firebase-ին տվյալները ստանալու համար
   useEffect(() => {
-    const fetchSlides = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "slides"));
-        const data = querySnapshot.docs.map((doc, index) => ({
-          firebaseId: doc.id,
-          ...doc.data(),
+    const dbRef = ref(db, '/');
+
+    const unsubscribe = onValue(dbRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const dataArray = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
+
+        const formattedSlides = dataArray.map((item, index) => ({
+          ...item,
           img: imagesMap[index % imagesMap.length]
         }));
-        
-        if (data.length > 0) {
-          setSlidesData(data);
-        }
-      } catch (error) {
-        console.error("Սխալ Firebase-ից տվյալներ ստանալիս:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchSlides();
+        setSlides(formattedSlides);
+      }
+    });
+
+    return () => unsubscribe();
   }, []);
 
-  // Ավտոմատ սլայդերի փոխարկում
-  useEffect(() => {
-    if (slidesData.length <= 1) return;
-    const timer = setInterval(() => {
-      handleNext();
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [currentIndex, slidesData]);
+  const changeSlide = (newIndex) => {
+    setFade(false); 
+    setTimeout(() => {
+      setCurrentIndex(newIndex);
+      setFade(true); 
+    }, 250);
+  };
 
   const handleNext = () => {
-    if (isAnimating || slidesData.length === 0) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev === slidesData.length - 1 ? 0 : prev + 1));
-    setTimeout(() => setIsAnimating(false), 400);
+    const nextIdx = (currentIndex + 1) % slides.length;
+    changeSlide(nextIdx);
   };
 
   const handlePrev = () => {
-    if (isAnimating || slidesData.length === 0) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev === 0 ? slidesData.length - 1 : prev - 1));
-    setTimeout(() => setIsAnimating(false), 400);
+    const prevIdx = (currentIndex - 1 + slides.length) % slides.length;
+    changeSlide(prevIdx);
   };
 
-  if (loading) {
-    return <div style={{ textAlign: 'center', padding: '50px', color: '#6c11d9', fontWeight: 'bold' }}>Բեռնվում է Firebase-ից...</div>;
-  }
-
-  if (slidesData.length === 0) {
-    return <div style={{ textAlign: 'center', padding: '50px', color: '#ff0000' }}>Տվյալներ չեն գտնվել Firestore-ում: Ստուգիր `slides` collection-ը:</div>;
-  }
-
-  const currentSlide = slidesData[currentIndex];
+  const current = slides[currentIndex] || slides[0];
 
   return (
     <>
       <style>{`
-        .HeroSliderContainer {
-          width: 100%;
-          height: 480px;
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 80px;
-          box-sizing: border-box;
-          background-color: ${currentSlide.bg || '#fde8f0'};
-          transition: background-color 0.6s ease-in-out;
-          font-family: 'Nunito Sans', sans-serif;
-          overflow: hidden;
-          border-bottom-left-radius: 40px;
+        @keyframes pageEntry {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
-
-        .HeroContent {
-          max-width: 550px;
-          z-index: 2;
-          opacity: ${isAnimating ? 0 : 1};
-          transform: translateY(${isAnimating ? '15px' : '0px'});
-          transition: opacity 0.4s ease, transform 0.4s ease;
+        .animate-content {
+          transition: opacity 0.3s ease, transform 0.3s ease;
+          opacity: ${fade ? 1 : 0};
+          transform: ${fade ? 'translateY(0px)' : 'translateY(12px)'};
         }
+      `}</style>
 
-        .HeroTitle {
-          font-size: 42px;
-          font-weight: 800;
-          color: ${currentSlide.textColor || '#121216'};
-          margin-bottom: 20px;
-          line-height: 1.2;
-        }
-
-        .HeroDesc {
-          font-size: 16px;
-          color: ${currentSlide.textColor || '#121216'};
-          opacity: 0.85;
-          margin-bottom: 30px;
-          line-height: 1.5;
-        }
-
-        .HeroBtn {
-          background-color: ${currentSlide.btnBg || '#6c11d9'};
-          color: ${currentSlide.btnColor || '#ffffff'};
-          padding: 12px 28px;
-          border-radius: 30px;
-          text-decoration: none;
-          font-size: 15px;
-          font-weight: 700;
-          display: inline-block;
-          box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-          transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        .HeroBtn:hover {
-          transform: translateY(-2px);
-          opacity: 0.9;
-        }
-
-        .HeroImageWrapper {
-          max-width: 500px;
-          height: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 2;
-          opacity: ${isAnimating ? 0 : 1};
-          transform: scale(${isAnimating ? '0.95' : '1'});
-          transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .HeroImage {
-          max-width: 100%;
-          max-height: 380px;
-          object-fit: contain;
-        }
-
-        .SliderControlsBar {
-          position: absolute;
-          bottom: 25px;
-          left: 0;
-          width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 15px;
-          z-index: 10;
-        }
-
-        .ArrowControlBtn {
-          background: none;
-          border: none;
-          cursor: pointer;
-          font-size: 18px;
-          color: ${currentSlide.textColor || '#121216'};
-          opacity: 0.7;
-          display: flex;
-          align-items: center;
-          transition: opacity 0.2s ease;
-        }
-
-        .ArrowControlBtn:hover {
-          opacity: 1;
-        }
-
-        .DotsContainer {
-          `}</style>
-
-      <div className="HeroSliderContainer">
-        <div className="HeroContent">
-          <h1 className="HeroTitle">{currentSlide.title}</h1>
-          <p className="HeroDesc">{currentSlide.description}</p>
-          <a href={currentSlide.btnLink} className="HeroBtn">
-            {currentSlide.btnText}
-          </a>
-        </div>
-
-        <div className="HeroImageWrapper">
-          <img src={currentSlide.img} alt="Slide Visual" className="HeroImage" />
-        </div>
-
-        <div className="SliderControlsBar">
-          <button className="ArrowControlBtn" onClick={handlePrev}>
-            <FaChevronLeft />
-          </button>
-
-          <div className="DotsContainer" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {slidesData.map((slide, index) => (
-              <button
-                key={slide.firebaseId || index}
-                style={{
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  backgroundColor: currentSlide.textColor || '#121216',
-                  opacity: currentIndex === index ? '1' : '0.3',
-                  transform: currentIndex === index ? 'scale(1.3)' : 'scale(1)',
+      <div 
+        style={{ 
+          backgroundColor: current.bg || '#000000', 
+          color: current.textColor || '#ffffff', 
+          padding: '50px 3% 30px 6%',
+          borderBottomLeftRadius: '200px',
+          position: 'relative',
+          minHeight: '500px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          transition: 'background-color 0.5s ease',
+          animation: 'pageEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
+      >
+        <div 
+          className="animate-content"
+          style={{ 
+            display: 'flex', 
+            justify: 'space-between', 
+            alignItems: 'center', 
+            width: '100%',
+            maxWidth: '1400px',
+            margin: '0 auto' 
+          }}
+        >
+          <div style={{ maxWidth: '480px', flexShrink: 0 }}>
+            <h1 style={{ fontSize: '44px', marginBottom: '18px', fontWeight: 'bold', lineHeight: '1.15' }}>
+              {current.title}
+            </h1>
+            <p style={{ fontSize: '18px', marginBottom: '32px', opacity: 0.9, lineHeight: '1.5' }}>
+              {current.description}
+            </p>
+            {current.btnText && (
+              <button 
+                onClick={() => navigate(current.btnLink || '/')}
+                style={{ 
+                  backgroundColor: current.btnBg || '#ffffff', 
+                  color: current.btnColor || '#5925a2',
                   border: 'none',
+                  padding: '14px 34px',
+                  borderRadius: '30px',
+                  fontSize: '16px',
                   cursor: 'pointer',
-                  padding: '0',
-                  transition: 'all 0.3s ease'
+                  fontWeight: '600',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.12)',
+                  transition: 'all 0.2s ease'
                 }}
-                onClick={() => {
-                  if (!isAnimating) {
-                    setIsAnimating(true);
-                    setCurrentIndex(index);
-                    setTimeout(() => setIsAnimating(false), 400);
-                  }
-                }}
-              />
-            ))}
+                onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.96)'}
+                onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
+              >
+                {current.btnText}
+              </button>
+            )}
           </div>
 
-          <button className="ArrowControlBtn" onClick={handleNext}>
-            <FaChevronRight />
-          </button>
+          <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+            {current.img && (
+              <img 
+                src={current.img} 
+                alt={current.title} 
+                style={{ 
+                  maxHeight: '460px', 
+                  maxWidth: '100%',
+                  objectFit: 'contain',
+                  filter: 'drop-shadow(0px 15px 30px rgba(0,0,0,0.25))'
+                }} 
+              />
+            )}
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px', marginTop: '30px' }}>
+          <FaArrowLeft 
+            onClick={handlePrev} 
+            style={{ cursor: 'pointer', fontSize: '16px', opacity: 0.8, color: current.textColor || '#fff' }} 
+          />
+          
+          {slides.map((_, idx) => (
+            <span 
+              key={idx}
+              onClick={() => changeSlide(idx)}
+              style={{
+                width: idx === currentIndex ? '8px' : '5px',
+                height: idx === currentIndex ? '8px' : '5px',
+                borderRadius: '50%',
+                backgroundColor: current.textColor || '#ffffff',
+                opacity: idx === currentIndex ? 1 : 0.35,
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+            />
+          ))}
+
+          <FaArrowRight 
+            onClick={handleNext} 
+            style={{ cursor: 'pointer', fontSize: '16px', opacity: 0.8, color: current.textColor || '#fff' }} 
+          />
         </div>
       </div>
     </>

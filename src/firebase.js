@@ -1,10 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBgitt4fPCHrlfNefPqaQH098tF5TL7syo",
   authDomain: "evoca-bank-28507.firebaseapp.com",
+  databaseURL: "https://evoca-bank-28507-default-rtdb.firebaseio.com",
   projectId: "evoca-bank-28507",
   storageBucket: "evoca-bank-28507.firebasestorage.app",
   messagingSenderId: "702717978448",
@@ -13,7 +13,4 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getFirestore(app);
-
-export { db };
+export const db = getDatabase(app);
