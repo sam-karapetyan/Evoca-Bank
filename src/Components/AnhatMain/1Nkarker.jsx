@@ -104,22 +104,31 @@ const initialSlides = [
 function Nkarker() {
   const [slides, setSlides] = useState(initialSlides);
   const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * initialSlides.length));
-  
   const [fade, setFade] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const dbRef = ref(db, '/');
+    // Փոխել ենք հղումը հատուկ slides հանգույցի վրա, որ չխառնվի մյուս տվյալների հետ
+    const dbRef = ref(db, '/slides');
 
     const unsubscribe = onValue(dbRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
         const dataArray = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
 
-        const formattedSlides = dataArray.map((item, index) => ({
-          ...item,
-          img: imagesMap[index % imagesMap.length]
-        }));
+        // Միաձուլում ենք բազայի տվյալները initialSlides-ի դիզայնի (գույների) հետ, որպեսզի գույները չկորչեն
+        const formattedSlides = dataArray.map((item, index) => {
+          const fallback = initialSlides[index % initialSlides.length];
+          return {
+            ...fallback, // Վերցնում ենք օրիգինալ գույներն ու նկարները
+            ...item,     // Վերագրում ենք բազայից եկած տեքստերը (եթե կան)
+            bg: item.bg || fallback.bg,
+            textColor: item.textColor || fallback.textColor,
+            btnBg: item.btnBg || fallback.btnBg,
+            btnColor: item.btnColor || fallback.btnColor,
+            img: imagesMap[index % imagesMap.length]
+          };
+        });
 
         setSlides(formattedSlides);
       }
@@ -187,7 +196,7 @@ function Nkarker() {
           className="animate-content"
           style={{ 
             display: 'flex', 
-            justify: 'space-between', 
+            justifyContent: 'space-between', 
             alignItems: 'center', 
             width: '100%',
             maxWidth: '1400px',

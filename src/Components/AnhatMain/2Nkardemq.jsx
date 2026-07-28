@@ -10,19 +10,20 @@ import Demq2 from '../../assets/Demq2.png';
 
 function NkarDemq() {
   const [data, setData] = useState({
-    title: "Դարձիր Evocabank-ի հաճախորդ բիոմետրիկ նույնականացմամբ",
-    description: "Սկանավորի'ր QR կոդը, ներբեռնի'ր EvocaTOUCH հարմարավետ հավելվածը, ստեղծի'ր քո հաշիվը և ստացիր քարտ",
-    btnText: "Իմանալ ավելին",
-    btnLink: "/biometric"
+    title: "Բեռնվում է...",
+    description: "Խնդրում ենք սպասել...",
+    btnText: "",
+    btnLink: "/"
   });
 
+  const [allCards, setAllCards] = useState({});
   const [currentFace, setCurrentFace] = useState(0);
   const [fade, setFade] = useState(true);
   const faces = [Demq1, Demq2];
 
   const navigate = useNavigate();
 
-  // Դանդաղ ու սահուն փոփոխման տրամաբանությունը (3վ մեկ)
+  // 1. Դեմքերի սահուն անիմացիայի տրամաբանությունը (3վ մեկ)
   useEffect(() => {
     const timer = setInterval(() => {
       setFade(false);
@@ -37,17 +38,30 @@ function NkarDemq() {
     return () => clearInterval(timer);
   }, []);
 
-  // Firebase Realtime Database
+  // 2. Տվյալների ուղղակի ստացումը Firebase Database-ից (հարցումներով)
   useEffect(() => {
+    // Ստանում ենք biometric տվյալները
     const bioRef = ref(db, '/biometric');
-    const unsubscribe = onValue(bioRef, (snapshot) => {
+    const unsubBio = onValue(bioRef, (snapshot) => {
       const val = snapshot.val();
       if (val) {
         setData(val);
       }
     });
 
-    return () => unsubscribe();
+    // Ստանում ենք նաև մնացած բոլոր քարտերի/հանգույցների տվյալները բազայից
+    const rootRef = ref(db, '/');
+    const unsubRoot = onValue(rootRef, (snapshot) => {
+      const val = snapshot.val();
+      if (val) {
+        setAllCards(val);
+      }
+    });
+
+    return () => {
+      unsubBio();
+      unsubRoot();
+    };
   }, []);
 
   return (
@@ -73,11 +87,10 @@ function NkarDemq() {
           justify-content: center;
         }
 
-        /* Անշարժ ֆոնային կետիկներ */
         .evoca-bg-dots {
           position: absolute;
           width: 380px;
-          height: 578px;
+          height: 380px;
           border-radius: 50%;
           z-index: 0;
           pointer-events: none;
@@ -88,7 +101,6 @@ function NkarDemq() {
           -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 70%);
         }
 
-        /* Ֆոնային Purple Եռանկյունին */
         .purple-triangle-bg {
           position: absolute;
           width: 0;
@@ -110,7 +122,6 @@ function NkarDemq() {
           justify-content: center;
         }
 
-        /* Դանդաղ ու սահուն fade transitions (0.8վ) */
         .face-img {
           width: 100%;
           height: 100%;
@@ -128,7 +139,6 @@ function NkarDemq() {
           transform: scale(0.96);
         }
 
-        /* Սպիտակ դիմագծերի ու սկանավորման անիմացիան */
         .scan-overlay {
           position: absolute;
           top: 0;
@@ -220,13 +230,9 @@ function NkarDemq() {
 
       <div className="bio-wrapper">
         <div className="bio-visual-box">
-          {/* Անշարժ ֆոնային կետիկները */}
           <div className="evoca-bg-dots"></div>
-
-          {/* Ֆոնային Purple Եռանկյունին */}
           <div className="purple-triangle-bg"></div>
 
-          {/* Դեմքի նկարները */}
           <div className="face-img-container">
             <img 
               src={faces[currentFace]} 
@@ -234,7 +240,6 @@ function NkarDemq() {
               className={`face-img ${fade ? 'fade-in' : 'fade-out'}`}
             />
 
-            {/* Սպիտակ անիմացիոն դիմագծեր */}
             <div className="scan-overlay">
               <div className="scan-line"></div>
 
@@ -256,7 +261,6 @@ function NkarDemq() {
           </div>
         </div>
 
-        {/* Աջ մաս՝ Տեքստեր Firebase-ից + QR Code + Button */}
         <div className="bio-info-box">
           <h2 className="bio-info-title">{data.title}</h2>
           <p className="bio-info-desc">{data.description}</p>

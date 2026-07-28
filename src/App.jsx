@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './Components/Header/Header';
 import Nkarker from './Components/AnhatMain/1Nkarker';
-import NkarDemq from './Components/AnhatMain/2Nkardemq'; // 1. Ավելացվել է import-ը
+import NkarDemq from './Components/AnhatMain/2Nkardemq';
+import Ardzancarder from './Components/AnhatMain/3Ardzancarder'; // Ավելացվել է import-ը
 
 // Փորձնական երկրորդ էջ (կարող ես հետագայում սարքել առանձին ֆայլով)
 function Deposits() {
@@ -26,7 +27,8 @@ function App() {
             element={
               <>
                 <Nkarker />
-                <NkarDemq /> {/* 2. Ավելացվել է այստեղ */}
+                <NkarDemq />
+                <Ardzancarder /> {/* Ավելացվել է գլխավոր էջում */}
               </>
             } 
           />
