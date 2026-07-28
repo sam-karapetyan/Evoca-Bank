@@ -6,9 +6,9 @@ import {
   FaGlobe, 
   FaSearch, 
   FaBars, 
-  FaTimes,
   FaChevronDown 
 } from 'react-icons/fa';
+import BurgerMenu from './BurgerMenu'; 
 
 function Headeriverev() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -125,132 +125,6 @@ function Headeriverev() {
         border: none;
         cursor: pointer;
       }
-
-      /* Side Menu Overlay */
-      .SideMenuOverlay {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.4s ease-in-out;
-      }
-
-      .SideMenuOverlay.active {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      /* Side Menu Main Drawer */
-      .SideMenuContainer {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 100%;
-        max-width: 900px;
-        height: 100vh;
-        background-color: #1a1a24;
-        z-index: 1001;
-        display: flex;
-        transition: right 0.4s ease-in-out;
-        color: white;
-      }
-
-      .SideMenuContainer.active {
-        right: 0;
-      }
-
-      .CloseBtn {
-        position: absolute;
-        top: 25px;
-        right: 25px;
-        font-size: 24px;
-        color: white;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1002;
-      }
-
-      /* Side Menu Content Structure */
-      .SideMenuLeft {
-        width: 35%;
-        padding: 50px 30px;
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-      }
-
-      .SideMenuRight {
-        width: 65%;
-        background-color: #6c11d9;
-        padding: 50px 40px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
-        overflow-y: auto;
-      }
-
-      .LeftMenuItem {
-        font-size: 18px;
-        font-weight: 600;
-        color: #a0a0a0;
-        text-decoration: none;
-        transition: color 0.2s ease;
-      }
-
-      .LeftMenuItem:hover, .LeftMenuItem.active {
-        color: #a855f7;
-      }
-
-      .SectionTitle {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 10px;
-        color: #ffffff;
-      }
-
-      .SectionItem {
-        display: block;
-        font-size: 14px;
-        color: #e2d8f7;
-        text-decoration: none;
-        margin-bottom: 8px;
-        transition: color 0.2s ease;
-      }
-
-      .SectionItem:hover {
-        color: #ffffff;
-      }
-
-      /* Animation for sequential text drop in */
-      @keyframes slideDownFade {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .SideMenuContainer.active .animate-item {
-        animation: slideDownFade 0.4s forwards ease-out;
-        opacity: 0;
-      }
-
-      .delay-1 { animation-delay: 0.2s !important; }
-      .delay-2 { animation-delay: 0.3s !important; }
-      .delay-3 { animation-delay: 0.4s !important; }
-      .delay-4 { animation-delay: 0.5s !important; }
-      .delay-5 { animation-delay: 0.6s !important; }
-      .delay-6 { animation-delay: 0.7s !important; }
     `}</style>
 
       <div className='Container'>
@@ -305,65 +179,8 @@ function Headeriverev() {
         </div>
       </div>
 
-      {/* Side Menu Drawer & Overlay */}
-      <div 
-        className={`SideMenuOverlay ${isMenuOpen ? 'active' : ''}`}
-        onClick={() => setIsMenuOpen(false)}
-      />
-
-      <div className={`SideMenuContainer ${isMenuOpen ? 'active' : ''}`}>
-        <button className='CloseBtn' onClick={() => setIsMenuOpen(false)}>
-          <FaTimes />
-        </button>
-
-        {/* Ձախ կողմի մենյուն */}
-        <div className='SideMenuLeft'>
-          <Link to="/individual" className='LeftMenuItem animate-item delay-1'>Անհատ</Link>
-          <Link to="/business" className='LeftMenuItem active animate-item delay-2'>Բիզնես</Link>
-          <Link to="/instant-payments" className='LeftMenuItem animate-item delay-3'>Ակնթարթային վճարումներ</Link>
-          <Link to="/about" className='LeftMenuItem animate-item delay-4'>Մեր մասին</Link>
-          <Link to="/news" className='LeftMenuItem animate-item delay-5'>Նորություններ</Link>
-          <Link to="/blog" className='LeftMenuItem animate-item delay-6'>Բլոգ</Link>
-          <Link to="/career" className='LeftMenuItem animate-item delay-6'>Կարիերա</Link>
-        </div>
-
-        {/* Աջ մանուշակագույն բաժինը */}
-        <div className='SideMenuRight'>
-          <div className='animate-item delay-1'>
-            <div className='SectionTitle'>Վարկեր</div>
-            <Link to="/business-loans" className='SectionItem'>Բիզնես վարկեր</Link>
-          </div>
-
-          <div className='animate-item delay-2'>
-            <div className='SectionTitle'>Լիզինգ</div>
-            <Link to="/leasing" className='SectionItem'>Evoca Leasing</Link>
-            <Link to="/special-offer" className='SectionItem'>Հատուկ առաջարկ</Link>
-          </div>
-
-          <div className='animate-item delay-3'>
-            <div className='SectionTitle'>Հաշիվներ</div>
-            <Link to="/accounts" className='SectionItem'>Հաշիվների բացում և սպասարկում</Link>
-            <Link to="/metal-accounts" className='SectionItem'>Առարկայազուրկ մետաղական հաշիվներ</Link>
-          </div>
-
-          <div className='animate-item delay-4'>
-            <div className='SectionTitle'>Ավանդներ</div>
-            <Link to="/deposits" className='SectionItem'>Դասական ավանդ</Link>
-          </div>
-
-          <div className='animate-item delay-5'>
-            <div className='SectionTitle'>Արժեթղթերի շուկա</div>
-            <Link to="/investment" className='SectionItem'>Ներդրումային ծառայություններ</Link>
-            <Link to="/bonds" className='SectionItem'>Պարտատոմսեր</Link>
-          </div>
-
-          <div className='animate-item delay-6'>
-            <div className='SectionTitle'>Առևտրի ֆինանսավորում</div>
-            <Link to="/guarantees" className='SectionItem'>Երաշխիք</Link>
-            <Link to="/factoring" className='SectionItem'>Ֆակտորինգային ֆինանսավորում</Link>
-          </div>
-        </div>
-      </div>
+      {/* Առանձնացված Burger Menu Component-ը */}
+      <BurgerMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </> 
   );
 }
