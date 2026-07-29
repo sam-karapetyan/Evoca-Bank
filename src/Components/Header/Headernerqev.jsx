@@ -1,155 +1,72 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
+import { auth } from '../../firebase'; // Ճշտիր ֆայլիդ ճանապարհը (src/firebase.js)
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import logo2Img from '../../assets/Logo2.png';
 import './Headernerqev.css';
+
 function Headernerqev({ onOpenBurger }) {
+  const [user, setUser] = useState(null);
+
+  // Ստուգում ենք՝ արդյոք օգտատերը մուտք է գործել
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Դուրս գալու ֆունկցիա
+  const handleLogout = () => {
+    signOut(auth);
+  };
+
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+    <div className="HeaderNerqevContainer">
+      <div className="HeaderLeftSection">
+        <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
+          <img src={logo2Img} alt="Logo2" className="HeaderLogo" />
+        </Link>
 
-        .HeaderNerqevContainer {
-          width: 100%;
-          height: 90px;
-          background-color: #ffffff;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 40px;
-          box-sizing: border-box;
-          font-family: 'Nunito Sans', sans-serif;
-          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
-          transition: all 0.3s ease;
-        }
+        <nav className="HeaderNavLinks">
+          <Link to="/loans" className="HeaderNavLink">Վարկեր</Link>
+          <Link to="/cards" className="HeaderNavLink">Քարտեր</Link>
+          <Link to="/deposits" className="HeaderNavLink">Ավանդներ</Link>
+          <Link to="/accounts" className="HeaderNavLink">Հաշիվներ</Link>
+          <Link to="/transfers" className="HeaderNavLink">Փոխանցումներ</Link>
+          <Link to="/investment" className="HeaderNavLink">Արժեթղթեր</Link>
+          <Link to="/evoca-salary" className="HeaderNavLink">EvocaSALARY</Link>
+          <Link to="/evoca-touch" className="HeaderNavLink">EvocaTOUCH</Link>
+        </nav>
+      </div>
 
-        .HeaderLeftSection {
-          display: flex;
-          align-items: center;
-          gap: 30px;
-        }
-
-        .HeaderLogo {
-          width: 55px;
-          height: auto;
-          max-height: 50px;
-          object-fit: contain;
-        }
-
-        .HeaderNavLinks {
-          display: flex;
-          align-items: center;
-          gap: 18px;
-        }
-
-        .HeaderNavLink {
-          font-size: 14px;
-          font-weight: 800;
-          color: #121216;
-          text-decoration: none;
-          letter-spacing: -0.2px;
-          transition: color 0.2s ease;
-          white-space: nowrap;
-        }
-
-        .HeaderNavLink:hover {
-          color: #a855f7;
-        }
-
-        .HeaderRightSection {
-          display: flex;
-          align-items: center;
-          gap: 20px;
-        }
-
-        .EvocaOnlineBtn {
-          background-color: #6c11d9;
-          color: #ffffff;
-          padding: 10px 24px;
-          border-radius: 30px;
-          text-decoration: none;
-          font-size: 14px;
-          font-weight: 800;
-          white-space: nowrap;
-          transition: background-color 0.2s ease, transform 0.1s ease;
-        }
-
-        .EvocaOnlineBtn:hover {
-          background-color: #580cb8;
-          transform: translateY(-1px);
-        }
-
-        .BurgerBtn {
-          background: none;
-          border: none;
-          cursor: pointer;
-          font-size: 24px;
-          color: #121216;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 5px;
-          transition: color 0.2s ease;
-        }
-
-        .BurgerBtn:hover {
-          color: #6c11d9;
-        }
-
-        /* MOBILE RESPONSIVE MEDIA QUERY */
-        @media screen and (max-width: 768px) {
-          .HeaderNerqevContainer {
-            height: 65px !important;
-            padding: 0 15px !important;
-          }
-
-          .HeaderNavLinks {
-            display: none !important; /* Մոբայլում թաքցնում ենք երկար link-երը */
-          }
-
-          .HeaderLogo {
-            width: 42px !important;
-          }
-
-          .EvocaOnlineBtn {
-            padding: 7px 14px !important;
-            font-size: 12px !important;
-          }
-
-          .HeaderRightSection {
-            gap: 10px !important;
-          }
-        }
-      `}</style>
-
-      <div className="HeaderNerqevContainer">
-        <div className="HeaderLeftSection">
-          <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-            <img src={logo2Img} alt="Logo2" className="HeaderLogo" />
-          </Link>
-
-          <nav className="HeaderNavLinks">
-            <Link to="/loans" className="HeaderNavLink">Վարկեր</Link>
-            <Link to="/cards" className="HeaderNavLink">Քարտեր</Link>
-            <Link to="/deposits" className="HeaderNavLink">Ավանդներ</Link>
-            <Link to="/accounts" className="HeaderNavLink">Հաշիվներ</Link>
-            <Link to="/transfers" className="HeaderNavLink">Փոխանցումներ</Link>
-            <Link to="/investment" className="HeaderNavLink">Արժեթղթեր</Link>
-            <Link to="/evoca-salary" className="HeaderNavLink">EvocaSALARY</Link>
-            <Link to="/evoca-touch" className="HeaderNavLink">EvocaTOUCH</Link>
-          </nav>
-        </div>
-
-        <div className="HeaderRightSection">
-          <Link to="/online" className="EvocaOnlineBtn">
+      <div className="HeaderRightSection">
+        {user ? (
+          /* Եթե մուտք է գործել */
+          <div className="HeaderUserSection">
+            <img 
+              src={user.photoURL || 'https://via.placeholder.com/35'} 
+              alt="User Avatar" 
+              className="HeaderUserAvatar"
+            />
+            <span className="HeaderUserName">{user.displayName?.split(' ')[0]}</span>
+            <button onClick={handleLogout} className="LogoutBtn">
+              Դուրս գալ
+            </button>
+          </div>
+        ) : (
+          /* Եթե մուտք չի գործել */
+          <Link to="/login" className="EvocaOnlineBtn">
             EvocaONLINE
           </Link>
-          <button type="button" className="BurgerBtn" onClick={onOpenBurger}>
-            <FaBars />
-          </button>
-        </div>
+        )}
+
+        <button type="button" className="BurgerBtn" onClick={onOpenBurger}>
+          <FaBars />
+        </button>
       </div>
-    </>
+    </div>
   );
 }
 

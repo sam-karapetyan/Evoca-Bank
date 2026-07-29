@@ -1,8 +1,9 @@
 import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBgitt4fPCHrlfNefPqaQH098tF5TL7syo",
+  apiKey: "AIzaSyBgiTt4fPCHrlfNefPqaQHO98tF5TL7syo",
   authDomain: "evoca-bank-28507.firebaseapp.com",
   databaseURL: "https://evoca-bank-28507-default-rtdb.firebaseio.com",
   projectId: "evoca-bank-28507",
@@ -13,4 +14,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 export const db = getDatabase(app);
+export const auth = getAuth(app);
+export const googleProvider = new GoogleAuthProvider();

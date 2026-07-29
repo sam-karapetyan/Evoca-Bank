@@ -1,0 +1,158 @@
+.login-wrapper {
+  width: 100%;
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fc;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.login-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  padding: 35px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 25px;
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.google-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.google-btn:hover {
+  background-color: #f5f5f5;
+  border-color: #cccccc;
+}
+
+.google-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 22px 0;
+  color: #aaaaaa;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.divider span {
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  font-size: 13px;
+  color: #666666;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.input-group input {
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #6100e0;
+}
+
+.login-btn {
+  width: 100%;
+  background-color: #6100e0;
+  color: #ffffff;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 10px;
+}
+
+.login-btn:hover {
+  background-color: #4d00b3;
+}
+
+.toggle-mode {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #666666;
+}
+
+.toggle-mode span {
+  color: #6c11d9;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.toggle-mode span:hover {
+  color: #580cb8;
+}
+
+.error-msg {
+  color: #e53935;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 480px) {
+  .login-wrapper {
+    padding: 10px;
+  }
+
+  .login-card {
+    padding: 25px 20px;
+    border-radius: 16px;
+  }
+
+  .login-card h2 {
+    font-size: 20px;
+  }
+}

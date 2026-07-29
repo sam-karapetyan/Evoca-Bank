@@ -1,4 +1,4 @@
-    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 .HeaderNerqevContainer {
   width: 100%;
@@ -65,6 +65,48 @@
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
+.EvocaOnlineBtn:hover {
+  background-color: #580cb8;
+  transform: translateY(-1px);
+}
+
+/* User Logged-in Profile styles */
+.HeaderUserSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.HeaderUserAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #6c11d9;
+}
+
+.HeaderUserName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #121216;
+}
+
+.LogoutBtn {
+  background-color: #f1f3f5;
+  color: #e53935;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.LogoutBtn:hover {
+  background-color: #ffebee;
+}
+
 .BurgerBtn {
   background: none;
   border: none;
@@ -75,9 +117,14 @@
   align-items: center;
   justify-content: center;
   padding: 5px;
+  transition: color 0.2s ease;
 }
 
-/* MOBILE MEDIA QUERY */
+.BurgerBtn:hover {
+  color: #6c11d9;
+}
+
+/* MOBILE RESPONSIVE */
 @media screen and (max-width: 768px) {
   .HeaderNerqevContainer {
     height: 65px !important;
@@ -95,5 +142,13 @@
   .EvocaOnlineBtn {
     padding: 7px 14px !important;
     font-size: 12px !important;
+  }
+
+  .HeaderRightSection {
+    gap: 10px !important;
+  }
+
+  .HeaderUserName {
+    display: none; /* Մոբայլում ցույց ենք տալիս միայն նկարը */
   }
 }
