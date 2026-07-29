@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Headeriverev from './Headeriverev';
 import Headernerqev from './Headernerqev';
+import BurgerMenu from './BurgerMenu'; 
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Burger menu-ի state-ը
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,8 +37,15 @@ function Header() {
           background-color: #ffffff;
           box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
         }
+
         .header-spacer {
-          height: 90px; 
+          height: 90px;
+        }
+
+        @media screen and (max-width: 768px) {
+          .header-spacer {
+            height: 65px;
+          }
         }
       `}</style>
 
@@ -44,11 +53,15 @@ function Header() {
         {!isScrolled && <Headeriverev />}
 
         <div className={isScrolled ? 'fixed-header' : ''}>
-          <Headernerqev />
+          {/* Փոխանցում ենք onOpenBurger prop-ը */}
+          <Headernerqev onOpenBurger={() => setIsMenuOpen(true)} />
         </div>
 
         {isScrolled && <div className="header-spacer" />}
       </div>
+
+      {/* BurgerMenu-ն կառավարվում է այստեղից */}
+      <BurgerMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>
   );
 }

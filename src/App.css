@@ -1,5 +1,39 @@
-@import "tailwindcss";
-*{
-    margin: 0;
-    padding: 0;
+/* ==========================================
+   DESKTOP STYLES (Հիմնական ոճեր)
+   ========================================== */
+.header-container {
+  width: 100%;
+  z-index: 1000;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header-spacer {
+  height: 90px;
+}
+
+/* ==========================================
+   iPHONE 17 / MOBILE STYLES (max-width: 430px)
+   ========================================== */
+@media (max-width: 430px) {
+
+  .header-spacer {
+    height: 60px; /* Մոբայլում բարձրությունը փոքրացնում ենք */
+  }
+
+  /* Եթե Headeriverev կամ Headernerqev-ում ունես header-title */
+  .header-title {
+    font-size: 16px !important;
+  }
+
+  /* Հեռախոսի վրա վերևի փոքր header-ը (Headeriverev) թաքցնելու համար */
+  /* .header-iverev-class { display: none; } */
 }

@@ -3,6 +3,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
+import './1Nkarner.css'; // Import ենք անում media query-ներով CSS-ը
 
 import main1 from '../../assets/main1.png';
 import main2 from '../../assets/main2.png';
@@ -108,7 +109,6 @@ function Nkarker() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Փոխել ենք հղումը հատուկ slides հանգույցի վրա, որ չխառնվի մյուս տվյալների հետ
     const dbRef = ref(db, '/slides');
 
     const unsubscribe = onValue(dbRef, (snapshot) => {
@@ -116,12 +116,11 @@ function Nkarker() {
       if (data) {
         const dataArray = Array.isArray(data) ? data.filter(Boolean) : Object.values(data);
 
-        // Միաձուլում ենք բազայի տվյալները initialSlides-ի դիզայնի (գույների) հետ, որպեսզի գույները չկորչեն
         const formattedSlides = dataArray.map((item, index) => {
           const fallback = initialSlides[index % initialSlides.length];
           return {
-            ...fallback, // Վերցնում ենք օրիգինալ գույներն ու նկարները
-            ...item,     // Վերագրում ենք բազայից եկած տեքստերը (եթե կան)
+            ...fallback,
+            ...item,
             bg: item.bg || fallback.bg,
             textColor: item.textColor || fallback.textColor,
             btnBg: item.btnBg || fallback.btnBg,
@@ -158,126 +157,82 @@ function Nkarker() {
   const current = slides[currentIndex] || slides[0];
 
   return (
-    <>
-      <style>{`
-        @keyframes pageEntry {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-content {
-          transition: opacity 0.3s ease, transform 0.3s ease;
-          opacity: ${fade ? 1 : 0};
-          transform: ${fade ? 'translateY(0px)' : 'translateY(12px)'};
-        }
-      `}</style>
-
+    <div 
+      className="nkarker-slider-container"
+      style={{ 
+        backgroundColor: current.bg || '#000000', 
+        color: current.textColor || '#ffffff'
+      }}
+    >
       <div 
+        className="nkarker-content-wrapper animate-content"
         style={{ 
-          backgroundColor: current.bg || '#000000', 
-          color: current.textColor || '#ffffff', 
-          padding: '50px 3% 30px 6%',
-          borderBottomLeftRadius: '200px',
-          position: 'relative',
-          minHeight: '500px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          transition: 'background-color 0.5s ease',
-          animation: 'pageEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1)'
+          opacity: fade ? 1 : 0,
+          transform: fade ? 'translateY(0px)' : 'translateY(12px)'
         }}
       >
-        <div 
-          className="animate-content"
-          style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            width: '100%',
-            maxWidth: '1400px',
-            margin: '0 auto' 
-          }}
-        >
-          <div style={{ maxWidth: '480px', flexShrink: 0 }}>
-            <h1 style={{ fontSize: '44px', marginBottom: '18px', fontWeight: 'bold', lineHeight: '1.15' }}>
-              {current.title}
-            </h1>
-            <p style={{ fontSize: '18px', marginBottom: '32px', opacity: 0.9, lineHeight: '1.5' }}>
-              {current.description}
-            </p>
-            {current.btnText && (
-              <button 
-                onClick={() => navigate(current.btnLink || '/')}
-                style={{ 
-                  backgroundColor: current.btnBg || '#ffffff', 
-                  color: current.btnColor || '#5925a2',
-                  border: 'none',
-                  padding: '14px 34px',
-                  borderRadius: '30px',
-                  fontSize: '16px',
-                  cursor: 'pointer',
-                  fontWeight: '600',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.12)',
-                  transition: 'all 0.2s ease'
-                }}
-                onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.96)'}
-                onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
-              >
-                {current.btnText}
-              </button>
-            )}
-          </div>
-
-          <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-            {current.img && (
-              <img 
-                src={current.img} 
-                alt={current.title} 
-                style={{ 
-                  maxHeight: '460px', 
-                  maxWidth: '100%',
-                  objectFit: 'contain',
-                  filter: 'drop-shadow(0px 15px 30px rgba(0,0,0,0.25))'
-                }} 
-              />
-            )}
-          </div>
+        <div className="nkarker-text-section">
+          <h1 className="nkarker-title">
+            {current.title}
+          </h1>
+          <p className="nkarker-description">
+            {current.description}
+          </p>
+          {current.btnText && (
+            <button 
+              className="nkarker-btn"
+              onClick={() => navigate(current.btnLink || '/')}
+              style={{ 
+                backgroundColor: current.btnBg || '#ffffff', 
+                color: current.btnColor || '#5925a2'
+              }}
+              onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.96)'}
+              onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              {current.btnText}
+            </button>
+          )}
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px', marginTop: '30px' }}>
-          <FaArrowLeft 
-            onClick={handlePrev} 
-            style={{ cursor: 'pointer', fontSize: '16px', opacity: 0.8, color: current.textColor || '#fff' }} 
-          />
-          
-          {slides.map((_, idx) => (
-            <span 
-              key={idx}
-              onClick={() => changeSlide(idx)}
-              style={{
-                width: idx === currentIndex ? '8px' : '5px',
-                height: idx === currentIndex ? '8px' : '5px',
-                borderRadius: '50%',
-                backgroundColor: current.textColor || '#ffffff',
-                opacity: idx === currentIndex ? 1 : 0.35,
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
+        <div className="nkarker-img-section">
+          {current.img && (
+            <img 
+              src={current.img} 
+              alt={current.title} 
+              className="nkarker-image"
             />
-          ))}
-
-          <FaArrowRight 
-            onClick={handleNext} 
-            style={{ cursor: 'pointer', fontSize: '16px', opacity: 0.8, color: current.textColor || '#fff' }} 
-          />
+          )}
         </div>
       </div>
-    </>
+
+      <div className="nkarker-dots-wrapper">
+        <FaArrowLeft 
+          onClick={handlePrev} 
+          style={{ cursor: 'pointer', fontSize: '16px', opacity: 0.8, color: current.textColor || '#fff' }} 
+        />
+        
+        {slides.map((_, idx) => (
+          <span 
+            key={idx}
+            onClick={() => changeSlide(idx)}
+            style={{
+              width: idx === currentIndex ? '8px' : '5px',
+              height: idx === currentIndex ? '8px' : '5px',
+              borderRadius: '50%',
+              backgroundColor: current.textColor || '#ffffff',
+              opacity: idx === currentIndex ? 1 : 0.35,
+              cursor: 'pointer',
+              transition: 'all 0.3s ease'
+            }}
+          />
+        ))}
+
+        <FaArrowRight 
+          onClick={handleNext} 
+          style={{ cursor: 'pointer', fontSize: '16px', opacity: 0.8, color: current.textColor || '#fff' }} 
+        />
+      </div>
+    </div>
   );
 }
 

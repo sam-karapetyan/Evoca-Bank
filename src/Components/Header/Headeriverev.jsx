@@ -1,27 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { 
   FaMapMarkerAlt, 
   FaQuestionCircle, 
   FaGlobe, 
   FaSearch, 
-  FaBars, 
   FaChevronDown 
 } from 'react-icons/fa';
-import BurgerMenu from './BurgerMenu'; 
 
 function Headeriverev() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
     <>
       <style>{`
-        .Container {
+        .HeaderIverevContainer {
           padding: 0px 50px;
           display: flex;
           justify-content: space-between;
           align-items: center;
           height: 40px;
+          background-color: #ffffff;
         }
         .Link {
           display: flex;
@@ -41,7 +38,6 @@ function Headeriverev() {
           height: 100%;
           box-sizing: border-box;
           border-top: 2px solid transparent;
-          border-bottom: none;
         }
         .Link a:hover {
           color: rgba(127, 127, 127);
@@ -100,10 +96,6 @@ function Headeriverev() {
           transition: color 0.2s ease;
         }
 
-        .DropdownItem:hover {
-          color: #6c11d9;
-        }
-
         .PhoneItem {
           font-weight: bold;
           color: #111111;
@@ -121,9 +113,6 @@ function Headeriverev() {
           transition: color 0.2s ease;
           text-decoration: none;
         }
-        .CallOrder:hover {
-          color: #6c11d9;
-        }
 
         .Icons {
           display: flex;
@@ -138,9 +127,16 @@ function Headeriverev() {
           border: none;
           cursor: pointer;
         }
+
+        /* MOBILE RESPONSIVE MEDIA QUERY */
+        @media screen and (max-width: 768px) {
+          .HeaderIverevContainer {
+            display: none !important; /* Մոբայլի վրա վերևի փոքր բարը ամբողջությամբ թաքցնում ենք */
+          }
+        }
       `}</style>
 
-      <div className='Container'>
+      <div className='HeaderIverevContainer'>
         <div className='Link'>
           <NavLink to="/" end><span>Անհատ</span></NavLink>
           <NavLink to="/business"><span>Բիզնես</span></NavLink>
@@ -183,14 +179,11 @@ function Headeriverev() {
           <div className='Icons'>
             <Link to="/locations"><FaMapMarkerAlt /></Link>
             <Link to="/faq"><FaQuestionCircle /></Link>
-            <button><FaGlobe /></button>
-            <button><FaSearch /></button>
-            <button onClick={() => setIsMenuOpen(true)}><FaBars /></button>
+            <button type="button"><FaGlobe /></button>
+            <button type="button"><FaSearch /></button>
           </div>
         </div>
       </div>
-
-      <BurgerMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </> 
   );
 }

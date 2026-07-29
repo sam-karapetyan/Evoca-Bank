@@ -1,0 +1,131 @@
+@keyframes pageEntry {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nkarker-slider-container {
+  padding: 50px 3% 30px 6%;
+  border-bottom-left-radius: 200px;
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 0.5s ease;
+  animation: pageEntry 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nkarker-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.nkarker-text-section {
+  max-width: 480px;
+  flex-shrink: 0;
+}
+
+.nkarker-title {
+  font-size: 44px;
+  margin-bottom: 18px;
+  font-weight: bold;
+  line-height: 1.15;
+}
+
+.nkarker-description {
+  font-size: 18px;
+  margin-bottom: 32px;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.nkarker-btn {
+  border: none;
+  padding: 14px 34px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  transition: all 0.2s ease;
+}
+
+.nkarker-img-section {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nkarker-image {
+  max-height: 460px;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0px 15px 30px rgba(0,0,0,0.25));
+}
+
+.nkarker-dots-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+/* ==========================================
+   MOBILE & iPHONE RESPONSIVE (մինչև 768px)
+   ========================================== */
+@media screen and (max-width: 768px) {
+  .nkarker-slider-container {
+    padding: 30px 20px 20px 20px !important;
+    border-bottom-left-radius: 40px !important; /* Մոբայլում 200px շառավիղը շատ մեծ է */
+    min-height: auto !important;
+  }
+
+  .nkarker-content-wrapper {
+    flex-direction: column-reverse !important; /* Նկարը գալիս է վերև, տեքստը՝ ներքև */
+    text-align: center !important;
+    gap: 25px !important;
+  }
+
+  .nkarker-text-section {
+    max-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nkarker-title {
+    font-size: 24px !important; /* Վերնագրի չափսը փոքրացնում ենք iPhone-ի համար */
+    margin-bottom: 10px !important;
+  }
+
+  .nkarker-description {
+    font-size: 14px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .nkarker-btn {
+    padding: 10px 24px !important;
+    font-size: 14px !important;
+  }
+
+  .nkarker-img-section {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  .nkarker-image {
+    max-height: 220px !important; /* Նկարի բարձրությունը փոքրացնում ենք */
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import logo2Img from '../../assets/Logo2.png';
-
+import './Headernerqev.css';
 function Headernerqev({ onOpenBurger }) {
   return (
     <>
@@ -20,7 +20,7 @@ function Headernerqev({ onOpenBurger }) {
           box-sizing: border-box;
           font-family: 'Nunito Sans', sans-serif;
           box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
-          transition: box-shadow 0.3s ease;
+          transition: all 0.3s ease;
         }
 
         .HeaderLeftSection {
@@ -83,7 +83,7 @@ function Headernerqev({ onOpenBurger }) {
           background: none;
           border: none;
           cursor: pointer;
-          font-size: 20px;
+          font-size: 24px;
           color: #121216;
           display: flex;
           align-items: center;
@@ -94,6 +94,31 @@ function Headernerqev({ onOpenBurger }) {
 
         .BurgerBtn:hover {
           color: #6c11d9;
+        }
+
+        /* MOBILE RESPONSIVE MEDIA QUERY */
+        @media screen and (max-width: 768px) {
+          .HeaderNerqevContainer {
+            height: 65px !important;
+            padding: 0 15px !important;
+          }
+
+          .HeaderNavLinks {
+            display: none !important; /* Մոբայլում թաքցնում ենք երկար link-երը */
+          }
+
+          .HeaderLogo {
+            width: 42px !important;
+          }
+
+          .EvocaOnlineBtn {
+            padding: 7px 14px !important;
+            font-size: 12px !important;
+          }
+
+          .HeaderRightSection {
+            gap: 10px !important;
+          }
         }
       `}</style>
 
@@ -119,7 +144,7 @@ function Headernerqev({ onOpenBurger }) {
           <Link to="/online" className="EvocaOnlineBtn">
             EvocaONLINE
           </Link>
-          <button className="BurgerBtn" onClick={onOpenBurger}>
+          <button type="button" className="BurgerBtn" onClick={onOpenBurger}>
             <FaBars />
           </button>
         </div>
