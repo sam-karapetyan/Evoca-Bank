@@ -12,6 +12,7 @@ import Gortsynkerner from './Components/AnhatMain/6DzerqMain';
 import Mrcanak from './Components/AnhatMain/Mrcanak'; // Ներմուծում ենք Mrcanak-ը
 import Dram from './Components/AnhatMain/Dram'
 import Footerverev from './Components/AnhatMain/Footerverev';
+import Footer from './Components/Header/Footer'
 
 // Նոր էջ, որը բացվելու է "Բոլոր Նորությունները" կոճակը սեղմելիս
 function AllNewsPage() {
@@ -43,6 +44,7 @@ function App() {
                 <Mrcanak />
                 <Dram/>
                 <Footerverev/>
+                <Footer/>
               </>
             } 
           />
