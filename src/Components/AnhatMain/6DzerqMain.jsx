@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // 1. Ներմուծում ենք useNavigate-ը
 
 import DzerqImg from '../../assets/Dzerq.png';
 import TellcellImg from '../../assets/Tellcell.png';
@@ -9,6 +10,8 @@ import FutrisImg from '../../assets/Futris.png';
 import IndigoImg from '../../assets/Indigo.png';
 
 function Gortsynkerner() {
+  const navigate = useNavigate(); // 2. Ստեղծում ենք navigate ֆունկցիան
+
   const logos = [
     { id: 1, img: TellcellImg, name: "Tellcell" },
     { id: 2, img: EasyPayImg, name: "EasyPay" },
@@ -19,7 +22,6 @@ function Gortsynkerner() {
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const visibleCount = 3; 
 
   const nextSlide = () => {
@@ -214,7 +216,12 @@ function Gortsynkerner() {
           Դառնալով Evoca ընտանիքի անդամ՝ Դուք մուտք կգործեք ժամանակակից և յուրահատուկ աշխարհ: 
           Մենք միշտ բաց ենք հետաքրքիր առաջարկների ու համագործակցությունների համար:
         </p>
-        <button className="gortsynkerner-btn">
+        
+        {/* 3. Սեղմելիս տեղափոխում է /partners էջ */}
+        <button 
+          className="gortsynkerner-btn" 
+          onClick={() => navigate('/partners')}
+        >
           Բոլոր գործընկերները &gt;
         </button>
       </div>

@@ -1,60 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import Headeriverev from './Headeriverev';
 import Headernerqev from './Headernerqev';
-import BurgerMenu from './BurgerMenu';
 
 function Header() {
-  const [showTopHeader, setShowTopHeader] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 30) {
-        setShowTopHeader(false);
-      } else if (currentScrollY < lastScrollY) {
-        setShowTopHeader(true);
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
       }
-      
-      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   return (
     <>
       <style>{`
-        .StickyHeaderWrapper {
-          position: sticky;
-          top: 0;
-          z-index: 1000;
+        .header-container {
           width: 100%;
-          background-color: #ffffff;
+          z-index: 1000;
         }
 
-        .AnimatedTopHeader {
-          max-height: ${showTopHeader ? '40px' : '0px'};
-          opacity: ${showTopHeader ? '1' : '0'};
-          transform: translateY(${showTopHeader ? '0px' : '-10px'});
-          transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                      opacity 0.3s ease-in-out,
-                      transform 0.3s ease-in-out;
-          overflow: hidden;
+        .fixed-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 1000;
+          background-color: #ffffff;
+          box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .header-spacer {
+          height: 90px; 
         }
       `}</style>
 
-      <div className="StickyHeaderWrapper">
-        <div className="AnimatedTopHeader">
-          <Headeriverev />
-        </div>
-        <Headernerqev onOpenBurger={() => setIsMenuOpen(true)} />
-      </div>
+      <div className="header-container">
+        {!isScrolled && <Headeriverev />}
 
-      <BurgerMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+        <div className={isScrolled ? 'fixed-header' : ''}>
+          <Headernerqev />
+        </div>
+
+        {isScrolled && <div className="header-spacer" />}
+      </div>
     </>
   );
 }

@@ -3,27 +3,24 @@ import { ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
 
-// Import Assets
 import QR from '../../assets/QR.png';
 import Demq1 from '../../assets/Demq1.png';
 import Demq2 from '../../assets/Demq2.png';
 
 function NkarDemq() {
   const [data, setData] = useState({
-    title: "Բեռնվում է...",
-    description: "Խնդրում ենք սպասել...",
-    btnText: "",
+    title: "Դարձիր Evocabank-ի հաճախորդ բիոմետրիկ նույնականացմամբ",
+    description: "Սկանավորիր QR կոդը, ներբեռնիր EvocaTOUCH հարմարավետ հավելվածը, ստեղծիր քո հաշիվը և ստացիր քարտ",
+    btnText: "Իմանալ ավելին",
     btnLink: "/"
   });
 
-  const [allCards, setAllCards] = useState({});
   const [currentFace, setCurrentFace] = useState(0);
   const [fade, setFade] = useState(true);
   const faces = [Demq1, Demq2];
 
   const navigate = useNavigate();
 
-  // 1. Դեմքերի սահուն անիմացիայի տրամաբանությունը (3վ մեկ)
   useEffect(() => {
     const timer = setInterval(() => {
       setFade(false);
@@ -38,30 +35,22 @@ function NkarDemq() {
     return () => clearInterval(timer);
   }, []);
 
-  // 2. Տվյալների ուղղակի ստացումը Firebase Database-ից (հարցումներով)
   useEffect(() => {
-    // Ստանում ենք biometric տվյալները
     const bioRef = ref(db, '/biometric');
     const unsubBio = onValue(bioRef, (snapshot) => {
       const val = snapshot.val();
       if (val) {
-        setData(val);
+        setData((prev) => ({
+          ...prev,
+          title: val.title || prev.title,
+          description: val.description || prev.description,
+          btnText: val.btnText !== undefined ? val.btnText : prev.btnText,
+          btnLink: val.btnLink || prev.btnLink
+        }));
       }
     });
 
-    // Ստանում ենք նաև մնացած բոլոր քարտերի/հանգույցների տվյալները բազայից
-    const rootRef = ref(db, '/');
-    const unsubRoot = onValue(rootRef, (snapshot) => {
-      const val = snapshot.val();
-      if (val) {
-        setAllCards(val);
-      }
-    });
-
-    return () => {
-      unsubBio();
-      unsubRoot();
-    };
+    return () => unsubBio();
   }, []);
 
   return (
