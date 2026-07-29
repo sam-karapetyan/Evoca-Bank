@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../firebase';
+import './Carder.css'; // Import ենք անում CSS-ը
 
 // Import 10 card images from assets
 import card1 from '../../assets/card1.png';
@@ -108,181 +109,6 @@ function Carder() {
 
   return (
     <div className="carder-container-unique">
-      <style>{`
-        @keyframes cardFadeIn {
-          from {
-            opacity: 0.5;
-            transform: scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        .carder-container-unique {
-          width: 100%;
-          background-color: #f2f5f9;
-          padding: 50px 60px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          min-height: 540px;
-          box-sizing: border-box;
-          font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        .carder-left-sidebar {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: space-between;
-          width: 180px;
-          min-height: 420px;
-          user-select: none;
-        }
-
-        .carder-arrow-btn {
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          padding: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: transform 0.2s ease;
-        }
-
-        .carder-arrow-btn:hover {
-          transform: scale(1.25);
-        }
-
-        .carder-items-list {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          width: 100%;
-          align-items: center;
-        }
-
-        .carder-thumb-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          opacity: 0.6;
-          transform: scale(0.9);
-        }
-
-        .carder-thumb-item.active {
-          opacity: 1;
-          transform: scale(1.05);
-        }
-
-        .carder-thumb-img-wrapper {
-          width: 120px;
-          height: 75px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 8px;
-          overflow: hidden;
-        }
-
-        .carder-thumb-img-wrapper img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
-        }
-
-        .carder-thumb-title {
-          margin-top: 6px;
-          font-size: 13px;
-          font-weight: 600;
-          color: #2b2b2b;
-          text-align: center;
-          white-space: nowrap;
-        }
-
-        /* Կենտրոնական Քարտ */
-        .carder-center-display {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          perspective: 1000px;
-        }
-
-        .carder-big-card-box {
-          position: relative;
-          cursor: pointer;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          transform-style: preserve-3d;
-          animation: cardFadeIn 0.3s ease-out forwards;
-        }
-
-        .carder-big-card-img {
-          width: 420px;
-          height: 260px;
-          object-fit: contain;
-          filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.18));
-          transition: filter 0.3s ease;
-        }
-
-        .carder-big-card-box.hovered .carder-big-card-img {
-          filter: drop-shadow(-10px 25px 30px rgba(108, 17, 217, 0.4));
-        }
-
-        .carder-card-shadow {
-          width: 80%;
-          height: 14px;
-          background: rgba(0, 0, 0, 0.14);
-          border-radius: 50%;
-          filter: blur(10px);
-          margin-top: 18px;
-        }
-
-        /* Աջ կողմ */
-        .carder-right-info {
-          width: 280px;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 20px;
-        }
-
-        .carder-main-title {
-          font-size: 34px;
-          font-weight: 700;
-          color: #1e2025;
-          margin: 0;
-          line-height: 1.2;
-        }
-
-        .carder-action-btn {
-          background-color: #6c11d9;
-          color: #ffffff;
-          border: none;
-          padding: 14px 38px;
-          font-size: 15px;
-          font-weight: 600;
-          border-radius: 25px;
-          cursor: pointer;
-          box-shadow: 0 6px 18px rgba(108, 17, 217, 0.35);
-          transition: all 0.25s ease;
-        }
-
-        .carder-action-btn:hover {
-          background-color: #580fb4;
-          transform: translateY(-2px);
-        }
-      `}</style>
-
       <div className="carder-left-sidebar">
         <button className="carder-arrow-btn" onClick={handlePrev} aria-label="Previous">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6c11d9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
@@ -338,7 +164,6 @@ function Carder() {
         </div>
       </div>
 
-      {/* Աջ կողմ */}
       <div className="carder-right-info">
         <h2 className="carder-main-title">
           {activeCard.title}
