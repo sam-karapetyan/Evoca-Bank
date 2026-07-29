@@ -3,29 +3,37 @@ import { useNavigate } from 'react-router-dom';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../firebase';
 
-import card1Img from '../../assets/card1.png';
-import card2Img from '../../assets/card2.png';
-import card3Img from '../../assets/card3.png';
+// Import 10 card images from assets
+import card1 from '../../assets/card1.png';
+import card2 from '../../assets/card2.png';
+import card3 from '../../assets/card3.png';
+import card4 from '../../assets/card4.png';
+import card5 from '../../assets/card5.png';
+import card6 from '../../assets/card6.png';
+import card7 from '../../assets/card7.png';
+import card8 from '../../assets/card8.png';
+import card9 from '../../assets/card9.png';
+import card10 from '../../assets/card10.png';
 
-const LOCAL_IMAGES = {
-  card1: card1Img,
-  card2: card2Img,
-  card3: card3Img,
-};
-
-const DEFAULT_LOCAL_IMAGES = [card1Img, card2Img, card3Img];
+const ALL_CARDS = [
+  { id: '1', title: 'Arca Classic', image: card1 },
+  { id: '2', title: 'Visa Business', image: card2 },
+  { id: '3', title: 'Dalma Gift Card', image: card3 },
+  { id: '4', title: 'Evoca Travel Card', image: card4 },
+  { id: '5', title: 'Evoca Touch Card', image: card5 },
+  { id: '6', title: 'Evoca Digital Card', image: card6 },
+  { id: '7', title: 'Evoca Gold Card', image: card7 },
+  { id: '8', title: 'Evoca Platinum Card', image: card8 },
+  { id: '9', title: 'Evoca Infinite Card', image: card9 },
+  { id: '10', title: 'Evoca Premium Card', image: card10 }
+];
 
 function Carder() {
   const navigate = useNavigate();
 
-  const [sectionData, setSectionData] = useState({
-    title: "Evoca Travel Card",
-    buttonText: "Մանրամասն",
-    cards: []
-  });
-
+  const [cardsList, setCardsList] = useState(ALL_CARDS);
   const [activeIndex, setActiveIndex] = useState(0);
-
+  const [buttonText, setButtonText] = useState("Մանրամասն");
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, isHovered: false });
 
   useEffect(() => {
@@ -33,37 +41,30 @@ function Carder() {
     const unsubscribe = onValue(cardsRef, (snapshot) => {
       const val = snapshot.val();
       if (val) {
-        const firebaseCards = val.items ? Object.values(val.items) : [];
-        setSectionData({
-          title: val.title || "Evoca Travel Card",
-          buttonText: val.buttonText || "Մանրամասն",
-          cards: firebaseCards
-        });
+        if (val.buttonText) setButtonText(val.buttonText);
+        if (val.items) {
+          const itemsArr = Array.isArray(val.items) ? val.items : Object.values(val.items);
+          if (itemsArr.length > 0) {
+            const merged = itemsArr.map((item, idx) => ({
+              ...item,
+              image: ALL_CARDS[idx % ALL_CARDS.length].image
+            }));
+            setCardsList(merged);
+          }
+        }
       }
+    }, () => {
+      setCardsList(ALL_CARDS);
     });
 
     return () => unsubscribe();
   }, []);
 
-  const cardsList = sectionData.cards;
-
-  const getCardImage = (card, index) => {
-    if (card?.imageKey && LOCAL_IMAGES[card.imageKey]) {
-      return LOCAL_IMAGES[card.imageKey];
-    }
-    if (card?.image && LOCAL_IMAGES[card.image]) {
-      return LOCAL_IMAGES[card.image];
-    }
-    return DEFAULT_LOCAL_IMAGES[index % DEFAULT_LOCAL_IMAGES.length];
-  };
-
   const handlePrev = () => {
-    if (cardsList.length === 0) return;
     setActiveIndex((prev) => (prev === 0 ? cardsList.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    if (cardsList.length === 0) return;
     setActiveIndex((prev) => (prev === cardsList.length - 1 ? 0 : prev + 1));
   };
 
@@ -78,8 +79,8 @@ function Carder() {
     const x = e.clientX - card.left - card.width / 2;
     const y = e.clientY - card.top - card.height / 2;
 
-    const rotateX = (y / (card.height / 2)) * 22; 
-    const rotateY = (-x / (card.width / 2)) * 22; 
+    const rotateX = (y / (card.height / 2)) * 18;
+    const rotateY = (-x / (card.width / 2)) * 18;
 
     setTilt({ rotateX, rotateY, isHovered: true });
   };
@@ -90,22 +91,19 @@ function Carder() {
 
   const getVisibleCards = () => {
     if (cardsList.length === 0) return [];
-    if (cardsList.length <= 3) {
-      return cardsList.map((card, idx) => ({ card, originalIndex: idx }));
-    }
-
+    
     let visible = [];
     let startIdx = activeIndex - 1;
     if (startIdx < 0) startIdx = cardsList.length - 1;
 
     for (let i = 0; i < 3; i++) {
-      const index = (startIdx + i) % cardsList.length;
-      visible.push({ card: cardsList[index], originalIndex: index });
+      const idx = (startIdx + i) % cardsList.length;
+      visible.push({ card: cardsList[idx], originalIndex: idx });
     }
     return visible;
   };
 
-  const activeCard = cardsList[activeIndex] || {};
+  const activeCard = cardsList[activeIndex] || ALL_CARDS[0];
   const visibleCards = getVisibleCards();
 
   return (
@@ -113,23 +111,12 @@ function Carder() {
       <style>{`
         @keyframes cardFadeIn {
           from {
-            opacity: 0.3;
-            transform: scale(0.9) translateY(12px);
+            opacity: 0.5;
+            transform: scale(0.95);
           }
           to {
             opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-        }
-
-        @keyframes titleSlide {
-          from {
-            opacity: 0;
-            transform: translateX(15px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
+            transform: scale(1);
           }
         }
 
@@ -140,18 +127,18 @@ function Carder() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          min-height: 520px;
+          min-height: 540px;
           box-sizing: border-box;
           font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-          overflow: hidden !important;
         }
 
         .carder-left-sidebar {
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
-          width: 220px;
+          justify-content: space-between;
+          width: 180px;
+          min-height: 420px;
           user-select: none;
         }
 
@@ -173,8 +160,7 @@ function Carder() {
         .carder-items-list {
           display: flex;
           flex-direction: column;
-          gap: 18px;
-          margin: 12px 0;
+          gap: 20px;
           width: 100%;
           align-items: center;
         }
@@ -184,60 +170,52 @@ function Carder() {
           flex-direction: column;
           align-items: center;
           cursor: pointer;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          opacity: 0.55;
-          transform: scale(0.95);
+          transition: all 0.3s ease;
+          opacity: 0.6;
+          transform: scale(0.9);
         }
 
         .carder-thumb-item.active {
           opacity: 1;
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
 
         .carder-thumb-img-wrapper {
-          width: 130px;
-          height: 80px;
+          width: 120px;
+          height: 75px;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 12px;
+          border-radius: 8px;
           overflow: hidden;
-          background: transparent;
-          padding: 4px;
-          transition: transform 0.3s ease;
-        }
-
-        .carder-thumb-item:hover .carder-thumb-img-wrapper {
-          transform: translateY(-4px) rotate(-3deg);
         }
 
         .carder-thumb-img-wrapper img {
           width: 100%;
           height: 100%;
           object-fit: contain;
-          filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+          filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
         }
 
         .carder-thumb-title {
           margin-top: 6px;
           font-size: 13px;
-          font-weight: 700;
-          color: #2c2e35;
+          font-weight: 600;
+          color: #2b2b2b;
           text-align: center;
+          white-space: nowrap;
         }
 
-        /* 3D Dynamic Container */
+        /* Կենտրոնական Քարտ */
         .carder-center-display {
           flex: 1;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 0 20px;
-          perspective: 1000px; /* 3D խորություն */
+          perspective: 1000px;
         }
 
-        /* 💥 DYNAMIC TILT BOX */
         .carder-big-card-box {
           position: relative;
           cursor: pointer;
@@ -245,19 +223,17 @@ function Carder() {
           flex-direction: column;
           align-items: center;
           transform-style: preserve-3d;
-          animation: cardFadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-          will-change: transform;
+          animation: cardFadeIn 0.3s ease-out forwards;
         }
 
         .carder-big-card-img {
-          width: 380px;
-          height: 240px;
+          width: 420px;
+          height: 260px;
           object-fit: contain;
           filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.18));
           transition: filter 0.3s ease;
         }
 
-        /* Hover ժամանակ ստվերի փոփոխություն */
         .carder-big-card-box.hovered .carder-big-card-img {
           filter: drop-shadow(-10px 25px 30px rgba(108, 17, 217, 0.4));
         }
@@ -269,16 +245,9 @@ function Carder() {
           border-radius: 50%;
           filter: blur(10px);
           margin-top: 18px;
-          transition: all 0.3s ease;
         }
 
-        .carder-big-card-box.hovered .carder-card-shadow {
-          width: 88%;
-          transform: translateY(10px) scale(0.9);
-          background: rgba(108, 17, 217, 0.3);
-          filter: blur(14px);
-        }
-
+        /* Աջ կողմ */
         .carder-right-info {
           width: 280px;
           display: flex;
@@ -288,19 +257,18 @@ function Carder() {
         }
 
         .carder-main-title {
-          font-size: 32px;
+          font-size: 34px;
           font-weight: 700;
           color: #1e2025;
           margin: 0;
-          line-height: 1.25;
-          animation: titleSlide 0.35s ease forwards;
+          line-height: 1.2;
         }
 
         .carder-action-btn {
           background-color: #6c11d9;
           color: #ffffff;
           border: none;
-          padding: 13px 36px;
+          padding: 14px 38px;
           font-size: 15px;
           font-weight: 600;
           border-radius: 25px;
@@ -311,15 +279,13 @@ function Carder() {
 
         .carder-action-btn:hover {
           background-color: #580fb4;
-          transform: translateY(-3px) scale(1.03);
-          box-shadow: 0 10px 25px rgba(108, 17, 217, 0.5);
+          transform: translateY(-2px);
         }
       `}</style>
 
-      {/* Ձախ sidebar */}
       <div className="carder-left-sidebar">
         <button className="carder-arrow-btn" onClick={handlePrev} aria-label="Previous">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c11d9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6c11d9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="18 15 12 9 6 15"></polyline>
           </svg>
         </button>
@@ -333,8 +299,8 @@ function Carder() {
             >
               <div className="carder-thumb-img-wrapper">
                 <img 
-                  src={getCardImage(item.card, item.originalIndex)} 
-                  alt={item.card.title || 'Card'} 
+                  src={item.card.image} 
+                  alt={item.card.title} 
                 />
               </div>
               <span className="carder-thumb-title">{item.card.title}</span>
@@ -343,13 +309,12 @@ function Carder() {
         </div>
 
         <button className="carder-arrow-btn" onClick={handleNext} aria-label="Next">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6c11d9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#6c11d9" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
       </div>
 
-      {/* Կենտրոնական քարտ՝ Real-time Dynamic 3D Tilt Effect-ով */}
       <div className="carder-center-display">
         <div 
           key={activeIndex} 
@@ -359,14 +324,14 @@ function Carder() {
           onMouseLeave={handleMouseLeave}
           style={{
             transform: tilt.isHovered
-              ? `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) scale(1.06)`
+              ? `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg) scale(1.05)`
               : 'rotateX(0deg) rotateY(0deg) scale(1)',
-            transition: tilt.isHovered ? 'transform 0.1s ease-out' : 'transform 0.5s ease-out'
+            transition: tilt.isHovered ? 'transform 0.1s ease-out' : 'transform 0.4s ease-out'
           }}
         >
           <img 
-            src={getCardImage(activeCard, activeIndex)} 
-            alt={activeCard.title || 'Featured Card'} 
+            src={activeCard.image} 
+            alt={activeCard.title} 
             className="carder-big-card-img" 
           />
           <div className="carder-card-shadow"></div>
@@ -375,11 +340,11 @@ function Carder() {
 
       {/* Աջ կողմ */}
       <div className="carder-right-info">
-        <h2 key={activeIndex} className="carder-main-title">
-          {activeCard.title || sectionData.title}
+        <h2 className="carder-main-title">
+          {activeCard.title}
         </h2>
         <button className="carder-action-btn" onClick={handleDetailNavigation}>
-          {sectionData.buttonText}
+          {buttonText}
         </button>
       </div>
     </div>

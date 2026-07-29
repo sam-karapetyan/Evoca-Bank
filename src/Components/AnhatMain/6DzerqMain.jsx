@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // 1. Ներմուծում ենք useNavigate-ը
+import { useNavigate } from 'react-router-dom'; 
 
 import DzerqImg from '../../assets/Dzerq.png';
 import TellcellImg from '../../assets/Tellcell.png';
@@ -10,7 +10,7 @@ import FutrisImg from '../../assets/Futris.png';
 import IndigoImg from '../../assets/Indigo.png';
 
 function Gortsynkerner() {
-  const navigate = useNavigate(); // 2. Ստեղծում ենք navigate ֆունկցիան
+  const navigate = useNavigate();
 
   const logos = [
     { id: 1, img: TellcellImg, name: "Tellcell" },
