@@ -15,8 +15,8 @@ import Footerverev from './Components/AnhatMain/Footerverev';
 import Footer from './Components/Header/Footer';
 
 import Login from './Login/Login';
+import FloatingChat from './Components/Chat/FloatingChat'; // <--- Import
 
-// Գլխավոր էջի բլոկները
 function Home() {
   return (
     <>
@@ -33,7 +33,6 @@ function Home() {
   );
 }
 
-// Բոլոր նորությունների էջը
 function AllNewsPage() {
   return (
     <div style={{ padding: '80px 20px', textAlign: 'center', minHeight: '60vh' }}>
@@ -47,17 +46,17 @@ function App() {
   return (
     <Router>
       <div>
-        {/* Header-ը երևում է ԲՈԼՈՐ էջերում */}
         <Header />
 
-        {/* Երթուղիներ */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/all-news" element={<AllNewsPage />} />
           <Route path="/login" element={<Login />} />
         </Routes>
 
-        {/* Footer-ները երևում են ԲՈԼՈՐ էջերում */}
+        {/* Ֆիքսված Չաթի կոճակը բոլոր էջերի համար */}
+        <FloatingChat />
+
         <Footerverev />
         <Footer />
       </div>

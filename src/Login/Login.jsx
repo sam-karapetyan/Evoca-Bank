@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword 
 } from 'firebase/auth';
 import { ref, set } from 'firebase/database';
-import { FcGoogle } from 'react-icons/fc'; // Google-ի անխափան լոգոն
+import { FcGoogle } from 'react-icons/fc';
 import './Login.css';
 
 function Login() {
@@ -35,6 +35,8 @@ function Login() {
     } catch (err) {
       if (err.code === 'auth/api-key-not-valid') {
         setError("Firebase API Key-ը սխալ է: Ստուգիր firebase.js ֆայլը:");
+      } else if (err.code === 'auth/configuration-not-found') {
+        setError("Google Auth-ը ակտիվացված չէ Firebase Console-ում:");
       } else {
         setError("Google մուտքի սխալ: " + err.message);
       }
@@ -63,11 +65,22 @@ function Login() {
           photoURL: 'https://via.placeholder.com/150',
           lastSeen: new Date().toISOString()
         });
+
+        console.log("Գրանցումն հաջողվեց:", user);
       } else {
-        await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log("Մուտքն հաջողվեց:", userCredential.user);
       }
     } catch (err) {
-      setError("Սխալ: " + err.message);
+      if (err.code === 'auth/invalid-credential') {
+        setError("Էլ․ հասցեն կամ գաղտնաբառը սխալ է (կամ հաշիվը ստեղծվել է Google-ով):");
+      } else if (err.code === 'auth/email-already-in-use') {
+        setError("Այս էլ․ հասցեով հաշիվ արդեն գոյություն ունի:");
+      } else if (err.code === 'auth/weak-password') {
+        setError("Գաղտնաբառը պետք է լինի առնվազն 6 նիշ:");
+      } else {
+        setError("Սխալ: " + err.message);
+      }
     }
   };
 
@@ -78,7 +91,6 @@ function Login() {
 
         {error && <p className="error-msg">{error}</p>}
 
-        {/* Google Կոճակ՝ FcGoogle իկոնկայով */}
         <button type="button" className="google-btn" onClick={handleGoogleSignIn}>
           <FcGoogle size={22} />
           {isRegister ? 'Գրանցվել Google-ով' : 'Մուտք Google-ով'}

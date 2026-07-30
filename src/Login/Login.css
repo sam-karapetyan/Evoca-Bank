@@ -48,11 +48,6 @@
   border-color: #cccccc;
 }
 
-.google-btn img {
-  width: 20px;
-  height: 20px;
-}
-
 .divider {
   display: flex;
   align-items: center;
@@ -140,6 +135,7 @@
   color: #e53935;
   font-size: 13px;
   margin-bottom: 15px;
+  line-height: 1.4;
 }
 
 @media screen and (max-width: 480px) {
