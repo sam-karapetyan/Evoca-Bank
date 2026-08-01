@@ -21,7 +21,7 @@ const initialSlides = [
     title: "Օնլայն ավանդ EvocaTOUCH հավելվածով",
     description: "Դի'ր ավանդ Evocabank-ում` բարձր, չա'տ բարձր տոկոսներով:",
     btnText: "Ծանոթանալ պայմաններին",
-    btnLink: "/deposits",
+    btnLink: "/card/evoca-travel-card",
     bg: "#fde8f0",
     textColor: "#121216",
     btnBg: "#6c11d9",
@@ -33,7 +33,7 @@ const initialSlides = [
     title: "UnionPay Gold",
     description: "Ամբողջ աշխարհում քո արագ և հարմար վճարումների ուղեկիցը",
     btnText: "Իմանալ ավելին",
-    btnLink: "/unionpay",
+    btnLink: "/card/unionpay",
     bg: "#bca84f",
     textColor: "#ffffff",
     btnBg: "#5925a2",
@@ -45,7 +45,7 @@ const initialSlides = [
     title: "Հիփոթեքային վարկեր Evocabank-ում` ամենահարմար պայմաններով",
     description: "Ձեռք բեր քո երազանքի բնակարանը` ցածր տոկոսադրույքով:",
     btnText: "Իմանալ ավելին",
-    btnLink: "/mortgage",
+    btnLink: "/card/mortgage",
     bg: "#e6dfff",
     textColor: "#121216",
     btnBg: "#6c11d9",
@@ -57,7 +57,7 @@ const initialSlides = [
     title: "Visa Infinite",
     description: "Ձեռք բեր Visa վճարային համակարգի ամենաբարձր դասի քարտը հենց հիմա",
     btnText: "Իմանալ ավելին",
-    btnLink: "/visa-infinite",
+    btnLink: "/card/visa-infinite",
     bg: "#000000",
     textColor: "#ffffff",
     btnBg: "#ffffff",
@@ -69,7 +69,7 @@ const initialSlides = [
     title: "Visa Vision",
     description: "Ձեռք բեր Visa Vision քարտ քո նախընտրած գույնով, դիզայնով ու ոճով և օգտվիր բազմաթիվ առավելություններից",
     btnText: "Իմանալ ավելին",
-    btnLink: "/visa-vision",
+    btnLink: "/card/visa-vision",
     bg: "#26272b",
     textColor: "#ffffff",
     btnBg: "#ffffff",
@@ -81,7 +81,7 @@ const initialSlides = [
     title: "Evoca Աշխատավարձային Նախագիծ",
     description: "Բեր աշխատավարձդ Evoca: Տար շատ ավելին...",
     btnText: "Իմանալ ավելին",
-    btnLink: "/payroll",
+    btnLink: "/card/payroll",
     bg: "#5925a2",
     textColor: "#ffffff",
     btnBg: "#ffffff",
@@ -93,7 +93,7 @@ const initialSlides = [
     title: "Կարճ հեռախոսահամար` 8444",
     description: "Բարի գալուստ, Evocabank: Մենք սպասում ենք Ձեր զանգին...",
     btnText: "Իմանալ ավելին",
-    btnLink: "/contact",
+    btnLink: "/card/contact",
     bg: "#000000",
     textColor: "#ffffff",
     btnBg: "#ffffff",
@@ -125,6 +125,7 @@ function Nkarker() {
             textColor: item.textColor || fallback.textColor,
             btnBg: item.btnBg || fallback.btnBg,
             btnColor: item.btnColor || fallback.btnColor,
+            btnLink: item.btnLink || fallback.btnLink,
             img: imagesMap[index % imagesMap.length]
           };
         });
@@ -181,7 +182,7 @@ function Nkarker() {
           {current.btnText && (
             <button 
               className="nkarker-btn"
-              onClick={() => navigate(`/slide/${current.id}`, { state: { slide: current } })}
+              onClick={() => navigate(current.btnLink || `/card/${current.id}`)}
               style={{ 
                 backgroundColor: current.btnBg || '#ffffff', 
                 color: current.btnColor || '#5925a2'

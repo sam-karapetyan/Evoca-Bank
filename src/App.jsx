@@ -15,7 +15,8 @@ import Footerverev from './Components/AnhatMain/Footerverev';
 import Footer from './Components/Header/Footer';
 
 import Login from './Login/Login';
-import FloatingChat from './Components/Chat/FloatingChat'; // <--- Import
+import FloatingChat from './Components/Chat/FloatingChat';
+import CardDetail from './pages/CardDetail/CardDetail';
 
 function Home() {
   return (
@@ -52,11 +53,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/all-news" element={<AllNewsPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/cards" element={<CardDetail />} />
+          <Route path="/card/:cardId" element={<CardDetail />} />
         </Routes>
 
-        {/* Ֆիքսված Չաթի կոճակը բոլոր էջերի համար */}
         <FloatingChat />
-
         <Footerverev />
         <Footer />
       </div>

@@ -1,61 +1,76 @@
 import React, { useState, useEffect } from 'react';
+import { ref, onValue } from 'firebase/database';
+import { db } from '../../firebase';
 
 import Dzerq2Img from '../../assets/Dzerq2.png';
 import Dzerq3Img from '../../assets/Dzerq3.png';
+
+const fallbackData = {
+  updatedAt: '27/07/2026 15:52',
+  reviews: [
+    {
+      id: 1,
+      rating: 5,
+      text: 'Բանկ, որ իր ռեբրենդինգի շքեղ միջոցառմամբ ու աշխատանքային ձևաչափով բանկային ոլորտում ամրապնդեց որակ և ճաշակ թելադրեց: Evocabank-ն առաջին իսկ վայրկյանից ստիպեց նորովի և ժամանակակից...',
+      author: 'Կամո Թովմասյան',
+      role: 'KAMOBLOG մեդիա-հարթակի հիմնադիր, influencer'
+    },
+    {
+      id: 2,
+      rating: 5,
+      text: 'Evocabank-ի հետ աշխատելը իսկական հաճույք է: Ժամանակակից ծառայությունները և արագ սպասարկումը անփոխարինելի են:',
+      author: 'Աննա Գրիգորյան',
+      role: 'Մարկետոլոգ'
+    },
+    {
+      id: 3,
+      rating: 5,
+      text: 'Լավագույն թվային բանկինգը Հայաստանում: Հավելվածն անհավանական հարմար է ու ոճային:',
+      author: 'Արմեն Սարգսյան',
+      role: 'IT մասնագետ'
+    },
+    {
+      id: 4,
+      rating: 5,
+      text: 'Արագ փոխանցումներ, բարձրակարգ սպասարկում և միշտ հասանելի աջակցություն:',
+      author: 'Սոնա Մարտիրոսյան',
+      role: 'Դիզայներ'
+    },
+    {
+      id: 5,
+      rating: 5,
+      text: 'Ինովացիոն բանկային լուծումներ, որոնք խնայում են ժամանակը:',
+      author: 'Դավիթ Հովհաննիսյան',
+      role: 'Գործարար'
+    }
+  ]
+};
 
 function Footerverev() {
   const [data, setData] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    fetch('http://localhost:3000/footerVerev')
-      .then((res) => res.json())
-      .then((resData) => setData(resData))
-      .catch(() => {
-        setData({
-          updatedAt: '27/07/2026 15:52',
-          reviews: [
-            {
-              id: 1,
-              rating: 5,
-              text: 'Բանկ, որ իր ռեբրենդինգի շքեղ միջոցառմամբ ու աշխատանքային ձևաչափով բանկային ոլորտում ամրապնդեց որակ և ճաշակ թելադրեց: Evocabank-ն առաջին իսկ վայրկյանից ստիպեց նորովի և ժամանակակից...',
-              author: 'Կամո Թովմասյան',
-              role: 'KAMOBLOG մեդիա-հարթակի հիմնադիր, influencer'
-            },
-            {
-              id: 2,
-              rating: 5,
-              text: 'Evocabank-ի հետ աշխատելը իսկական հաճույք է: Ժամանակակից ծառայությունները և արագ սպասարկումը անփոխարինելի են:',
-              author: 'Աննա Գրիգորյան',
-              role: 'Մարկետոլոգ'
-            },
-            {
-              id: 3,
-              rating: 5,
-              text: 'Լավագույն թվային բանկինգը Հայաստանում: Հավելվածն անհավանական հարմար է ու ոճային:',
-              author: 'Արմեն Սարգսյան',
-              role: 'IT մասնագետ'
-            },
-            {
-              id: 4,
-              rating: 5,
-              text: 'Արագ փոխանցումներ, բարձրակարգ սպասարկում և միշտ հասանելի աջակցություն:',
-              author: 'Սոնա Մարտիրոսյան',
-              role: 'Դիզայներ'
-            },
-            {
-              id: 5,
-              rating: 5,
-              text: 'Ինովացիոն բանկային լուծումներ, որոնք խնայում են ժամանակը:',
-              author: 'Դավիթ Հովհաննիսյան',
-              role: 'Գործարար'
-            }
-          ]
-        });
-      });
+    const footerRef = ref(db, 'footerVerev');
+    
+    const unsubscribe = onValue(
+      footerRef,
+      (snapshot) => {
+        const resData = snapshot.val();
+        if (resData) {
+          setData(resData);
+        } else {
+          setData(fallbackData);
+        }
+      },
+      () => {
+        setData(fallbackData);
+      }
+    );
+
+    return () => unsubscribe();
   }, []);
 
-  // Ավտոմատ slider փոխվելը (ամեն 5 վայրկյանը մեկ)
   useEffect(() => {
     if (!data || !data.reviews || data.reviews.length === 0) return;
     const interval = setInterval(() => {
@@ -171,7 +186,6 @@ function Footerverev() {
           animation: floatReverseContinuous 5.5s ease-in-out infinite;
         }
 
-        /* 4. Կենտրոնական կարծիքի բլոկ */
         .review-card-center {
           max-width: 680px;
           text-align: center;
@@ -193,7 +207,6 @@ function Footerverev() {
           font-size: 28px;
         }
 
-        /* Չակերտներ և Տեքստ */
         .quote-box {
           position: relative;
           padding: 0 45px;
@@ -268,7 +281,6 @@ function Footerverev() {
           transform: scale(1.3);
         }
 
-        /* Թարմացման ամսաթիվ */
         .update-timestamp {
           width: 100%;
           text-align: right;
