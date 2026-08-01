@@ -17,6 +17,27 @@ function CardDetail() {
     || (cardsData && cardsData['evoca-travel-card']) 
     || defaultCard;
 
+  const otherNews = [
+    {
+      id: 1,
+      title: 'Evocabank-ը և Green Rock-ը մեկնարկեցին Բանկի նոր գլխամասի նախագիծը',
+      date: '30.07.2026',
+      img: 'https://www.evoca.am/images-cache/news/1/17854167235525/428x321.png'
+    },
+    {
+      id: 2,
+      title: 'Evoca-ի ղեկավարները հաջողությամբ ավարտեցին Generative AI դասընթացը',
+      date: '17.07.2026',
+      img: 'https://www.evoca.am/images-cache/news/1/17842875742396/428x321.png'
+    },
+    {
+      id: 3,
+      title: 'ՊԱՐԶԱԲԱՆՈՒՄ',
+      date: '05.06.2026',
+      img: 'https://www.evoca.am/images-cache/news/1/17806626445767/428x321.jpg'
+    }
+  ];
+
   return (
     <div className="card-detail-page">
       <div className="card-detail-subnav">
@@ -85,8 +106,19 @@ function CardDetail() {
             </p>
           </div>
 
-          <div className="card-content-footer-title">
-            <h2>Այլ Նորություններ</h2>
+          <div className="other-news-section">
+            <h2 className="other-news-main-title">Այլ Նորություններ</h2>
+            <div className="other-news-grid">
+              {otherNews.map((news) => (
+                <div key={news.id} className="news-card">
+                  <div className="news-card-img-wrapper">
+                    <img src={news.img} alt={news.title} className="news-card-img" />
+                  </div>
+                  <h3 className="news-card-title">{news.title}</h3>
+                  <span className="news-card-date">{news.date}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

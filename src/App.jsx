@@ -30,6 +30,7 @@ function Home() {
       <Gortsynkerner />
       <Mrcanak />
       <Dram />
+      <Footerverev />
     </>
   );
 }
@@ -58,7 +59,6 @@ function App() {
         </Routes>
 
         <FloatingChat />
-        <Footerverev />
         <Footer />
       </div>
     </Router>
