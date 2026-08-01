@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBars, FaGlobe } from 'react-icons/fa';
-import { auth } from '../../firebase'; // Ճշտիր ֆայլիդ ճանապարհը
+import { auth } from '../../firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import logo2Img from '../../assets/Logo2.png';
 import UserMapModal from '../Header/UserMapModal';
@@ -14,17 +14,13 @@ function Headernerqev({ onOpenBurger }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      
-      if (currentUser) {
-        setIsMapOpen(true);
-      }
     });
     return () => unsubscribe();
   }, []);
 
   const handleLogout = () => {
     signOut(auth);
-    setIsMapOpen(false); 
+    setIsMapOpen(false);
   };
 
   return (
