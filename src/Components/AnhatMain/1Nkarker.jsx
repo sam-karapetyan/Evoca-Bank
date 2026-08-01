@@ -181,7 +181,7 @@ function Nkarker() {
           {current.btnText && (
             <button 
               className="nkarker-btn"
-              onClick={() => navigate(current.btnLink || '/')}
+              onClick={() => navigate(`/slide/${current.id}`, { state: { slide: current } })}
               style={{ 
                 backgroundColor: current.btnBg || '#ffffff', 
                 color: current.btnColor || '#5925a2'
