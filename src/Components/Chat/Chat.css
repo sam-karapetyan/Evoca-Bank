@@ -258,7 +258,6 @@
   padding: 20px;
 }
 
-/* ԶԱՆԳԻ ՊԱՏՈՒՀԱՆ (CALL MODAL) */
 .call-modal-overlay {
   position: absolute;
   top: 0;
@@ -414,7 +413,6 @@
   font-weight: bold;
 }
 
-/* 📱 MOBILE MEDIA QUERY (iPhone 11 Pro / SmartPhone-ների համար) */
 @media screen and (max-width: 500px) {
   .chat-sidebar {
     width: 60px;

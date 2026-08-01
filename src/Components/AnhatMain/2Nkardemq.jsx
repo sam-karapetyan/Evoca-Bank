@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
-import './2Nkardemq.css'; // Import ենք անում առանձին CSS-ը
+import './2Nkardemq.css'; 
 
 import QR from '../../assets/QR.png';
 import Demq1 from '../../assets/Demq1.png';

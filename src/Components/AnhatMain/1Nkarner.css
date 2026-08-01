@@ -82,18 +82,15 @@
   margin-top: 30px;
 }
 
-/* ==========================================
-   MOBILE & iPHONE RESPONSIVE (մինչև 768px)
-   ========================================== */
 @media screen and (max-width: 768px) {
   .nkarker-slider-container {
     padding: 30px 20px 20px 20px !important;
-    border-bottom-left-radius: 40px !important; /* Մոբայլում 200px շառավիղը շատ մեծ է */
+    border-bottom-left-radius: 40px !important; 
     min-height: auto !important;
   }
 
   .nkarker-content-wrapper {
-    flex-direction: column-reverse !important; /* Նկարը գալիս է վերև, տեքստը՝ ներքև */
+    flex-direction: column-reverse !important; 
     text-align: center !important;
     gap: 25px !important;
   }
@@ -106,7 +103,7 @@
   }
 
   .nkarker-title {
-    font-size: 24px !important; /* Վերնագրի չափսը փոքրացնում ենք iPhone-ի համար */
+    font-size: 24px !important; 
     margin-bottom: 10px !important;
   }
 
@@ -126,6 +123,6 @@
   }
 
   .nkarker-image {
-    max-height: 220px !important; /* Նկարի բարձրությունը փոքրացնում ենք */
+    max-height: 220px !important;
   }
 }

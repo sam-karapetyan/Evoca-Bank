@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { 
   FaMapMarkerAlt, 
@@ -7,8 +7,11 @@ import {
   FaSearch, 
   FaChevronDown 
 } from 'react-icons/fa';
+import UserMapModal from './UserMapModal'; 
 
 function Headeriverev() {
+  const [isMapOpen, setIsMapOpen] = useState(false);
+
   return (
     <>
       <style>{`
@@ -128,10 +131,9 @@ function Headeriverev() {
           cursor: pointer;
         }
 
-        /* MOBILE RESPONSIVE MEDIA QUERY */
         @media screen and (max-width: 768px) {
           .HeaderIverevContainer {
-            display: none !important; /* Մոբայլի վրա վերևի փոքր բարը ամբողջությամբ թաքցնում ենք */
+            display: none !important;
           }
         }
       `}</style>
@@ -157,7 +159,7 @@ function Headeriverev() {
             <div className='DropdownMenu'>
               <Link to="/online-application-1" className='DropdownItem'>Հայտ 1</Link>
               <Link to="/online-application-2" className='DropdownItem'>Հայտ 2</Link>
-              <Link to="/online-application-3" className='DropdownItem'>Հայտ 3</Link>
+              <Link to="/online-application-3" className='DropdownItem'>Հայt 3</Link>
             </div>
           </div>
 
@@ -179,11 +181,15 @@ function Headeriverev() {
           <div className='Icons'>
             <Link to="/locations"><FaMapMarkerAlt /></Link>
             <Link to="/faq"><FaQuestionCircle /></Link>
-            <button type="button"><FaGlobe /></button>
+            <button type="button" onClick={() => setIsMapOpen(true)} title="Քարտեզ">
+              <FaGlobe />
+            </button>
             <button type="button"><FaSearch /></button>
           </div>
         </div>
       </div>
+
+      {isMapOpen && <UserMapModal onClose={() => setIsMapOpen(false)} />}
     </> 
   );
 }

@@ -217,7 +217,6 @@ function Gortsynkerner() {
           Մենք միշտ բաց ենք հետաքրքիր առաջարկների ու համագործակցությունների համար:
         </p>
         
-        {/* 3. Սեղմելիս տեղափոխում է /partners էջ */}
         <button 
           className="gortsynkerner-btn" 
           onClick={() => navigate('/partners')}

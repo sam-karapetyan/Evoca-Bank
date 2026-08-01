@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-// Նոր նկարների ներմուծում assets-ից
 import Dzerq2Img from '../../assets/Dzerq2.png';
 import Dzerq3Img from '../../assets/Dzerq3.png';
 
@@ -8,13 +7,11 @@ function Footerverev() {
   const [data, setData] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // db.json-ից տվյալների ստացում
   useEffect(() => {
     fetch('http://localhost:3000/footerVerev')
       .then((res) => res.json())
       .then((resData) => setData(resData))
       .catch(() => {
-        // Fallback տվյալներ
         setData({
           updatedAt: '27/07/2026 15:52',
           reviews: [
@@ -88,7 +85,6 @@ function Footerverev() {
           font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* Անընդհատ լողացող/շարժվող անիմացիաներ */
         @keyframes floatContinuous {
           0% { transform: translateY(0px) rotate(0deg); }
           50% { transform: translateY(-25px) rotate(10deg); }
@@ -107,7 +103,6 @@ function Footerverev() {
           100% { transform: translateY(0px) scale(1) rotate(0deg); }
         }
 
-        /* 1. Մեծ Լողացող Եռանկյուններ */
         .big-triangle-left {
           position: absolute;
           left: 6%;
@@ -136,7 +131,6 @@ function Footerverev() {
           z-index: 1;
         }
 
-        /* 2. Անընդհատ Շարժվող Զիգզագներ */
         .zigzag-left-img {
           position: absolute;
           left: 23%;
@@ -157,7 +151,6 @@ function Footerverev() {
           z-index: 2;
         }
 
-        /* 3. Ձեռքերի նկարները (Dzerq2.png & Dzerq3.png) */
         .hand-left-img {
           position: absolute;
           left: 20%;
@@ -189,7 +182,6 @@ function Footerverev() {
           align-items: center;
         }
 
-        /* Աստղեր */
         .stars-container {
           display: flex;
           gap: 8px;
@@ -254,7 +246,6 @@ function Footerverev() {
           margin: 0;
         }
 
-        /* Dots Slider */
         .dots-container {
           display: flex;
           gap: 12px;
@@ -296,15 +287,12 @@ function Footerverev() {
         }
       `}</style>
 
-      {/* Մեծ անընդհատ շարժվող Եռանկյուններ */}
       <div className="big-triangle-left" />
       <div className="big-triangle-right" />
 
-      {/* Ձեռքերի նկարները assets-ից */}
       <img src={Dzerq2Img} alt="OK Hand" className="hand-left-img" />
       <img src={Dzerq3Img} alt="Thumbs Up" className="hand-right-img" />
 
-      {/* Անընդհատ շարժվող Զիգզագներ */}
       <svg className="zigzag-left-img" viewBox="0 0 50 80">
         <path d="M10 10 L35 30 L10 50 L35 70" stroke="#8c32ff" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
@@ -312,16 +300,13 @@ function Footerverev() {
         <path d="M10 25 L30 10 L50 40 L70 25" stroke="#ff007a" strokeWidth="6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
 
-      {/* Կենտրոնական Կարծիքի բաժինը */}
       <div className="review-card-center">
-        {/* 5 Դեղին աստղերը */}
         <div className="stars-container">
           {[...Array(currentReview.rating || 5)].map((_, i) => (
             <span key={i} className="star-item">★</span>
           ))}
         </div>
 
-        {/* Չակերտներով Տեքստը */}
         <div className="quote-box">
           <span className="quote-left-mark">“</span>
           <p className="review-main-text">
@@ -338,11 +323,9 @@ function Footerverev() {
           <span className="quote-right-mark">”</span>
         </div>
 
-        {/* Հեղինակի Անունն ու Պաշտոնը */}
         <h4 className="author-name">{currentReview.author}</h4>
         <p className="author-role">{currentReview.role}</p>
 
-        {/* 5 Սլայդեր կետերը (Dots) */}
         <div className="dots-container">
           {data.reviews.map((_, idx) => (
             <button
@@ -354,7 +337,6 @@ function Footerverev() {
         </div>
       </div>
 
-      {/* Ամսաթիվ աջ ներքևում */}
       <div className="update-timestamp">
         Թարմացվել է` {data.updatedAt}
       </div>

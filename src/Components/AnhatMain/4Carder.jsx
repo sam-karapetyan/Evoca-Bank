@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../../firebase';
-import './Carder.css'; // Import ենք անում CSS-ը
+import './Carder.css'; 
 
-// Import 10 card images from assets
 import card1 from '../../assets/card1.png';
 import card2 from '../../assets/card2.png';
 import card3 from '../../assets/card3.png';

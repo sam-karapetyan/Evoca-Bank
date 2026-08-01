@@ -5,7 +5,7 @@ import BurgerMenu from './BurgerMenu';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Burger menu-ի state-ը
+  const [isMenuOpen, setIsMenuOpen] = useState(false); 
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,14 +53,12 @@ function Header() {
         {!isScrolled && <Headeriverev />}
 
         <div className={isScrolled ? 'fixed-header' : ''}>
-          {/* Փոխանցում ենք onOpenBurger prop-ը */}
           <Headernerqev onOpenBurger={() => setIsMenuOpen(true)} />
         </div>
 
         {isScrolled && <div className="header-spacer" />}
       </div>
 
-      {/* BurgerMenu-ն կառավարվում է այստեղից */}
       <BurgerMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>
   );

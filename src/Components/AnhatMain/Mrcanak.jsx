@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Mrcanak.css'; // Import ենք անում CSS-ը
+import './Mrcanak.css';
 
-// Assets նկարների ներմուծում
 import FootballImg from '../../assets/Football.png';
 import EarthImg from '../../assets/Earth.png';
 import XImg from '../../assets/X.png';
@@ -10,7 +9,6 @@ import XImg from '../../assets/X.png';
 function Mrcanak() {
   const navigate = useNavigate();
 
-  // Քարտերի տվյալները
   const newsData = [
     {
       id: 1,
@@ -35,7 +33,6 @@ function Mrcanak() {
     }
   ];
 
-  // Scroll անելիս քարտերի ներքևից վերև բարձրանալու (Animation) էֆեկտը
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

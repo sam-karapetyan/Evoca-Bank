@@ -44,7 +44,6 @@
   gap: 30px;
 }
 
-/* Անիմացիայի սկզբնական վիճակ (անտեսանելի և ներքևում) */
 .mrcanak-card {
   background: #ffffff;
   border-radius: 20px;
@@ -56,7 +55,6 @@
   cursor: pointer;
 }
 
-/* Scroll անելիս ակտիվացող դասը */
 .mrcanak-card.show-card {
   opacity: 1;
   transform: translateY(0);
@@ -114,9 +112,6 @@
   margin-top: 10px;
 }
 
-/* ==========================================
-   MOBILE & TABLET RESPONSIVE
-   ========================================== */
 @media screen and (max-width: 992px) {
   .mrcanak-section {
     padding: 50px 30px;

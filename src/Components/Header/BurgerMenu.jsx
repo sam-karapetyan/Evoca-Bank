@@ -65,7 +65,7 @@ function BurgerMenu({ isOpen, onClose }) {
           margin-bottom: 60px;
           margin-right: 20px;
           object-fit: contain;
-          mix-blend-mode: multiply; /* Հեռացնում է նկարի սպիտակ background-ը */
+          mix-blend-mode: multiply; 
         }
 
         .LeftMenuLinks {

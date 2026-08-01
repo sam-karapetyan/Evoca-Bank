@@ -43,7 +43,6 @@ function Login() {
     }
   };
 
-  // Էլ. հասցեով Մուտք / Գրանցում
   const handleEmailAuth = async (e) => {
     e.preventDefault();
     setError('');

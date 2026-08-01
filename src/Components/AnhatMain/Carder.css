@@ -95,7 +95,6 @@
   white-space: nowrap;
 }
 
-/* Կենտրոնական Քարտ */
 .carder-center-display {
   flex: 1;
   display: flex;
@@ -171,9 +170,6 @@
   transform: translateY(-2px);
 }
 
-/* ==========================================
-   MOBILE RESPONSIVE (մինչև 768px)
-   ========================================== */
 @media screen and (max-width: 768px) {
   .carder-container-unique {
     flex-direction: column !important;
@@ -183,7 +179,7 @@
   }
 
   .carder-center-display {
-    order: 1; /* Քարտը ցույց ենք տալիս ամենավերևում */
+    order: 1; 
     width: 100% !important;
   }
 
@@ -193,7 +189,7 @@
   }
 
   .carder-right-info {
-    order: 2; /* Վերնագիրն ու կոճակը մեջտեղում */
+    order: 2; 
     width: 100% !important;
     align-items: center !important;
     text-align: center !important;
@@ -210,7 +206,7 @@
   }
 
   .carder-left-sidebar {
-    order: 3; /* Thumbnails-ը դնում ենք ներքևում՝ հորիզոնական դասավորությամբ */
+    order: 3; 
     width: 100% !important;
     min-height: auto !important;
     flex-direction: row !important;
@@ -219,7 +215,7 @@
   }
 
   .carder-arrow-btn {
-    transform: rotate(-90deg); /* Սլաքները պտտում ենք ձախ/աջ direction-ի համար */
+    transform: rotate(-90deg);
   }
 
   .carder-arrow-btn:hover {

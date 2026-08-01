@@ -8,7 +8,6 @@ function FloatingChat() {
 
   return (
     <div className="floating-chat-wrapper">
-      {/* Չաթի պատուհանը (բացվում է կոճակին սեղմելիս) */}
       {isOpen && (
         <div className="chat-popup">
           <div className="chat-popup-header">
@@ -23,7 +22,6 @@ function FloatingChat() {
         </div>
       )}
 
-      {/* Ներքևի աջ անկյունում ֆիքսված կոճակը */}
       <button 
         className="floating-chat-btn" 
         onClick={() => setIsOpen(!isOpen)}

@@ -158,12 +158,9 @@
   transform: translateY(-2px);
 }
 
-/* ==========================================
-   MOBILE & TABLET RESPONSIVE (մինչև 768px)
-   ========================================== */
 @media screen and (max-width: 768px) {
   .bio-wrapper {
-    flex-direction: column !important; /* Վերև-ներքև ենք դասավորում */
+    flex-direction: column !important; 
     gap: 35px !important;
     padding: 30px 15px !important;
     text-align: center !important;

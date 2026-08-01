@@ -3,7 +3,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { ref, onValue } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
-import './1Nkarner.css'; // Import ենք անում media query-ներով CSS-ը
+import './1Nkarner.css';
 
 import main1 from '../../assets/main1.png';
 import main2 from '../../assets/main2.png';

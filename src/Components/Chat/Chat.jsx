@@ -27,17 +27,14 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
   
-  // Ձայնային հաղորդագրություն
   const [isRecording, setIsRecording] = useState(false);
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
 
-  // Զանգեր
   const [incomingCall, setIncomingCall] = useState(null);
   const [activeCall, setActiveCall] = useState(null);
   const [isMuted, setIsMuted] = useState(false);
 
-  // WebRTC Stream-եր (Ձայն/Տեսանյութ)
   const [localStream, setLocalStream] = useState(null);
   const [remoteStream, setRemoteStream] = useState(null);
 
@@ -46,7 +43,6 @@ function Chat() {
   const remoteVideoRef = useRef(null);
   const messagesEndRef = useRef(null);
 
-  // 1. Մուտք գործած օգտատեր և զանգի ազդանշանների լսում
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -71,7 +67,6 @@ function Chat() {
     return () => unsubscribe();
   }, []);
 
-  // 2. Կապում ենք localStream-ը և remoteStream-ը <video> էլեմենտներին
   useEffect(() => {
     if (localVideoRef.current && localStream) {
       localVideoRef.current.srcObject = localStream;
@@ -84,7 +79,6 @@ function Chat() {
     }
   }, [remoteStream, activeCall]);
 
-  // 3. Օգտատերերի ցուցակ
   useEffect(() => {
     if (!currentUser) return;
     const usersRef = ref(db, 'users');
@@ -125,7 +119,6 @@ function Chat() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Տեքստ ուղարկել
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (!text.trim() || !selectedUser || !currentUser) return;
@@ -144,7 +137,6 @@ function Chat() {
     setText('');
   };
 
-  // Ձայնային հաղորդագրություն
   const startRecording = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -196,17 +188,14 @@ function Chat() {
     const pc = new RTCPeerConnection(ICE_SERVERS);
     pcRef.current = pc;
 
-    // Ստանում ենք տեղական տեսախցիկը/միկրոֆոնը
     const stream = await navigator.mediaDevices.getUserMedia({
       video: callType === 'video',
       audio: true
     });
     setLocalStream(stream);
 
-    // Ավելացնում ենք մեր Stream-ը WebRTC connection-ին
     stream.getTracks().forEach(track => pc.addTrack(track, stream));
 
-    // Երբ դիմացինի Stream-ը հասնում է
     pc.ontrack = (event) => {
       if (event.streams && event.streams[0]) {
         setRemoteStream(event.streams[0]);
@@ -237,7 +226,6 @@ function Chat() {
         offer: { type: offer.type, sdp: offer.sdp }
       });
 
-      // Լսում ենք Answer-ը
       const answerRef = ref(db, `calls/${targetUid}/answer`);
       onValue(answerRef, async (snapshot) => {
         const answer = snapshot.val();
@@ -250,7 +238,6 @@ function Chat() {
         }
       });
 
-      // Լսում ենք Receiver-ի Candidate-ները
       const remoteCandidatesRef = ref(db, `calls/${targetUid}/receiverCandidates`);
       onChildAdded(remoteCandidatesRef, async (snapshot) => {
         const candidate = snapshot.val();
@@ -265,7 +252,6 @@ function Chat() {
       });
 
     } else {
-      // Receiver Logic
       const callSnapshotRef = ref(db, `calls/${currentUser.uid}`);
       onValue(callSnapshotRef, async (snapshot) => {
         const callData = snapshot.val();
@@ -286,7 +272,6 @@ function Chat() {
         }
       }, { onlyOnce: true });
 
-      // Լսում ենք Caller-ի Candidate-ները
       const remoteCandidatesRef = ref(db, `calls/${currentUser.uid}/callerCandidates`);
       onChildAdded(remoteCandidatesRef, async (snapshot) => {
         const candidate = snapshot.val();
@@ -358,7 +343,6 @@ function Chat() {
 
   return (
     <div className="chat-container">
-      {/* Ձախ մաս՝ Օգտատերեր */}
       <div className="chat-sidebar">
         <h3>Օգտատերեր</h3>
         <div className="users-list">
@@ -463,7 +447,6 @@ function Chat() {
         </div>
       )}
 
-      {/* ԱԿՏԻՎ ԶԱՆԳԻ ՊԱՏՈՒՀԱՆ */}
       {activeCall && (
         <div className="call-modal-overlay">
           <div className="call-modal">
@@ -473,7 +456,6 @@ function Chat() {
             </div>
 
             <div className="video-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
-              {/* 1. ԴԻՄԱՑԻՆԻ ՏԵՍԱՆՅՈՒԹՆ ՈՒ ՁԱՅՆԸ (Ամբողջ էկրանով) */}
               <video 
                 ref={remoteVideoRef} 
                 autoPlay 
@@ -481,7 +463,6 @@ function Chat() {
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
 
-              {/* Ձայնային զանգի դեպքում ավատար */}
               {activeCall.type === 'audio' && (
                 <div className="audio-call-avatar" style={{ position: 'absolute', zIndex: 2 }}>
                   <img 

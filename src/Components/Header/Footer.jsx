@@ -85,7 +85,6 @@ function Footer() {
           color: #6100e0;
         }
 
-        /* Աջ սյունակ (Սոց. ցանցեր և Կապ) */
         .footer-col-contact {
           display: flex;
           flex-direction: column;
@@ -177,7 +176,6 @@ function Footer() {
           text-decoration: none;
         }
 
-        /* Ներքևի Տեքստը և Լոգոների շարքը */
         .footer-bottom-strip {
           background-color: #f5f5f7;
           border-top: 1px solid #eeeeee;
@@ -237,9 +235,7 @@ function Footer() {
         }
       `}</style>
 
-      {/* Վերևի հիմնական բաժինը */}
       <div className="footer-main-content">
-        {/* 1. Լոգո և հասցե */}
         <div className="footer-col-brand">
           <a href="/">
             <img src={LogoImg} alt="Evocabank Logo" className="footer-logo" />
@@ -258,7 +254,6 @@ function Footer() {
           </p>
         </div>
 
-        {/* 2. Բանկի մասին */}
         <div className="footer-col-links">
           <h4>Բանկի մասին</h4>
           <ul className="footer-links-list">
@@ -275,7 +270,6 @@ function Footer() {
           </ul>
         </div>
 
-        {/* 3. Օգտակար հղումներ */}
         <div className="footer-col-links">
           <h4>Օգտակար հղումներ</h4>
           <ul className="footer-links-list">
@@ -288,7 +282,6 @@ function Footer() {
           </ul>
         </div>
 
-        {/* 4. Այլ հղումներ */}
         <div className="footer-col-links">
           <h4>Այլ հղումներ</h4>
           <ul className="footer-links-list">
@@ -303,7 +296,6 @@ function Footer() {
           </ul>
         </div>
 
-        {/* 5. Սոց. ցանցեր և Կապ */}
         <div className="footer-col-contact">
           <div className="social-icons">
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon-link" title="Facebook">
@@ -349,7 +341,6 @@ function Footer() {
         </div>
       </div>
 
-      {/* Ներքևի գորշ շերտը */}
       <div className="footer-bottom-strip">
         <div className="footer-bottom-container">
           <p className="disclaimer-text">

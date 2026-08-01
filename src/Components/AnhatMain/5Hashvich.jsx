@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
 
 function Hashvich() {
-  const [activeTab, setActiveTab] = useState('vark'); // 'vark' (Վարկ) կամ 'avand' (Ավանդ)
+  const [activeTab, setActiveTab] = useState('vark'); 
 
-  // Վարկի փոփոխականներ
   const [amount, setAmount] = useState(10000000);
   const [term, setTerm] = useState(12);
   const [rate, setRate] = useState(12);
-  const [paymentType, setPaymentType] = useState('zspanakadzv'); // 'zspanakadzv' կամ 'anuitet'
+  const [paymentType, setPaymentType] = useState('zspanakadzv'); 
 
-  // Ավանդի փոփոխականներ
   const [avandAmount, setAvandAmount] = useState(1000000);
   const [avandTerm, setAvandTerm] = useState(12);
   const [avandRate, setAvandRate] = useState(9);
 
-  // Հաշվարկված արդյունք
   const [result, setResult] = useState(null);
 
-  // Վարկի հաշվարկ
   const calculateLoan = () => {
     const P = Number(amount);
     const n = Number(term);
@@ -55,7 +51,6 @@ function Hashvich() {
     }
   };
 
-  // Ավանդի հաշվարկ
   const calculateAvand = () => {
     const P = Number(avandAmount);
     const n = Number(avandTerm);
@@ -109,7 +104,6 @@ function Hashvich() {
           position: relative;
         }
 
-        /* Թաբերը (Վարկ / Ավանդ) */
         .hashvich-tabs {
           display: inline-flex;
           background-color: #f5f4f9;
@@ -149,7 +143,6 @@ function Hashvich() {
           }
         }
 
-        /* Ինփութ բլոկ */
         .hashvich-field {
           display: flex;
           flex-direction: column;
@@ -188,7 +181,6 @@ function Hashvich() {
           background: transparent;
         }
 
-        /* Սլայդեր (Range) */
         .hashvich-range-container {
           position: relative;
           padding-top: 4px;
@@ -222,7 +214,6 @@ function Hashvich() {
           margin-top: 6px;
         }
 
-        /* Ռադիո կոճակներ (Մարման ձև) */
         .hashvich-radio-group {
           display: flex;
           flex-direction: column;
@@ -350,7 +341,6 @@ function Hashvich() {
 
       <div className="hashvich-card">
         
-        {/* Թաբեր */}
         <div className="hashvich-tabs">
           <button 
             className={`hashvich-tab-btn ${activeTab === 'vark' ? 'active' : ''}`}
@@ -367,10 +357,8 @@ function Hashvich() {
         </div>
 
         {activeTab === 'vark' ? (
-          /* ՎԱՐԿԻ ՀԱՇՎԻՉ */
           <div className="hashvich-grid">
             
-            {/* 1․ Վարկի գումար */}
             <div className="hashvich-field">
               <div className="hashvich-input-box">
                 <span className="hashvich-label">Վարկի գումար</span>
@@ -398,7 +386,6 @@ function Hashvich() {
               </div>
             </div>
 
-            {/* 2․ Ժամկետ */}
             <div className="hashvich-field">
               <div className="hashvich-input-box">
                 <span className="hashvich-label">Ժամկետ</span>
@@ -420,7 +407,6 @@ function Hashvich() {
               </div>
             </div>
 
-            {/* 3․ Տարեկան տոկոսադրույք */}
             <div className="hashvich-field">
               <div className="hashvich-input-box">
                 <span className="hashvich-label">Տարեկան տոկոսադրույք</span>
@@ -442,7 +428,6 @@ function Hashvich() {
               </div>
             </div>
 
-            {/* 4․ Մարման ձև */}
             <div className="hashvich-radio-group">
               <span className="hashvich-radio-title">Մարման ձև</span>
               <div className="hashvich-radio-options">
@@ -470,10 +455,8 @@ function Hashvich() {
 
           </div>
         ) : (
-          /* ԱՎԱՆԴԻ ՀԱՇՎԻՉ */
           <div className="hashvich-grid">
             
-            {/* Ավանդի գումար */}
             <div className="hashvich-field">
               <div className="hashvich-input-box">
                 <span className="hashvich-label">Ավանդի գումար</span>
@@ -501,7 +484,6 @@ function Hashvich() {
               </div>
             </div>
 
-            {/* Ավանդի Ժամկետ */}
             <div className="hashvich-field">
               <div className="hashvich-input-box">
                 <span className="hashvich-label">Ժամկետ</span>
@@ -523,7 +505,6 @@ function Hashvich() {
               </div>
             </div>
 
-            {/* Ավանդի տոկոսադրույք */}
             <div className="hashvich-field">
               <div className="hashvich-input-box">
                 <span className="hashvich-label">Տարեկան եկամտաբերություն</span>
@@ -548,7 +529,6 @@ function Hashvich() {
           </div>
         )}
 
-        {/* Հաշվարկված արդյունքի ցուցադրում */}
         {result && (
           <div className="hashvich-result-box">
             {result.type === 'anuitet' && (
@@ -600,7 +580,6 @@ function Hashvich() {
           </div>
         )}
 
-        {/* Ներքևի տեքստ և կոճակ */}
         <div className="hashvich-footer">
           <p className="hashvich-disclaimer">
             Բոլոր հաշվարկները կրում են մոտավոր բնույթ և չեն հանդիսանում հրապարակային առաջարկ:

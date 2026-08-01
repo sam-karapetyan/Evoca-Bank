@@ -89,7 +89,6 @@
   border-radius: 0;
 }
 
-/* 📱 MOBILE (iPhone 11 Pro - 375px և այլ հեռախոսներ) */
 @media screen and (max-width: 500px) {
   .floating-chat-wrapper {
     bottom: 15px;

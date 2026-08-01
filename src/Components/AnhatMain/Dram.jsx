@@ -37,7 +37,6 @@ function Dram() {
       });
   }, []);
 
-  // Ճշգրտված Հաշվիչի տրամաբանություն (Calculator Logic)
   useEffect(() => {
     if (!dramData) return;
 
@@ -47,7 +46,6 @@ function Dram() {
       return;
     }
 
-    // Եթե նույն արժույթն է ընտրված
     if (fromCurrency === toCurrency) {
       setToAmount(num.toString());
       return;
@@ -59,13 +57,10 @@ function Dram() {
     let result = 0;
 
     if (fromCurrency === 'AMD' && toCurr) {
-      // AMD -> Foreign
       result = num / toCurr.sell;
     } else if (toCurrency === 'AMD' && fromCurr) {
-      // Foreign -> AMD
       result = num * fromCurr.buy;
     } else if (fromCurr && toCurr) {
-      // Foreign -> Foreign (օր. USD -> EUR)
       const inAMD = num * fromCurr.buy;
       result = inAMD / toCurr.sell;
     }
@@ -78,12 +73,10 @@ function Dram() {
   return (
     <div className="dram-wrapper">
       <div className="dram-container">
-        {/* Ձախ մաս՝ Տեղեկություն, Աղյուսակ և Հաշվիչ */}
         <div className="dram-left">
           <p className="dram-info-text">{dramData.infoText}</p>
 
           <div className="dram-card">
-            {/* Թաբեր */}
             <div className="dram-tabs">
               {dramData.tabs.map((tab, idx) => (
                 <button
@@ -125,7 +118,6 @@ function Dram() {
                 ))}
               </div>
 
-              {/* Հաշվիչ (Calculator) */}
               <div className="dram-calculator">
                 <div className="calc-input-group">
                   <span className="calc-label">Ունեմ</span>
