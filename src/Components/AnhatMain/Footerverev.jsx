@@ -1,76 +1,85 @@
 import React, { useState, useEffect } from 'react';
-import { ref, onValue } from 'firebase/database';
+import { ref, get, set, onValue } from 'firebase/database';
 import { db } from '../../firebase';
 
 import Dzerq2Img from '../../assets/Dzerq2.png';
 import Dzerq3Img from '../../assets/Dzerq3.png';
 
-const fallbackData = {
-  updatedAt: '27/07/2026 15:52',
+const initialFooterVerevData = {
+  updatedAt: "27/07/2026 15:52",
   reviews: [
     {
       id: 1,
       rating: 5,
-      text: 'Բանկ, որ իր ռեբրենդինգի շքեղ միջոցառմամբ ու աշխատանքային ձևաչափով բանկային ոլորտում ամրապնդեց որակ և ճաշակ թելադրեց: Evocabank-ն առաջին իսկ վայրկյանից ստիպեց նորովի և ժամանակակից...',
-      author: 'Կամո Թովմասյան',
-      role: 'KAMOBLOG մեդիա-հարթակի հիմնադիր, influencer'
+      text: "Բանկ, որ իր ռեբրենդինգի շքեղ միջոցառմամբ ու աշխատանքային ձևաչափով բանկային ոլորտում ամրապնդեց որակ և ճաշակ թելադրեց: Evocabank-ն առաջին իսկ վայրկյանից ստիպեց նորովի և ժամանակակից...",
+      author: "Կամո Թովմասյան",
+      role: "KAMOBLOG մեդիա-հարթակի հիմնադիր, influencer"
     },
     {
       id: 2,
       rating: 5,
-      text: 'Evocabank-ի հետ աշխատելը իսկական հաճույք է: Ժամանակակից ծառայությունները և արագ սպասարկումը անփոխարինելի են:',
-      author: 'Աննա Գրիգորյան',
-      role: 'Մարկետոլոգ'
+      text: "Evocabank-ի հետ աշխատելը իսկական հաճույք է: Ժամանակակից ծառայությունները և արագ սպասարկումը անփոխարինելի են:",
+      author: "Աննա Գրիգորյան",
+      role: "Մարկետոլոգ"
     },
     {
       id: 3,
       rating: 5,
-      text: 'Լավագույն թվային բանկինգը Հայաստանում: Հավելվածն անհավանական հարմար է ու ոճային:',
-      author: 'Արմեն Սարգսյան',
-      role: 'IT մասնագետ'
+      text: "Լավագույն թվային բանկինգը Հայաստանում: Հավելվածն անհավանական հարմար է ու ոճային:",
+      author: "Արմեն Սարգսյան",
+      role: "IT մասնագետ"
     },
     {
       id: 4,
       rating: 5,
-      text: 'Արագ փոխանցումներ, բարձրակարգ սպասարկում և միշտ հասանելի աջակցություն:',
-      author: 'Սոնա Մարտիրոսյան',
-      role: 'Դիզայներ'
+      text: "Արագ փոխանցումներ, բարձրակարգ սպասարկում և միշտ հասանելի աջակցություն:",
+      author: "Սոնա Մարտիրոսյան",
+      role: "Դիզայներ"
     },
     {
       id: 5,
       rating: 5,
-      text: 'Ինովացիոն բանկային լուծումներ, որոնք խնայում են ժամանակը:',
-      author: 'Դավիթ Հովհաննիսյան',
-      role: 'Գործարար'
+      text: "Ինովացիոն բանկային լուծումներ, որոնք խնայում են ժամանակը:",
+      author: "Դավիթ Հովհաննիսյան",
+      role: "Գործարար"
     }
   ]
 };
 
 function Footerverev() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(initialFooterVerevData);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const footerRef = ref(db, 'footerVerev');
-    
+
+    get(footerRef)
+      .then((snapshot) => {
+        if (!snapshot.exists()) {
+          set(footerRef, initialFooterVerevData)
+            .then(() => console.log("Տվյալները հաջողությամբ ուղարկվեցին Firebase Realtime Database!"))
+            .catch((err) => console.error("Սխալ Firebase տվյալներ գրելիս:", err));
+        }
+      })
+      .catch((error) => console.error("Սխալ Firebase հարցման ժամանակ:", error));
+
     const unsubscribe = onValue(
       footerRef,
       (snapshot) => {
         const resData = snapshot.val();
-        if (resData) {
+        if (resData && resData.reviews && resData.reviews.length > 0) {
           setData(resData);
-        } else {
-          setData(fallbackData);
         }
       },
-      () => {
-        setData(fallbackData);
+      (error) => {
+        console.error("Firebase fetch error:", error);
       }
     );
 
     return () => unsubscribe();
   }, []);
 
+  // Ավտոմատ սլայդերի ինտերվալ
   useEffect(() => {
     if (!data || !data.reviews || data.reviews.length === 0) return;
     const interval = setInterval(() => {
@@ -79,9 +88,24 @@ function Footerverev() {
     return () => clearInterval(interval);
   }, [data]);
 
-  if (!data) return null;
+  const currentReview = data?.reviews?.[currentIndex] || data?.reviews?.[0];
 
-  const currentReview = data.reviews[currentIndex] || data.reviews[0];
+  if (!currentReview) return null;
+
+  const renderFormattedText = (text) => {
+    if (!text || !text.includes('Evocabank')) return text;
+    const parts = text.split('Evocabank');
+    return (
+      <>
+        {parts.map((part, index) => (
+          <React.Fragment key={index}>
+            {part}
+            {index < parts.length - 1 && <span className="brand-highlight">Evocabank</span>}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  };
 
   return (
     <div className="footer-verev-container">
@@ -297,6 +321,12 @@ function Footerverev() {
           .zigzag-right-img { right: 10%; }
           .review-main-text { font-size: 14px; }
         }
+
+        @media (max-width: 576px) {
+          .hand-left-img, .hand-right-img { display: none; }
+          .quote-box { padding: 0 20px; }
+          .review-main-text { font-size: 13.5px; }
+        }
       `}</style>
 
       <div className="big-triangle-left" />
@@ -322,15 +352,7 @@ function Footerverev() {
         <div className="quote-box">
           <span className="quote-left-mark">“</span>
           <p className="review-main-text">
-            {currentReview.text.includes('Evocabank') ? (
-              <>
-                {currentReview.text.split('Evocabank')[0]}
-                <span className="brand-highlight">Evocabank</span>
-                {currentReview.text.split('Evocabank')[1]}
-              </>
-            ) : (
-              currentReview.text
-            )}
+            {renderFormattedText(currentReview.text)}
           </p>
           <span className="quote-right-mark">”</span>
         </div>
@@ -349,9 +371,11 @@ function Footerverev() {
         </div>
       </div>
 
-      <div className="update-timestamp">
-        Թարմացվել է` {data.updatedAt}
-      </div>
+      {data.updatedAt && (
+        <div className="update-timestamp">
+          Թարմացվել է` {data.updatedAt}
+        </div>
+      )}
     </div>
   );
 }

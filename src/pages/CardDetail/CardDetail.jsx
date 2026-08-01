@@ -1,42 +1,81 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import cardsData from '../../data/cardsData';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { db } from '../../firebase';
+import { ref, get, child } from 'firebase/database';
 import './CardDetail.css';
 
+const defaultNewsList = [
+  {
+    id: '1',
+    title: 'Evocabank-ը և Green Rock-ը մեկնարկեցին Բանկի նոր գլխամասի նախագիծը',
+    date: '30.07.2026',
+    img: 'https://www.evoca.am/images-cache/news/1/17854167235525/428x321.png'
+  },
+  {
+    id: '2',
+    title: 'Evoca-ի ղեկավարները հաջողությամբ ավարտեցին Generative AI դասընթացը',
+    date: '17.07.2026',
+    img: 'https://www.evoca.am/images-cache/news/1/17842875742396/428x321.png'
+  },
+  {
+    id: '3',
+    title: 'ՊԱՐԶԱԲԱՆՈՒՄ',
+    date: '05.06.2026',
+    img: 'https://www.evoca.am/images-cache/news/1/17806626445767/428x321.jpg'
+  }
+];
+
 function CardDetail() {
-  const { cardId } = useParams();
+  const { cardId } = useParams(); 
   const [activeTab, setActiveTab] = useState('cards');
+  
+  const [card, setCard] = useState(null);
+  const [otherNews, setOtherNews] = useState(defaultNewsList);
+  const [loading, setLoading] = useState(true);
 
-  const defaultCard = {
-    title: 'Evoca Travel Card',
-    subtitle: 'Սիրո՞ւմ եմ ճամփորդել. ուրեմն ժամանակն է ձեռք բերելու Evoca Mastercard Travel Card, որը կդառնա քո ճամփորդական անբաժան ընկերը:',
-    img: ''
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const dbRef = ref(db);
 
-  const card = (cardsData && cardId && cardsData[cardId]) 
-    || (cardsData && cardsData['evoca-travel-card']) 
-    || defaultCard;
+      try {
+        const cardSnapshot = await get(child(dbRef, `cards/${cardId}`));
+        if (cardSnapshot.exists()) {
+          setCard(cardSnapshot.val());
+        } else {
+          setCard({
+            title: 'Evoca Travel Card',
+            subtitle: 'Սիրո՞ւմ եմ ճամփորդել. ուրեմն ժամանակն է ձեռք բերելու Evoca Mastercard Travel Card...',
+            img: ''
+          });
+        }
 
-  const otherNews = [
-    {
-      id: 1,
-      title: 'Evocabank-ը և Green Rock-ը մեկնարկեցին Բանկի նոր գլխամասի նախագիծը',
-      date: '30.07.2026',
-      img: 'https://www.evoca.am/images-cache/news/1/17854167235525/428x321.png'
-    },
-    {
-      id: 2,
-      title: 'Evoca-ի ղեկավարները հաջողությամբ ավարտեցին Generative AI դասընթացը',
-      date: '17.07.2026',
-      img: 'https://www.evoca.am/images-cache/news/1/17842875742396/428x321.png'
-    },
-    {
-      id: 3,
-      title: 'ՊԱՐԶԱԲԱՆՈՒՄ',
-      date: '05.06.2026',
-      img: 'https://www.evoca.am/images-cache/news/1/17806626445767/428x321.jpg'
+        const newsSnapshot = await get(child(dbRef, 'news'));
+        if (newsSnapshot.exists()) {
+          const newsData = newsSnapshot.val();
+          const newsArray = Object.keys(newsData).map(key => ({
+            id: key,
+            ...newsData[key]
+          }));
+          if (newsArray.length > 0) {
+            setOtherNews(newsArray);
+          }
+        }
+      } catch (error) {
+        console.error("Firebase-ից տվյալներ բեռնելու սխալ:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (cardId) {
+      fetchData();
     }
-  ];
+  }, [cardId]); 
+
+  if (loading) {
+    return <div className="loading">Բեռնվում է...</div>;
+  }
 
   return (
     <div className="card-detail-page">
@@ -73,7 +112,7 @@ function CardDetail() {
         <div className="card-hero-wrapper">
           <div className="card-hero-text">
             <h1 className="card-hero-title">{card?.title}</h1>
-            <p className="card-hero-description">{card?.subtitle}</p>
+            <p className="card-hero-description">{card?.subtitle || card?.description}</p>
           </div>
 
           <div className="card-hero-media">
@@ -102,7 +141,7 @@ function CardDetail() {
               Այսուհետ <strong>Evocabank</strong>-ի հաճախորդներն ավելի հեշտ ու արագ կարող են կապ հաստատել Բանկի հետ` պարզապես հավաքելով <strong>8444</strong> քաղաքային կամ բջջային հեռախոսներից:
             </p>
             <p>
-              Հիշեցնենք նաև, որ <strong>Evocabank</strong>-ի հետ կարող եք նաև կապ հաստատել <span className="highlight-purple">+37410605555</span> հեռախոսահամարով: Իսկ արտասահմանից զանգահարելիս` գործում է միայն <span className="highlight-purple">+37410605555</span> հեռախոսահամարը:
+              Հիշեցնենք նաև, որ <strong>Evocabank</strong>-ի հետ կարող եք նաև կապ հաստատել <span className="highlight-purple">+37410605555</span> հեռախոսահամարով:
             </p>
           </div>
 
@@ -110,13 +149,13 @@ function CardDetail() {
             <h2 className="other-news-main-title">Այլ Նորություններ</h2>
             <div className="other-news-grid">
               {otherNews.map((news) => (
-                <div key={news.id} className="news-card">
+                <Link key={news.id} to={`/news/${news.id}`} className="news-card">
                   <div className="news-card-img-wrapper">
                     <img src={news.img} alt={news.title} className="news-card-img" />
                   </div>
                   <h3 className="news-card-title">{news.title}</h3>
                   <span className="news-card-date">{news.date}</span>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
