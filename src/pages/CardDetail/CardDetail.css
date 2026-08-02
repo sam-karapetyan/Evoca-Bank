@@ -226,6 +226,7 @@
   outline: none;
   text-align: left;
   transition: color 0.3s ease;
+  justify-content: flex-start;
 }
 
 .accordion-card.active .accordion-header {
@@ -499,4 +500,231 @@
   .accordion-content td {
     padding: 6px 4px !important;
   }
+}
+/* --- ACCORDION INNER STYLES (HTML Render-ի համար) --- */
+
+.accordion-content {
+  color: #333333;
+  font-family: sans-serif;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.accordion-content p {
+  margin-bottom: 12px;
+  color: #2b2b2b;
+}
+
+.accordion-content strong {
+  color: #6100e0; /* Evoca մանուշակագույն վերնագրերի համար */
+  font-size: 15px;
+}
+
+/* Ցուցակներ (UL / LI) - Մանուշակագույն կետիկներով */
+.accordion-content ul {
+  list-style-type: disc;
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+.accordion-content li {
+  margin-bottom: 8px;
+  color: #4a4a4a;
+}
+
+.accordion-content ul::marker {
+  color: #6100e0; /* Կետիկների գույնը */
+}
+
+/* Աղյուսակի ոճերը (Table) */
+.accordion-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.accordion-content th {
+  background-color: #f6f3fc;
+  color: #6100e0;
+  font-weight: 700;
+  padding: 12px 10px;
+  border: 1px solid #e9e4f5;
+  font-size: 13px;
+  text-align: center;
+}
+
+.accordion-content td {
+  padding: 10px;
+  border: 1px solid #e9e4f5;
+  font-size: 13px;
+  text-align: center;
+  color: #444444;
+}
+
+.accordion-content tr:nth-child(even) {
+  background-color: #fafafc;
+}
+/* --- SERVICE PAGE & ACCORDION STYLES --- */
+.service-page-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #121216;
+  margin: 30px 0 10px 0;
+  text-align: left;
+}
+
+.service-subtitle {
+  font-size: 16px;
+  font-weight: 800;
+  color: #121216;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+}
+
+.accordions-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 50px;
+}
+
+.accordion-card {
+  border: 1.5px solid #6100e0;
+  border-radius: 12px;
+  background-color: #ffffff;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: #ffffff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.accordion-header:hover {
+  background-color: #fbf9ff;
+}
+
+.accordion-title-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: #121216;
+}
+
+.accordion-arrow {
+  color: #6100e0;
+  font-size: 14px;
+  font-weight: bold;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.accordion-arrow.down {
+  transform: rotate(90deg);
+}
+
+.accordion-arrow.up {
+  transform: rotate(-90deg);
+}
+
+.accordion-body {
+  padding: 0 24px 24px 24px;
+  background-color: #ffffff;
+  color: #2b2b30;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.accordion-content ol, 
+.accordion-content ul {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+.accordion-content li {
+  margin-bottom: 10px;
+}
+
+.accordion-content table {
+  width: 100%;
+  margin-top: 15px;
+  border-collapse: collapse;
+}
+
+.accordion-content th, 
+.accordion-content td {
+  padding: 10px;
+  border: 1px solid #e2d9f7;
+  font-size: 14px;
+}
+/* --- CARDS GRID (ՔԱՐՏԵՐ TAB) STYLES --- */
+.cards-tab-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 60px 20px;
+}
+
+.cards-grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.card-item-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  text-decoration: none;
+  border: 1px solid #efeef4;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-item-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(97, 0, 224, 0.12);
+}
+
+.card-item-img-container {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.card-item-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.card-item-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #121216;
+  margin: 0 0 10px 0;
+}
+
+.card-item-desc {
+  font-size: 14px;
+  color: #666666;
+  line-height: 1.5;
+  margin: 0;
 }
