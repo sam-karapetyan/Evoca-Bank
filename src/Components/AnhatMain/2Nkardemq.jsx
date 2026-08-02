@@ -13,7 +13,7 @@ function NkarDemq() {
     title: "Դարձիր Evocabank-ի հաճախորդ բիոմետրիկ նույնականացմամբ",
     description: "Սկանավորիր QR կոդը, ներբեռնիր EvocaTOUCH հարմարավետ հավելվածը, ստեղծիր քո հաշիվը և ստացիր քարտ",
     btnText: "Իմանալ ավելին",
-    btnLink: "/"
+    btnLink: "/biometric"
   });
 
   const [currentFace, setCurrentFace] = useState(0);
@@ -46,13 +46,17 @@ function NkarDemq() {
           title: val.title || prev.title,
           description: val.description || prev.description,
           btnText: val.btnText !== undefined ? val.btnText : prev.btnText,
-          btnLink: val.btnLink || prev.btnLink
+          btnLink: (val.btnLink && val.btnLink !== '/') ? val.btnLink : '/biometric'
         }));
       }
     });
 
     return () => unsubBio();
   }, []);
+
+  const handleNavigate = () => {
+    navigate(data.btnLink || '/biometric');
+  };
 
   return (
     <div className="bio-wrapper">
@@ -98,7 +102,7 @@ function NkarDemq() {
           {data.btnText && (
             <button 
               className="action-btn"
-              onClick={() => navigate(data.btnLink || '/')}
+              onClick={handleNavigate}
             >
               {data.btnText}
             </button>

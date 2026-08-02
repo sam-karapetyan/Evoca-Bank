@@ -18,6 +18,8 @@ import Login from './Login/Login';
 import FloatingChat from './Components/Chat/FloatingChat';
 import CardDetail from './pages/CardDetail/CardDetail';
 
+import BiometricDetail from './pages/biometric/BiometricDetail'; 
+
 function Home() {
   return (
     <>
@@ -64,6 +66,7 @@ function App() {
           {/* Dynamic route-եր ID-ներով նորությունների և քարտերի համար */}
           <Route path="/card/:cardId" element={<CardDetail />} />
           <Route path="/news/:cardId" element={<CardDetail />} />
+          <Route path="/biometric" element={<BiometricDetail />} />
         </Routes>
 
         <FloatingChat />
