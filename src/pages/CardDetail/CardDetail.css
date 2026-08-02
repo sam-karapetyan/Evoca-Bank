@@ -1,3 +1,7 @@
+/* ==========================================
+   PAGE BASE & SUBNAV STYLES
+   ========================================== */
+
 .card-detail-page {
   width: 100%;
   min-height: 80vh;
@@ -17,6 +21,11 @@
   align-items: center;
   gap: 0;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.card-subnav-inner::-webkit-scrollbar {
+  display: none;
 }
 
 .subnav-tab {
@@ -30,6 +39,7 @@
   white-space: nowrap;
   transition: background-color 0.2s ease, opacity 0.2s ease;
   opacity: 0.9;
+  text-decoration: none;
 }
 
 .subnav-tab:hover {
@@ -40,6 +50,10 @@
   background-color: #4800a8;
   opacity: 1;
 }
+
+/* ==========================================
+   HERO / BANNER SECTION
+   ========================================== */
 
 .card-hero-container {
   background-color: #f6f3fc;
@@ -116,6 +130,10 @@
   height: 60px;
 }
 
+/* ==========================================
+   CONTENT SECTION
+   ========================================== */
+
 .card-content-section {
   width: 100%;
   background-color: #ffffff;
@@ -176,6 +194,82 @@
   font-weight: 800;
 }
 
+/* ==========================================
+   ACCORDION STYLES & ANIMATIONS
+   ========================================== */
+
+.accordion-card {
+  border: 1.5px solid #e2e2e8;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.accordion-card.active {
+  border-color: #6100e0;
+  box-shadow: 0 4px 20px rgba(97, 0, 224, 0.08);
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 20px 24px;
+  background-color: #ffffff;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  color: #1d1d1f;
+  outline: none;
+  text-align: left;
+  transition: color 0.3s ease;
+}
+
+.accordion-card.active .accordion-header {
+  color: #6100e0;
+}
+
+.accordion-icon {
+  font-size: 14px;
+  color: #6100e0;
+  display: inline-block;
+  margin-left: 12px;
+  transform: rotate(90deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.accordion-card.active .accordion-icon {
+  transform: rotate(-90deg);
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.accordion-card.active .accordion-body {
+  max-height: 3500px;
+  opacity: 1;
+  transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.accordion-content {
+  padding: 0 24px 28px 24px;
+  color: #2c2c2e;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* ==========================================
+   OTHER NEWS SECTION
+   ========================================== */
+
 .other-news-section {
   margin-top: 80px;
 }
@@ -197,6 +291,7 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  text-decoration: none;
   transition: transform 0.2s ease;
 }
 
@@ -210,6 +305,7 @@
   overflow: hidden;
   margin-bottom: 16px;
   background-color: #f3f3f5;
+  border-radius: 8px;
 }
 
 .news-card-img {
@@ -233,6 +329,11 @@
   margin-top: auto;
 }
 
+/* ==========================================
+   MEDIA QUERIES (RESPONSIVE FOR TABLETS & PHONES)
+   ========================================== */
+
+/* Tablet & Smaller Screen ( <= 992px ) */
 @media (max-width: 992px) {
   .card-hero-wrapper {
     flex-direction: column;
@@ -275,6 +376,7 @@
   }
 }
 
+/* Mobile Screens ( <= 576px ) */
 @media (max-width: 576px) {
   .card-hero-container {
     padding: 35px 16px 60px 16px;
@@ -324,6 +426,16 @@
     line-height: 1.6;
   }
 
+  .accordion-header {
+    padding: 16px 18px;
+    font-size: 15px;
+  }
+
+  .accordion-content {
+    padding: 0 18px 20px 18px;
+    font-size: 14px;
+  }
+
   .other-news-section {
     margin-top: 45px;
   }
@@ -343,5 +455,48 @@
 
   .hero-bottom-curve svg {
     height: 35px;
+  }
+}
+
+/* Modern iPhones (iPhone 15 / 16 / 17 & Compact Smartphones <= 430px) */
+@media (max-width: 430px) {
+  .card-issuance-container {
+    padding: 24px 12px !important;
+  }
+
+  .card-hero-title {
+    font-size: 23px;
+  }
+
+  .accordion-header {
+    padding: 14px 14px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .accordion-content {
+    padding: 0 14px 18px 14px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .accordion-content ol, 
+  .accordion-content ul {
+    padding-left: 16px !important;
+  }
+
+  .subnav-tab {
+    padding: 10px 14px;
+    font-size: 12.5px;
+  }
+
+  /* Աղյուսակի հարմարեցում iPhone-ների վրա սահուն սքրոլի համար */
+  .accordion-content table {
+    font-size: 11px !important;
+  }
+
+  .accordion-content th, 
+  .accordion-content td {
+    padding: 6px 4px !important;
   }
 }

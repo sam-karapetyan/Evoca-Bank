@@ -54,8 +54,16 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/all-news" element={<AllNewsPage />} />
           <Route path="/login" element={<Login />} />
+          
+          {/* Քարտերի և SubNav-ի բոլոր 4 երթուղիները */}
           <Route path="/cards" element={<CardDetail />} />
+          <Route path="/card-issuance" element={<CardDetail />} />
+          <Route path="/social-cards" element={<CardDetail />} />
+          <Route path="/evoca-benefits" element={<CardDetail />} />
+
+          {/* Dynamic route-եր ID-ներով նորությունների և քարտերի համար */}
           <Route path="/card/:cardId" element={<CardDetail />} />
+          <Route path="/news/:cardId" element={<CardDetail />} />
         </Routes>
 
         <FloatingChat />
