@@ -1,122 +1,111 @@
 import React, { useState, useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
-import { Link } from 'react-router-dom';
 import { db } from '../../firebase';
 import NodebukHer from '../../Components/AnhatMain/6NodbukHer';
 import './BiometricDetail.css';
 
-import QR from '../../assets/QR.png';
-
-const defaultNewsList = [
-  {
-    id: 1,
-    title: 'Evocabank-ը և Green Rock-ը մեկնարկեցին Բանկի նոր գլխամասի նախագիծը',
-    date: '30.07.2026',
-    img: 'https://www.evoca.am/images-cache/news/1/17854167235525/428x321.png'
-  },
-  {
-    id: 2,
-    title: 'Evoca-ի ղեկավարները հաջողությամբ ավարտեցին Generative AI դասընթացը',
-    date: '17.07.2026',
-    img: 'https://www.evoca.am/images-cache/news/1/17842875742396/428x321.png'
-  },
-  {
-    id: 3,
-    title: 'ՊԱՐԶԱԲԱՆՈՒՄ',
-    date: '05.06.2026',
-    img: 'https://www.evoca.am/images-cache/news/1/17806626445767/428x321.jpg'
-  }
-];
-
-function BiometricDetail() {
-  const [title, setTitle] = useState("Դարձիր Evocabank-ի հաճախորդ բիոմետրիկ նույնականացմամբ");
+function EvocaTouchDetail() {
+  const [title, setTitle] = useState("EvocaTOUCH");
 
   // Էջը բացվելիս ավտոմատ բարձրանում է վերև
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Firebase-ից միայն վերնագիրն ենք թարմացնում, եթե առկա է
+  // Firebase-ից վերնագիրը թարմացնելու համար
   useEffect(() => {
-    const bioRef = ref(db, '/biometric/title');
-    const unsub = onValue(bioRef, (snapshot) => {
+    const touchRef = ref(db, '/evocaTouch/title');
+    const unsub = onValue(touchRef, (snapshot) => {
       const val = snapshot.val();
       if (val) {
         setTitle(val);
       }
     });
-
     return () => unsub();
   }, []);
 
   return (
-    <div className="evoca-biometric-page">
-      <div className="evoca-bio-main-container">
+    <div className="evoca-touch-page">
+      <div className="evoca-touch-main-container">
         
-        {/* Ամսաթիվ և Վերնագիր */}
-        <div className="evoca-bio-header">
-          <span className="evoca-bio-date">10.04.2024</span>
-          <h1 className="evoca-bio-title">{title}</h1>
+        {/* Վերնագիր */}
+        <div className="evoca-touch-header">
+          <h1 className="evoca-touch-title">{title}</h1>
         </div>
 
-        {/* Բաց Մանուշակագույն Տեքստային Բլոկ (2-րդ նկարի պես) */}
-        <div className="evoca-purple-callout">
+        {/* Հիմնական տեքստային բովանդակություն */}
+        <div className="evoca-touch-body-text">
           <p>
-            Այժմ դու կարող ես դառնալ <strong>Evocabank</strong>-ի հաճախորդ 
-            առանց Բանկ այցելելու՝ <strong>EvocaTOUCH</strong> հավելվածի միջոցով անցնելով 
-            արագ բիոմետրիկ նույնականացում:
+            Շատերին թվում է՝ դժվար ու անիրական է ֆինանսական ոլորտում լինել կրեատիվ, 
+            սակայն <strong>Evocabank</strong>-ին տարիներ շարունակ հաջողվում է գտնել out of box լուծումներ 
+            և շուկային ներկայանալ նոր &amp; ժամանակակից պրոդուկտներով:
           </p>
-        </div>
 
-        {/* Ամբողջական Տեքստը (2-րդ և 3-րդ նկարների ճշգրիտ կրկնօրինակը) */}
-        <div className="evoca-bio-body-text">
           <p>
-            Գործընթացը շատ պարզ է. անհրաժեշտ է միայն ներբեռնել <strong>EvocaTOUCH</strong> հավելվածը, 
-            սկանավորել անձը հաստատող փաստաթուղթն ու անցնել բիոմետրիկ նույնականացում:
+            Այդ գաղափարների շարքից է նոր <strong>EvocaTOUCH</strong> հավելվածը, որն առանձնանում է 
+            ժամանակակից թվային լուծումներով և հնարավորություններով:
           </p>
 
-          <h3 className="evoca-bio-section-heading">Դրա համար անհրաժեշտ է՝</h3>
-
-          <ol className="evoca-numbered-list">
-            <li>Ներբեռնել <strong>EvocaTOUCH</strong> հավելվածը,</li>
-            <li>Սեղմել <strong>«Դառնալ հաճախորդ»</strong> կոճակը,</li>
-            <li>Լրացնել հեռախոսահամարն ու անցնել նույնականացում (Selfie),</li>
-            <li>Մուտքագրել անձնագրի/ID քարտի տվյալները,</li>
-            <li>Ստեղծել մուտքանուն և գաղտնաբառ:</li>
-          </ol>
-
-          <p className="evoca-text-paragraph">
-            Վերջ, դու արդեն Evocabank-ի հաճախորդ ես! Կարող ես բացել բանկային հաշիվներ, 
-            պատվիրել քարտեր, ձևակերպել ավանդներ և օգտվել EvocaTOUCH-ի բոլոր հնարավորություններից:
+          <p>
+            <strong>EvocaTOUCH</strong> հավելվածն անվտանգ է, հարմար և նախատեսված է անմիջապես smartphone-ից 
+            մի շարք բանկային ծառայություններից օգտվելու համար: Կարևորելով հավելվածի անվտանգ օգտագործումը՝ 
+            Բանկն ապահովում է օգտատերերի մասին ինֆորմացիայի և կատարած գործարքների պաշտպանությունը՝ 
+            օգտագործելով գաղտնագրման վերջին տեխնոլոգիաները:
           </p>
-        </div>
 
-        {/* QR Կոդի Բլոկ (3-րդ նկարի պես) */}
-        <div className="evoca-qr-box">
-          <div className="evoca-qr-content">
-            <img src={QR} alt="EvocaTOUCH QR Code" className="evoca-qr-img" />
-            <p className="evoca-qr-desc">
-              Սկանավորիր QR կոդը EvocaTOUCH հավելվածը ներբեռնելու համար
-            </p>
-          </div>
-        </div>
+          <p>
+            <strong>EvocaTOUCH</strong> հավելվածը կառուցված է այս պահին հայտնի ամենավերջին մոբայլ 
+            տեխնոլոգիաներով:
+          </p>
 
-        {/* Այլ Նորություններ Բաժին */}
-        <div className="evoca-other-news-wrapper">
-          <h2 className="evoca-other-news-title">Այլ Նորություններ</h2>
-          <div className="evoca-news-cards-grid">
-            {defaultNewsList.map((news) => (
-              <Link key={news.id} to={`/news/${news.id}`} className="evoca-news-item">
-                <div className="evoca-news-img-box">
-                  <img src={news.img} alt={news.title} />
-                </div>
-                <div className="evoca-news-info">
-                  <h4 className="evoca-news-item-title">{news.title}</h4>
-                  <span className="evoca-news-item-date">{news.date}</span>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <p>
+            Հավելվածը գրվել է User Interface և User Experience նորագույն սկզբունքներով, ունի գունային 2 appearance՝ Dark և Light: 
+            Այն ավելի նման է facebook-ի կամ instagram-ի feed-ի՝ ամենակարևոր ու շատ օգտագործվող ֆունկցիաներն անմիջապես 
+            առաջին էջին են՝ Քարտեր, Հաշիվներ, Վարկեր, Ավանդներ: Օգտատերերը հնարավորություն ունեն ստեղծել Template-ներ, 
+            որի շնորհիվ բանկային փոխանցումները կատարվում են ավելի արագ ու հեշտ: 
+            Հնարավոր է ծանոթանալ Բանկի նորություններին ու ամենաակտուալ պրոդուկտներին՝ թերթվող story-ների միջոցով:
+          </p>
+
+          <p>
+            <strong>EvocaTOUCH</strong> հավելվածը 24/7 հասանելի է իր բոլոր օգտատերերին աշխարհի ցանկացած կետից, ցանկացած ժամի:
+          </p>
+
+          <p>
+            Նոր հավելվածն առաջարկում է գործառույթների լայն շրջանակ, որը ներառում է ամենօրյա բանկային գործընթացները՝ 
+            վերացնելով ֆիզիկական մասնաճյուղ այցելելու անհրաժեշտությունը: Առանց գրանցման և սպասարկման վճարի՝ օգտատերերը կարող են.
+          </p>
+
+          {/* Ցանկի բաժին */}
+          <ul className="evoca-bullet-list">
+            <li>Բացել բանկային հաշիվներ,</li>
+            <li>Պատվիրել քարտ կամ բացել թվային քարտ վայրկյանների ընթացքում,</li>
+            <li>Ստանալ վարկ,</li>
+            <li>Ներդնել ավանդ,</li>
+            <li>Կատարել փոխանցումներ հաշիվներին և քարտերին, ինչպես հայաստանյան, այնպես էլ արտերկրյա բանկերին,</li>
+            <li>Կատարել բանկային փոխանցումներ և վճարումներ,</li>
+            <li>Կատարել կոմունալ վճարումներ,</li>
+            <li>Առցանց ստանալ ավտոմեքենաների տուգանքները և իրականացնել վճարումներ մեկ հպումով,</li>
+            <li>Կատարել փոխանցումներ կոնտակտային տվյալներով,</li>
+            <li>24/7 ուղղել հարցեր նամակի միջոցով:</li>
+          </ul>
+
+          <p>
+            Հավելվածի հիմնական ուժեղ կողմերից մեկն անհատականացված բանկային ծառայության տրամադրումն է: 
+            Հաճախորդակենտրոն մոտեցման շնորհիվ Բանկը հնարավորություն է տալիս օգտատերերին հավելվածը 
+            հարմարեցնել իրենց նախասիրություններին և կարիքներին:
+          </p>
+
+          <p>
+            Հավելվածից օգտվելու հարմարավետությունն ու անվտանգությունը բարձրացնելու համար օգտատերը կարող է 
+            ակտիվացնել կենսաչափական նույնականացումը՝ օգտագործելով մատնահետքի կամ դեմքի ճանաչման համակարգերը: 
+            Բացի այդ, նոր հավելվածն առաջարկում է արագ և հեշտ ինտեգրում այլ ֆինանսական գործիքների հետ, 
+            ինչը թույլ է տալիս օգտատերերին կառավարել իրենց ֆինանսները մեկ հավելվածի միջոցով:
+          </p>
+
+          <p>
+            <strong>EvocaTOUCH</strong>-ի միջոցով օգտատերերը կարող են 24/7 հասանելիություն ունենալ իրենց ֆինանսներին, 
+            վերահսկել իրենց դրամական միջոցները, արագ ու անվտանգ գործարքներ կատարել աշխարհի ցանկացած կետից, ցանկացած ժամի:
+          </p>
         </div>
 
       </div>
@@ -129,4 +118,4 @@ function BiometricDetail() {
   );
 }
 
-export default BiometricDetail;
+export default EvocaTouchDetail;

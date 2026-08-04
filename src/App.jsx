@@ -17,8 +17,8 @@ import Footer from './Components/Header/Footer';
 import Login from './Login/Login';
 import FloatingChat from './Components/Chat/FloatingChat';
 import CardDetail from './pages/CardDetail/CardDetail';
-
 import BiometricDetail from './pages/biometric/BiometricDetail'; 
+import PartnersPage from './pages/Partners/PartnersPage'; // <-- Ավելացվել է այստեղ (ստուգիր քո folder path-ը)
 
 function Home() {
   return (
@@ -67,6 +67,9 @@ function App() {
           <Route path="/card/:cardId" element={<CardDetail />} />
           <Route path="/news/:cardId" element={<CardDetail />} />
           <Route path="/biometric" element={<BiometricDetail />} />
+          
+          {/* Բոլոր Գործընկերների Էջ */}
+          <Route path="/partners" element={<PartnersPage />} />
         </Routes>
 
         <FloatingChat />
