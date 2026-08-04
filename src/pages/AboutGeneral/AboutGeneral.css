@@ -1,4 +1,3 @@
-/* About General Page Styles */
 .about-general-page {
   width: 100%;
   background-color: #ffffff;
@@ -7,7 +6,6 @@
   overflow-x: hidden;
 }
 
-/* Sub Header Nav */
 .about-sub-header {
   width: 100%;
   background-color: #6100e0;
@@ -41,14 +39,12 @@
   background-color: rgba(255, 255, 255, 0.18);
 }
 
-/* Main Container */
 .about-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px 80px 20px;
 }
 
-/* Breadcrumb */
 .about-breadcrumb {
   font-size: 14px;
   color: #888888;
@@ -64,7 +60,6 @@
   color: #1a1a1a;
 }
 
-/* Titles */
 .about-main-title {
   font-size: 36px;
   font-weight: 800;
@@ -72,7 +67,6 @@
   margin-bottom: 35px;
 }
 
-/* Section 1: Intro Section */
 .about-intro-section {
   display: flex;
   align-items: center;
@@ -108,7 +102,6 @@
   border-radius: 12px;
 }
 
-/* Section 2: Vision Block */
 .about-vision-section {
   width: 100vw;
   position: relative;
@@ -154,7 +147,6 @@
   margin: 0;
 }
 
-/* Section 3: Mission Block */
 .about-mission-section {
   margin-bottom: 90px;
 }
@@ -204,7 +196,6 @@
   font-weight: 500;
 }
 
-/* Section 4: Արժեքներ և առաջնայնություններ */
 .values-section {
   max-width: 1000px;
   margin: 0 auto 90px auto;
@@ -239,7 +230,6 @@
   margin: 0;
 }
 
-/* Section 5: Կորպորատիվ սոցիալական պատասխանատվություն (CSR) */
 .csr-section {
   background-color: #f8f8fb;
   border-radius: 16px;
@@ -292,7 +282,6 @@
   margin: 0;
 }
 
-/* Section 6: Timeline Slider (Բանկի պատմությունը) */
 .history-section {
   max-width: 1000px;
   margin: 0 auto;
@@ -449,27 +438,105 @@
   display: block;
 }
 
-/* Responsive Styles */
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
   .about-intro-section {
     flex-direction: column;
+    gap: 25px;
+    margin-bottom: 50px;
   }
+
   .values-grid {
     grid-template-columns: 1fr;
+    gap: 25px;
   }
+
   .csr-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
+
   .mission-text-box {
     position: static;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 15px;
+    border-radius: 8px;
   }
+
   .history-card-container {
     flex-direction: column;
   }
+
   .history-text-box {
     border-radius: 16px 16px 0 0;
     padding: 25px;
   }
+
+  .history-img-box {
+    height: 220px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-container {
+    padding: 0 15px 50px 15px;
+  }
+
+  .about-main-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .vision-title,
+  .mission-title,
+  .values-title,
+  .csr-title,
+  .history-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .about-vision-section {
+    padding: 50px 15px;
+    margin-bottom: 50px;
+  }
+
+  .vision-description p {
+    font-size: 15px;
+  }
+
+  .csr-section {
+    padding: 30px 20px;
+    margin-bottom: 50px;
+  }
+
+  .year-label {
+    font-size: 14px;
+  }
+
+  .year-item.active .year-label {
+    font-size: 16px;
+  }
+
+  .about-nav-item {
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+}
+/* Structure page styles */
+.structure-chart-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 10px 0;
+}
+
+.structure-img {
+  width: 100%;
+  min-width: 800px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
 }

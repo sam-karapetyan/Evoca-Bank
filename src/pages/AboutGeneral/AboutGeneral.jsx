@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './aboutGeneral.css';
 
 const historyData = [
@@ -38,10 +38,13 @@ const historyData = [
 function AboutGeneral() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const location = useLocation();
+
+  const isStructure = location.pathname === '/structure';
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [location.pathname]);
 
   const handleYearChange = (index) => {
     if (index === activeIndex || index < 0 || index >= historyData.length) return;
@@ -54,11 +57,10 @@ function AboutGeneral() {
 
   return (
     <div className="about-general-page">
-      {/* Մանուշակագույն Sub-Header Մենյու */}
       <div className="about-sub-header">
         <div className="about-sub-header-inner">
-          <Link to="/about-general" className="about-nav-item active">Ընդհանուր</Link>
-          <Link to="/structure" className="about-nav-item">Կառուցվածք</Link>
+          <Link to="/about-general" className={`about-nav-item ${!isStructure ? 'active' : ''}`}>Ընդհանուր</Link>
+          <Link to="/structure" className={`about-nav-item ${isStructure ? 'active' : ''}`}>Կառուցվածք</Link>
           <Link to="/shareholders" className="about-nav-item">Բաժնետերեր</Link>
           <Link to="/management" className="about-nav-item">Ղեկավարություն</Link>
           <Link to="/partners" className="about-nav-item">Գործընկերներ</Link>
@@ -69,181 +71,191 @@ function AboutGeneral() {
       </div>
 
       <div className="about-container">
-        {/* Breadcrumb path */}
-        <div className="about-breadcrumb">
-          <Link to="/">🏠</Link> &gt; Մեր մասին &gt; Evoca-ի մասին &gt; <strong>Ընդհանուր</strong>
-        </div>
-
-        <h1 className="about-main-title">Ընդհանուր տեղեկություն</h1>
-
-        {/* Բաժին 1: Ընդհանուր տեղեկություն */}
-        <div className="about-intro-section">
-          <div className="about-intro-text">
-            <p>
-              <strong>Evocabank</strong>-ը արագ, պարզ և նորարար ծառայություններ մատուցող բանկ է, որն առանձնանում է տեղեկատվական նորագույն տեխնոլոգիաների ակտիվ կիրառմամբ:
-            </p>
-            <p>
-              Մենք հատուկ ուշադրություն ենք դարձնում մոբայլ ծառայությունների զարգացմանը:
-            </p>
-            <p>
-              Մենք աշխատում ենք mobile-first ֆորմատով՝ յուրաքանչյուր նոր ծառայություն նախագծելիս նախևառաջ հաշվի ենք առնում դրա՝ հավելվածով օգտագործման հարմարավետությունը:
-            </p>
-            <p>
-              Աշխարհը թվային է դառնում, և մենք պատրաստ ենք դրան:
-            </p>
-          </div>
-
-          <div className="about-intro-image">
-            <img 
-              src="https://www.evoca.am/images-cache/about_pages/1/16201288751575/780x570.png" 
-              alt="Evocabank" 
-            />
-          </div>
-        </div>
-
-        {/* Բաժին 2: Մեր տեսլականը */}
-        <div className="about-vision-section">
-          <div className="about-vision-content">
-            <h2 className="vision-title">Մեր տեսլականը</h2>
-            <div className="vision-description">
-              <div className="vision-line"></div>
-              <p>
-                Դառնալ գլոբալ ֆինտեխ գործընկեր, որը միավորում է լավագույն փորձն ու տեխնոլոգիական նորարարությունները հարմարավետ և ճկուն ծառայություններապահովելու համար:
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Բաժին 3: Մեր առաքելությունը */}
-        <div className="about-mission-section">
-          <h2 className="mission-title">Մեր առաքելությունը</h2>
-          
-          <div className="mission-image-wrapper">
-            <img 
-              src="https://www.evoca.am/images-cache/about_pages/1/160992374514/946x430.jpg" 
-              alt="Evoca Mission" 
-              className="mission-main-img"
-            />
-            
-            <div className="mission-text-box">
-              <p>
-                Որպես human-first և խելացի ֆինտեխ ընկերություն՝ մենք հնարավորություն ենք տալիս մարդկանց երազելու ավելի համարձակ, բիզնեսներին՝ բացահայտելու նոր հորիզոններ, և հասարակությանը՝ կառուցելու ավելի լավ ապագա:
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Բաժին 4: Արժեքներ և առաջնայնություններ */}
-        <div className="values-section">
-          <h2 className="values-title">Արժեքներ և առաջնայնություններ</h2>
-          <div className="values-grid">
-            <div className="value-card">
-              <h3>Human-first</h3>
-              <p>
-                Առաջին տեղում միշտ մարդիկ են՝ մեր հաճախորդները, էքսպերտների թիմը և հասարակությունը: Չէ՞ որ աշխարհում ամեն ինչ արվում է մարդկանց կողմից մարդկանց համար:
-              </p>
-            </div>
-            <div className="value-card">
-              <h3>Նորարարություն</h3>
-              <p>
-                Նորարարությունը մեր ԴՆԹ-ի մասն է, իսկ փոփոխությունն այսօր միակ հաստատունն է: Մենք բաց ենք և պատրաստակամ զարգանալու համար:
-              </p>
-            </div>
-            <div className="value-card">
-              <h3>Դրական ազդեցություն</h3>
-              <p>
-                Մենք ձգտում ենք ունենալ դրական ազդեցություն և նպաստել աշխարհն ավելի լավը դարձնելուն:
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Բաժին 5: Կորպորատիվ սոցիալական պատասխանատվություն (CSR) */}
-        <div className="csr-section">
-          <h2 className="csr-title">Կորպորատիվ սոցիալական պատասխանատվություն</h2>
-          <p className="csr-subtitle">
-            Բանկը շարունակաբար աջակցություն է ցուցաբերում հանրության տարբեր խմբերին և հասարակական նախաձեռնություններին հետևյալ ոլորտներում՝
-          </p>
-          
-          <div className="csr-grid">
-            <div className="csr-item">
-              <div className="csr-dash"></div>
-              <p>Նորագույն տեխնոլոգիաների զարգացում, նորարար նախաձեռնություններ, startup-եր,</p>
-            </div>
-            <div className="csr-item">
-              <div className="csr-dash"></div>
-              <p>Երիտասարդության կրթական, գիտական և մշակութային նախաձեռնություններ,</p>
-            </div>
-            <div className="csr-item">
-              <div className="csr-dash"></div>
-              <p>Հասարակական կարևոր նշանակություն ունեցող նախաձեռնություններ,</p>
-            </div>
-            <div className="csr-item">
-              <div className="csr-dash"></div>
-              <p>Հասարակության առավել խոցելի խմբեր, մասնավորապես՝ ծնողազուրկ կամ հատուկ խնամքի տակ գտնվող երեխաներ:</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Բաժին 6: Բանկի պատմությունը (Անիմացիոն Timeline Slider) */}
-        <div className="history-section">
-          <h2 className="history-title">Բանկի պատմությունը</h2>
-
-          <div className="timeline-controls">
-            <button 
-              className="arrow-btn" 
-              onClick={() => handleYearChange(activeIndex + 1)}
-              disabled={activeIndex === historyData.length - 1}
-            >
-              &larr;
-            </button>
-
-            <div className="timeline-track">
-              <div className="timeline-line-bg"></div>
-              
-              {/* Մանուշակագույն ակտիվ ցուցիչը, որը սահում է ճիշտ տարեթվի տակ */}
-              <div 
-                className="timeline-line-active" 
-                style={{
-                  left: `${(activeIndex / (historyData.length - 1)) * 100}%`
-                }}
-              ></div>
-
-              {historyData.map((item, index) => (
-                <button 
-                  key={item.year} 
-                  className={`year-item ${index === activeIndex ? 'active' : ''}`}
-                  onClick={() => handleYearChange(index)}
-                >
-                  <span className="year-label">{item.year}</span>
-                  <span className="year-dot"></span>
-                </button>
-              ))}
+        {isStructure ? (
+          <>
+            <div className="about-breadcrumb">
+              <Link to="/">🏠</Link> &gt; Մեր մասին &gt; Evoca-ի մասին &gt; <strong>Կառուցվածք</strong>
             </div>
 
-            <button 
-              className="arrow-btn" 
-              onClick={() => handleYearChange(activeIndex - 1)}
-              disabled={activeIndex === 0}
-            >
-              &rarr;
-            </button>
-          </div>
+            <h1 className="about-main-title">Բանկի կառուցվածքը</h1>
 
-          {/* Տվյալների ցուցադրում */}
-          <div className={`history-card-container ${animating ? 'animating' : ''}`}>
-            <div className="history-text-box">
-              <p>{historyData[activeIndex].text}</p>
-            </div>
-            <div className="history-img-box">
+            <div className="structure-chart-wrapper">
               <img 
-                src={historyData[activeIndex].image} 
-                alt={`Evoca history ${historyData[activeIndex].year}`} 
+                src="https://www.evoca.am/file_manager/structure/Organizational%20Structure-arm.png" 
+                alt="Բանկի կառուցվածքը" 
+                className="structure-img"
               />
             </div>
-          </div>
-        </div>
+          </>
+        ) : (
+          <>
+            <div className="about-breadcrumb">
+              <Link to="/">🏠</Link> &gt; Մեր մասին &gt; Evoca-ի մասին &gt; <strong>Ընդհանուր</strong>
+            </div>
 
+            <h1 className="about-main-title">Ընդհանուր տեղեկություն</h1>
+
+            <div className="about-intro-section">
+              <div className="about-intro-text">
+                <p>
+                  <strong>Evocabank</strong>-ը արագ, պարզ և նորարար ծառայություններ մատուցող բանկ է, որն առանձնանում է տեղեկատվական նորագույն տեխնոլոգիաների ակտիվ կիրառմամբ:
+                </p>
+                <p>
+                  Մենք հատուկ ուշադրություն ենք դարձնում մոբայլ ծառայությունների զարգացմանը:
+                </p>
+                <p>
+                  Մենք աշխատում ենք mobile-first ֆորմատով՝ յուրաքանչյուր նոր ծառայություն նախագծելիս նախևառաջ հաշվի ենք առնում դրա՝ հավելվածով օգտագործման հարմարավետությունը:
+                </p>
+                <p>
+                  Աշխարհը թվային է դառնում, և մենք պատրաստ ենք դրան:
+                </p>
+              </div>
+
+              <div className="about-intro-image">
+                <img 
+                  src="https://www.evoca.am/images-cache/about_pages/1/16201288751575/780x570.png" 
+                  alt="Evocabank" 
+                />
+              </div>
+            </div>
+
+            <div className="about-vision-section">
+              <div className="about-vision-content">
+                <h2 className="vision-title">Մեր տեսլականը</h2>
+                <div className="vision-description">
+                  <div className="vision-line"></div>
+                  <p>
+                    Դառնալ գլոբալ ֆինտեխ գործընկեր, որը միավորում է լավագույն փորձն ու տեխնոլոգիական նորարարությունները հարմարավետ և ճկուն ծառայություններապահովելու համար:
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="about-mission-section">
+              <h2 className="mission-title">Մեր առաքելությունը</h2>
+              
+              <div className="mission-image-wrapper">
+                <img 
+                  src="https://www.evoca.am/images-cache/about_pages/1/160992374514/946x430.jpg" 
+                  alt="Evoca Mission" 
+                  className="mission-main-img"
+                />
+                
+                <div className="mission-text-box">
+                  <p>
+                    Որպես human-first և խելացի ֆինտեխ ընկերություն՝ մենք հնարավորություն ենք տալիս մարդկանց երազելու ավելի համարձակ, բիզնեսներին՝ բացահայտելու նոր հորիզոններ, և հասարակությանը՝ կառուցելու ավելի լավ ապագա:
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="values-section">
+              <h2 className="values-title">Արժեքներ և առաջնայնություններ</h2>
+              <div className="values-grid">
+                <div className="value-card">
+                  <h3>Human-first</h3>
+                  <p>
+                    Առաջին տեղում միշտ մարդիկ են՝ մեր հաճախորդները, էքսպերտների թիմը և հասարակությունը: Չէ՞ որ աշխարհում ամեն ինչ արվում է մարդկանց կողմից մարդկանց համար:
+                  </p>
+                </div>
+                <div className="value-card">
+                  <h3>Նորարարություն</h3>
+                  <p>
+                    Նորարարությունը մեր ԴՆԹ-ի մասն է, իսկ փոփոխությունն այսօր միակ հաստատունն է: Մենք բաց ենք և պատրաստակամ զարգանալու համար:
+                  </p>
+                </div>
+                <div className="value-card">
+                  <h3>Դրական ազդեցություն</h3>
+                  <p>
+                    Մենք ձգտում ենք ունենալ դրական ազդեցություն և նպաստել աշխարհն ավելի լավը դարձնելուն:
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="csr-section">
+              <h2 className="csr-title">Կորպորատիվ սոցիալական պատասխանատվություն</h2>
+              <p className="csr-subtitle">
+                Բանկը շարունակաբար աջակցություն է ցուցաբերում հանրության տարբեր խմբերին և հասարակական նախաձեռնություններին հետևյալ ոլորտներում՝
+              </p>
+              
+              <div className="csr-grid">
+                <div className="csr-item">
+                  <div className="csr-dash"></div>
+                  <p>Նորագույն տեխնոլոգիաների զարգացում, նորարար նախաձեռնություններ, startup-եր,</p>
+                </div>
+                <div className="csr-item">
+                  <div className="csr-dash"></div>
+                  <p>Երիտասարդության կրթական, գիտական և մշակութային նախաձեռնություններ,</p>
+                </div>
+                <div className="csr-item">
+                  <div className="csr-dash"></div>
+                  <p>Հասարակական կարևոր նշանակություն ունեցող նախաձեռնություններ,</p>
+                </div>
+                <div className="csr-item">
+                  <div className="csr-dash"></div>
+                  <p>Հասարակության առավել խոցելի խմբեր, մասնավորապես՝ ծնողազուրկ կամ հատուկ խնամքի տակ գտնվող երեխաներ:</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="history-section">
+              <h2 className="history-title">Բանկի պատմությունը</h2>
+
+              <div className="timeline-controls">
+                <button 
+                  className="arrow-btn" 
+                  onClick={() => handleYearChange(activeIndex + 1)}
+                  disabled={activeIndex === historyData.length - 1}
+                >
+                  &larr;
+                </button>
+
+                <div className="timeline-track">
+                  <div className="timeline-line-bg"></div>
+                  
+                  <div 
+                    className="timeline-line-active" 
+                    style={{
+                      left: `${(activeIndex / (historyData.length - 1)) * 100}%`
+                    }}
+                  ></div>
+
+                  {historyData.map((item, index) => (
+                    <button 
+                      key={item.year} 
+                      className={`year-item ${index === activeIndex ? 'active' : ''}`}
+                      onClick={() => handleYearChange(index)}
+                    >
+                      <span className="year-label">{item.year}</span>
+                      <span className="year-dot"></span>
+                    </button>
+                  ))}
+                </div>
+
+                <button 
+                  className="arrow-btn" 
+                  onClick={() => handleYearChange(activeIndex - 1)}
+                  disabled={activeIndex === 0}
+                >
+                  &rarr;
+                </button>
+              </div>
+
+              <div className={`history-card-container ${animating ? 'animating' : ''}`}>
+                <div className="history-text-box">
+                  <p>{historyData[activeIndex].text}</p>
+                </div>
+                <div className="history-img-box">
+                  <img 
+                    src={historyData[activeIndex].image} 
+                    alt={`Evoca history ${historyData[activeIndex].year}`} 
+                  />
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
