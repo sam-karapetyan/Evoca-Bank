@@ -522,21 +522,22 @@
     font-size: 13px;
   }
 }
-/* Structure page styles */
+/* Structure section styling */
 .structure-chart-wrapper {
   width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: 0 auto;
-  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
   padding: 10px 0;
 }
 
 .structure-img {
+  max-width: 600px; /* Նկարի առավելագույն լայնությունը փոքրացված է */
   width: 100%;
-  min-width: 800px;
   height: auto;
   display: block;
   margin: 0 auto;
   border-radius: 8px;
+  object-fit: contain;
 }
