@@ -1,15 +1,19 @@
+/* About General Page Styles */
 .about-general-page {
   width: 100%;
   background-color: #ffffff;
   font-family: 'Segoe UI', Arial, sans-serif;
   color: #333333;
+  overflow-x: hidden;
 }
 
+/* Sub Header Nav */
 .about-sub-header {
   width: 100%;
   background-color: #6100e0;
   overflow-x: auto;
   white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .about-sub-header-inner {
@@ -17,35 +21,50 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
+  padding: 0 10px;
 }
 
 .about-nav-item {
-  color: rgba(255, 255, 255, 0.75);
-  padding: 18px 25px;
-  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 18px 22px;
+  font-size: 15px;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .about-nav-item:hover,
 .about-nav-item.active {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.18);
 }
 
+/* Main Container */
 .about-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px 80px 20px;
 }
 
+/* Breadcrumb */
 .about-breadcrumb {
-  font-size: 13px;
+  font-size: 14px;
   color: #888888;
   margin: 25px 0 15px 0;
 }
 
+.about-breadcrumb a {
+  color: #888888;
+  text-decoration: none;
+}
+
+.about-breadcrumb strong {
+  color: #1a1a1a;
+}
+
+/* Titles */
 .about-main-title {
   font-size: 36px;
   font-weight: 800;
@@ -53,6 +72,7 @@
   margin-bottom: 35px;
 }
 
+/* Section 1: Intro Section */
 .about-intro-section {
   display: flex;
   align-items: center;
@@ -72,6 +92,10 @@
   margin-bottom: 16px;
 }
 
+.about-intro-text strong {
+  color: #6100e0;
+}
+
 .about-intro-image {
   flex: 1;
   display: flex;
@@ -81,18 +105,26 @@
 .about-intro-image img {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
-/* Vision Block */
+/* Section 2: Vision Block */
 .about-vision-section {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   background-color: #6100e0;
   padding: 80px 20px;
   color: #ffffff;
+  box-sizing: border-box;
+  margin-bottom: 80px;
 }
 
 .about-vision-content {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -109,8 +141,8 @@
 }
 
 .vision-line {
-  width: 50px;
-  height: 2px;
+  width: 40px;
+  height: 3px;
   background-color: #ffffff;
   margin-top: 14px;
   flex-shrink: 0;
@@ -119,13 +151,12 @@
 .vision-description p {
   font-size: 18px;
   line-height: 1.6;
-  max-width: 700px;
+  margin: 0;
 }
 
-/* Mission Block */
+/* Section 3: Mission Block */
 .about-mission-section {
-  padding: 80px 0 120px 0;
-  background-color: #ffffff;
+  margin-bottom: 90px;
 }
 
 .mission-title {
@@ -133,30 +164,36 @@
   font-weight: 800;
   color: #1a1a1a;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .mission-image-wrapper {
   position: relative;
-  width: 100%;
+  max-width: 946px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mission-main-img {
   width: 100%;
   height: auto;
-  border-radius: 6px;
+  border-radius: 8px;
   display: block;
 }
 
 .mission-text-box {
-  position: absolute;
-  bottom: -40px;
-  left: 40px;
-  width: 65%;
+  position: relative;
+  margin-top: -80px;
+  width: 82%;
+  max-width: 680px;
   background-color: #f7f3fe;
-  padding: 35px 40px;
+  padding: 30px 40px;
   border-left: 4px solid #6100e0;
   box-shadow: 0 10px 30px rgba(0,0,0,0.06);
   border-radius: 0 8px 8px 0;
+  box-sizing: border-box;
 }
 
 .mission-text-box p {
@@ -164,83 +201,275 @@
   line-height: 1.7;
   color: #333333;
   margin: 0;
+  font-weight: 500;
 }
 
-/* News Section */
-.news-section {
-  padding-bottom: 80px;
+/* Section 4: Արժեքներ և առաջնայնություններ */
+.values-section {
+  max-width: 1000px;
+  margin: 0 auto 90px auto;
+  text-align: center;
 }
 
-.news-title {
-  font-size: 28px;
+.values-title {
+  font-size: 34px;
   font-weight: 800;
-  margin-bottom: 30px;
   color: #1a1a1a;
+  margin-bottom: 45px;
 }
 
-.news-cards-grid {
+.values-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
+  gap: 35px;
+  text-align: left;
 }
 
-.news-card {
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+.value-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #6100e0;
+  margin-bottom: 16px;
+}
+
+.value-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #666666;
+  margin: 0;
+}
+
+/* Section 5: Կորպորատիվ սոցիալական պատասխանատվություն (CSR) */
+.csr-section {
+  background-color: #f8f8fb;
+  border-radius: 16px;
+  padding: 50px 40px;
+  margin-bottom: 90px;
+}
+
+.csr-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.csr-subtitle {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #444444;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.csr-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.csr-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.csr-dash {
+  width: 25px;
+  height: 3px;
+  background-color: #6100e0;
+  margin-top: 10px;
+  flex-shrink: 0;
+}
+
+.csr-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333333;
+  margin: 0;
+}
+
+/* Section 6: Timeline Slider (Բանկի պատմությունը) */
+.history-section {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.history-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 40px;
+}
+
+.timeline-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding: 0 10px;
+  gap: 20px;
+}
+
+.timeline-track {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.timeline-line-bg {
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #e5e5e5;
+  z-index: 1;
+}
+
+.timeline-line-active {
+  position: absolute;
+  bottom: 3px;
+  width: 45px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #6100e0;
+  z-index: 2;
+  transform: translateX(-50%);
+  transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.arrow-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #6100e0;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.arrow-btn:hover:not(:disabled) {
+  transform: scale(1.15);
+}
+
+.arrow-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.year-item {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 3;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 5px;
 }
 
-.news-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+.year-label {
+  font-size: 18px;
+  font-weight: 700;
+  color: #888888;
+  margin-bottom: 12px;
+  transition: color 0.3s, transform 0.3s;
 }
 
-.news-card-purple-bg {
-  width: 100%;
-  height: 200px;
+.year-item.active .year-label {
+  color: #6100e0;
+  font-size: 20px;
+}
+
+.year-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #888888;
+  transition: all 0.3s;
+}
+
+.year-item.active .year-dot {
   background-color: #6100e0;
+  transform: scale(1.3);
+}
+
+.history-card-container {
+  display: flex;
+  align-items: stretch;
+  background-color: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  min-height: 280px;
+}
+
+.history-card-container.animating {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.history-text-box {
+  flex: 1.2;
+  background-color: #f9f8fd;
+  padding: 40px;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.history-text-box p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333333;
+  margin: 0;
+}
+
+.history-img-box {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  background-color: #f2edf9;
 }
 
-.news-card-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1;
+.history-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.news-card-content h3 {
-  font-size: 15px;
-  font-weight: 700;
-  color: #222222;
-  margin-bottom: 15px;
-  line-height: 1.4;
-}
-
-.news-card-content span {
-  font-size: 12px;
-  color: #999999;
-}
-
+/* Responsive Styles */
 @media (max-width: 900px) {
   .about-intro-section {
     flex-direction: column;
+  }
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+  .csr-grid {
+    grid-template-columns: 1fr;
   }
   .mission-text-box {
     position: static;
     width: 100%;
     margin-top: 20px;
-    box-sizing: border-box;
   }
-  .news-cards-grid {
-    grid-template-columns: 1fr;
+  .history-card-container {
+    flex-direction: column;
+  }
+  .history-text-box {
+    border-radius: 16px 16px 0 0;
+    padding: 25px;
   }
 }
