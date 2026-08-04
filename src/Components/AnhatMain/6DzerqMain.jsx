@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; 
-
+import { Link } from 'react-router-dom';
 import DzerqImg from '../../assets/Dzerq.png';
-import TellcellImg from '../../assets/Tellcell.png';
-import EasyPayImg from '../../assets/EasyPay.png';
-import EarlyoneImg from '../../assets/Earlyone.png';
-import AdeliImg from '../../assets/Adeli.png';
-import FutrisImg from '../../assets/Futris.png';
-import IndigoImg from '../../assets/Indigo.png';
+
+const logos = [
+  { id: 1, img: 'https://www.evoca.am/images-cache/partners/1/17104032198171/348x150_grayscale.png', name: "Chip Store" },
+  { id: 2, img: 'https://www.evoca.am/images-cache/partners/1/17077436606929/348x150_grayscale.png', name: "Fab Lab" },
+  { id: 3, img: 'https://www.evoca.am/images-cache/partners/1/17107493820339/348x150_grayscale.png', name: "IMR" },
+  { id: 4, img: 'https://www.evoca.am/images-cache/partners/1/17072192942611/348x150_grayscale.png', name: "Dignisi" },
+  { id: 5, img: 'https://www.evoca.am/images-cache/partners/1/17072192635138/348x150_grayscale.png', name: "Wizzy" },
+  { id: 6, img: 'https://www.evoca.am/images-cache/partners/1/17072192435541/348x150_grayscale.png', name: "Kamo Blog" },
+  { id: 7, img: 'https://www.evoca.am/images-cache/partners/1/16104577054001/348x150_grayscale.png', name: "Dalma" },
+  { id: 8, img: 'https://www.evoca.am/images-cache/partners/1/16104583322099/348x150_grayscale.png', name: "Nor Tun" }
+];
 
 function Gortsynkerner() {
-  const navigate = useNavigate();
-
-  const logos = [
-    { id: 1, img: TellcellImg, name: "Tellcell" },
-    { id: 2, img: EasyPayImg, name: "EasyPay" },
-    { id: 3, img: EarlyoneImg, name: "Earlyone" },
-    { id: 4, img: AdeliImg, name: "Adeli" },
-    { id: 5, img: FutrisImg, name: "Futris" },
-    { id: 6, img: IndigoImg, name: "Indigo" }
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCount = 3; 
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 480) {
+        setVisibleCount(1);
+      } else if (window.innerWidth < 768) {
+        setVisibleCount(2);
+      } else {
+        setVisibleCount(3);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % logos.length);
@@ -35,7 +43,7 @@ function Gortsynkerner() {
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();
-    }, 3000);
+    }, 3500);
     return () => clearInterval(timer);
   }, []);
 
@@ -68,7 +76,7 @@ function Gortsynkerner() {
         }
 
         .gortsynkerner-left {
-          width: 30%;
+          width: 32%;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -117,15 +125,15 @@ function Gortsynkerner() {
 
         .dots-bg {
           position: absolute;
-          width: 280px;
-          height: 280px;
+          width: 260px;
+          height: 260px;
           animation: rotateDots 20s linear infinite;
           pointer-events: none;
           z-index: 1;
         }
 
         .hand-img {
-          width: 170px;
+          width: 160px;
           height: auto;
           position: relative;
           z-index: 2;
@@ -133,12 +141,12 @@ function Gortsynkerner() {
         }
 
         .gortsynkerner-right {
-          width: 42%;
+          width: 40%;
           position: relative;
           display: flex;
           align-items: center;
           background: #f8f9fa;
-          padding: 30px 20px;
+          padding: 20px 10px;
           border-radius: 20px;
         }
 
@@ -164,32 +172,25 @@ function Gortsynkerner() {
 
         .slider-track {
           display: flex;
-          gap: 20px;
+          gap: 15px;
           justify-content: space-around;
-          transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .logo-card {
           flex: 1;
-          height: 80px;
+          height: 90px;
           display: flex;
           align-items: center;
           justify-content: center;
           background: #ffffff;
           border-radius: 12px;
           padding: 10px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-          transition: all 0.4s ease;
-        }
-
-        .logo-card:hover {
-          transform: translateY(-5px) rotate(2deg);
-          box-shadow: 0 8px 20px rgba(97, 0, 224, 0.15);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.04);
         }
 
         .logo-card img {
-          max-width: 80%;
-          max-height: 60%;
+          max-width: 85%;
+          max-height: 65%;
           object-fit: contain;
         }
 
@@ -207,6 +208,22 @@ function Gortsynkerner() {
             align-items: center;
           }
         }
+
+        @media (max-width: 440px) {
+          .gortsynkerner-title {
+            font-size: 28px;
+          }
+          .dots-bg {
+            width: 200px;
+            height: 200px;
+          }
+          .hand-img {
+            width: 120px;
+          }
+          .gortsynkerner-right {
+            padding: 10px 5px;
+          }
+        }
       `}</style>
 
       <div className="gortsynkerner-left">
@@ -217,12 +234,12 @@ function Gortsynkerner() {
           Մենք միշտ բաց ենք հետաքրքիր առաջարկների ու համագործակցությունների համար:
         </p>
         
-        <button 
-          className="gortsynkerner-btn" 
-          onClick={() => navigate('/partners')}
-        >
-          Բոլոր գործընկերները &gt;
-        </button>
+        {/* React Router Link navigation-ի համար */}
+        <Link to="/partners" style={{ textDecoration: 'none' }}>
+          <button className="gortsynkerner-btn">
+            Բոլոր գործընկերները &gt;
+          </button>
+        </Link>
       </div>
 
       <div className="gortsynkerner-center">

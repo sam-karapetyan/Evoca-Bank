@@ -7,12 +7,10 @@ import './BiometricDetail.css';
 function EvocaTouchDetail() {
   const [title, setTitle] = useState("EvocaTOUCH");
 
-  // Էջը բացվելիս ավտոմատ բարձրանում է վերև
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Firebase-ից վերնագիրը թարմացնելու համար
   useEffect(() => {
     const touchRef = ref(db, '/evocaTouch/title');
     const unsub = onValue(touchRef, (snapshot) => {
@@ -28,12 +26,10 @@ function EvocaTouchDetail() {
     <div className="evoca-touch-page">
       <div className="evoca-touch-main-container">
         
-        {/* Վերնագիր */}
         <div className="evoca-touch-header">
           <h1 className="evoca-touch-title">{title}</h1>
         </div>
 
-        {/* Հիմնական տեքստային բովանդակություն */}
         <div className="evoca-touch-body-text">
           <p>
             Շատերին թվում է՝ դժվար ու անիրական է ֆինանսական ոլորտում լինել կրեատիվ, 
@@ -75,7 +71,6 @@ function EvocaTouchDetail() {
             վերացնելով ֆիզիկական մասնաճյուղ այցելելու անհրաժեշտությունը: Առանց գրանցման և սպասարկման վճարի՝ օգտատերերը կարող են.
           </p>
 
-          {/* Ցանկի բաժին */}
           <ul className="evoca-bullet-list">
             <li>Բացել բանկային հաշիվներ,</li>
             <li>Պատվիրել քարտ կամ բացել թվային քարտ վայրկյանների ընթացքում,</li>
@@ -110,7 +105,6 @@ function EvocaTouchDetail() {
 
       </div>
 
-      {/* Ներքևի Նոութբուքի Բաններ */}
       <div className="evoca-bottom-banner-container">
         <NodebukHer />
       </div>

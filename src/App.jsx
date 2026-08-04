@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 import Header from './Components/Header/Header';
 import Nkarker from './Components/AnhatMain/1Nkarker';
@@ -13,12 +13,26 @@ import Mrcanak from './Components/AnhatMain/Mrcanak';
 import Dram from './Components/AnhatMain/Dram';
 import Footerverev from './Components/AnhatMain/Footerverev';
 import Footer from './Components/Header/Footer';
+import AboutGeneral from './pages/AboutGeneral/AboutGeneral';
 
 import Login from './Login/Login';
 import FloatingChat from './Components/Chat/FloatingChat';
 import CardDetail from './pages/CardDetail/CardDetail';
 import BiometricDetail from './pages/biometric/BiometricDetail'; 
-import PartnersPage from './pages/Partners/PartnersPage'; // <-- Ավելացվել է այստեղ (ստուգիր քո folder path-ը)
+
+// Գործընկերների էջի import
+import GorcnkernerPage from './pages/Gorcnkerner/Gorcnkerner';
+
+// ScrollToTop component - էջը փոխելիս միշտ վերև բարձրանալու համար
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function Home() {
   return (
@@ -49,27 +63,39 @@ function AllNewsPage() {
 function App() {
   return (
     <Router>
+      <ScrollToTop />
+      
       <div>
         <Header />
 
         <Routes>
+          {/* Գլխավոր էջեր */}
           <Route path="/" element={<Home />} />
           <Route path="/all-news" element={<AllNewsPage />} />
           <Route path="/login" element={<Login />} />
           
-          {/* Քարտերի և SubNav-ի բոլոր 4 երթուղիները */}
+          {/* Քարտերի երթուղիներ */}
           <Route path="/cards" element={<CardDetail />} />
           <Route path="/card-issuance" element={<CardDetail />} />
           <Route path="/social-cards" element={<CardDetail />} />
           <Route path="/evoca-benefits" element={<CardDetail />} />
 
-          {/* Dynamic route-եր ID-ներով նորությունների և քարտերի համար */}
+          {/* Dynamic Routes */}
           <Route path="/card/:cardId" element={<CardDetail />} />
           <Route path="/news/:cardId" element={<CardDetail />} />
           <Route path="/biometric" element={<BiometricDetail />} />
           
-          {/* Բոլոր Գործընկերների Էջ */}
-          <Route path="/partners" element={<PartnersPage />} />
+          {/* «ՄԵՐ ՄԱՍԻՆ» / «EVOCA-Ի ՄԱՍԻՆ» ROUTE-ՆԵՐԸ */}
+          <Route path="/about-general" element={<AboutGeneral />} />
+          <Route path="/partners" element={<GorcnkernerPage />} />
+          
+          {/* Մյուս SubNav էջերը, որպեսզի սեղմելիս Error չտա */}
+          <Route path="/structure" element={<AboutGeneral />} />
+          <Route path="/shareholders" element={<AboutGeneral />} />
+          <Route path="/management" element={<AboutGeneral />} />
+          <Route path="/awards" element={<AboutGeneral />} />
+          <Route path="/reviews" element={<AboutGeneral />} />
+          <Route path="/csr" element={<AboutGeneral />} />
         </Routes>
 
         <FloatingChat />

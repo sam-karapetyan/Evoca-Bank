@@ -32,6 +32,9 @@ function Headernerqev({ onOpenBurger }) {
           </Link>
 
           <nav className="HeaderNavLinks">
+            {/* ԱՀԱ ԱՎԵԼԱՑՎԱԾ ԿՈՃԱԿԸ */}
+            <Link to="/about-general" className="HeaderNavLink">Ընդհանուր</Link>
+            
             <Link to="/loans" className="HeaderNavLink">Վարկեր</Link>
             <Link to="/cards" className="HeaderNavLink">Քարտեր</Link>
             <Link to="/deposits" className="HeaderNavLink">Ավանդներ</Link>

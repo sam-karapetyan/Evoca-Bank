@@ -1,0 +1,194 @@
+@keyframes spinDots {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.partners-page-container {
+  width: 100%;
+  background-color: #ffffff;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: #333;
+}
+
+/* Մանուշակագույն վերևի մենյուն */
+.partners-sub-header {
+  width: 100%;
+  background-color: #6100e0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.partners-sub-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.sub-nav-item {
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.sub-nav-item:hover, .sub-nav-item.active {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.partners-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px 80px 20px;
+}
+
+.partners-breadcrumb {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+.partners-main-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 30px;
+}
+
+/* Grid Layout 3x3 */
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background-color: #e2d6fd; /* Border-ի գույնը քառակուսիների միջև */
+  border: 1px solid #e2d6fd;
+}
+
+.partner-card {
+  background-color: #ffffff;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-card:hover {
+  background-color: #faf8ff;
+}
+
+.partner-logo-img {
+  max-width: 80%;
+  max-height: 100px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.partner-card:hover .partner-logo-img {
+  filter: grayscale(0%);
+}
+
+/* Մեջտեղի ձեռքի բլոկի ոճերը */
+.center-hand-card {
+  background-color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+
+.center-hand-wrapper {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dots-circle-svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: spinDots 25s linear infinite;
+}
+
+.center-hand-img {
+  width: 110px;
+  height: auto;
+  z-index: 2;
+  filter: drop-shadow(0 10px 15px rgba(0,0,0,0.12));
+}
+
+.purple-triangle-icon {
+  position: absolute;
+  right: 5px;
+  top: 40%;
+  color: #8b3dff;
+  font-size: 20px;
+  transform: rotate(45deg);
+}
+
+.blue-zigzag-icon {
+  position: absolute;
+  left: 10px;
+  bottom: 15px;
+  color: #00d2ff;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Էջադրում (Pagination) */
+.partners-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.pagination-arrow, .pagination-page {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #666;
+}
+
+.pagination-page.active-page {
+  background-color: #6100e0;
+  color: #ffffff;
+}
+
+/* Media Queries (iPhone 17 Pro, Mobile, Tablets) */
+@media (max-width: 900px) {
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 440px) { /* iPhone 17 / Mobile screens */
+  .partners-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .partners-main-title {
+    font-size: 26px;
+  }
+  .partner-card {
+    min-height: 170px;
+    padding: 15px;
+  }
+}
