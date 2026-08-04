@@ -38,9 +38,12 @@ const historyData = [
 function AboutGeneral() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+  const [isAccordionOpen, setIsAccordionOpen] = useState(true);
+
   const location = useLocation();
 
   const isStructure = location.pathname === '/structure';
+  const isShareholders = location.pathname === '/shareholders';
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -57,11 +60,12 @@ function AboutGeneral() {
 
   return (
     <div className="about-general-page">
+      {/* Top Tab Navigation */}
       <div className="about-sub-header">
         <div className="about-sub-header-inner">
-          <Link to="/about-general" className={`about-nav-item ${!isStructure ? 'active' : ''}`}>Ընդհանուր</Link>
+          <Link to="/about-general" className={`about-nav-item ${!isStructure && !isShareholders ? 'active' : ''}`}>Ընդհանուր</Link>
           <Link to="/structure" className={`about-nav-item ${isStructure ? 'active' : ''}`}>Կառուցվածք</Link>
-          <Link to="/shareholders" className="about-nav-item">Բաժնետերեր</Link>
+          <Link to="/shareholders" className={`about-nav-item ${isShareholders ? 'active' : ''}`}>Բաժնետերեր</Link>
           <Link to="/management" className="about-nav-item">Ղեկավարություն</Link>
           <Link to="/partners" className="about-nav-item">Գործընկերներ</Link>
           <Link to="/awards" className="about-nav-item">Մրցանակներ</Link>
@@ -71,7 +75,8 @@ function AboutGeneral() {
       </div>
 
       <div className="about-container">
-        {isStructure ? (
+        {/* Page 2: Կառուցվածք */}
+        {isStructure && (
           <>
             <div className="about-breadcrumb">
               <Link to="/">🏠</Link> &gt; Մեր մասին &gt; Evoca-ի մասին &gt; <strong>Կառուցվածք</strong>
@@ -87,7 +92,77 @@ function AboutGeneral() {
               />
             </div>
           </>
-        ) : (
+        )}
+
+        {/* Page 3: Բաժնետերեր */}
+        {isShareholders && (
+          <>
+            <div className="about-breadcrumb">
+              <Link to="/">🏠</Link> &gt; Մեր մասին &gt; Evoca-ի մասին &gt; <strong>Բաժնետերեր</strong>
+            </div>
+
+            <h1 className="about-main-title">Բաժնետերեր</h1>
+
+            <div className="shareholders-section">
+              <div className="shareholder-card">
+                <div className="shareholder-img-wrapper">
+                  <img 
+                    src="https://www.evoca.am/file_manager/Shareholders/Mareta%20Gevorkyan%20Evocabank.png" 
+                    alt="Մարետա Գևորկյան" 
+                  />
+                </div>
+                <div className="shareholder-info">
+                  <h2 className="shareholder-name">Մարետա Գևորկյան</h2>
+                  <div className="shareholder-bio">
+                    <p>Մարետա Գևորկյանը միանձնյա տիրապետում է Evocabank-ի բաժնետոմսերի 100%-ին:</p>
+                    <p>Նա ծնվել է Դիլիջանում, ավարտել Դիլիջանի միջնակարգ դպրոցը, այնուհետև՝ Երևանի պետական մանկավարժական ակադեմիան:</p>
+                    <p>2008 թվականից բնակվելով Շվեյցարիայում՝ նա ակտիվորեն ներգրավված է բանկային, տարածքային զարգացման և սոցիալական նախաձեռնություններում՝ նպաստելով Հայաստանի կայուն զարգացմանը:</p>
+                  </div>
+                  <div className="shareholder-note">
+                    <p><strong>Նշում.</strong> Բանկն անուղղակի նշանակալից մասնակից չունի:</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Necessary Information Accordion */}
+              <div className="info-accordion-section">
+                <h3 className="section-subtitle">ԱՆՀՐԱԺԵՇՏ ՏԵՂԵԿԱՏՎՈՒԹՅՈՒՆ</h3>
+                
+                <div className="accordion-item">
+                  <button 
+                    className="accordion-header"
+                    onClick={() => setIsAccordionOpen(!isAccordionOpen)}
+                  >
+                    <span>Ուշադրություն.</span>
+                    <span className={`accordion-arrow ${isAccordionOpen ? 'open' : ''}`}>▲</span>
+                  </button>
+                  
+                  {isAccordionOpen && (
+                    <div className="accordion-body">
+                      <ul className="info-bullets">
+                        <li>
+                          «ԷՎՈԿԱԲԱՆԿ» ԲԲԸ-ի յուրաքանչյուր բաժնետեր, համաձայն «Բանկերի և բանկային գործունեության մասին» Հայաստանի Հանրապետության օրենքի 43-րդ հոդվածի 4-րդ մասի, իրավունք ունի ստանալու մեր վերջին տարեկան հաշվետվության և արտաքին աուդիտի եզրակացության պատճենները:
+                        </li>
+                        <li>
+                          «ԷՎՈԿԱԲԱՆԿ» ԲԲԸ-ի տեղաբաշխված քվեարկող բաժնետոմսերի 2%-ին և ավելին տիրապետող յուրաքանչյուր բաժնետեր իրավունք ունի ստանալու «Բանկերի և բանկային գործունեության մասին» Հայաստանի Հանրապետության օրենքի 43-րդ հոդվածի 4-րդ և 5-րդ մասերով սահմանված տեղեկությունները:
+                        </li>
+                        <li>
+                          Վերոնշյալ տեղեկությունները տրամադրում ենք ԱՆՎՃԱՐ՝ բաժնետիրոջ գրավոր դիմումը ստանալուց հետո 3 (երեք) աշխատանքային օրվա ընթացքում: Գրավոր դիմումը կարող է ներկայացվել առձեռն՝ մեր Գլխամասային գրասենյակում, ցանկացած մասնաճյուղում կամ ներկայացուցչությունում, էլեկտրոնային հասցեով՝ hello@evoca.am կամ փոստով՝ ՀՀ, 0010, ք. Երևան, Հանրապետության 44/2 հասցեով:
+                        </li>
+                        <li>
+                          Շահութաբաժինների բաշխումը կատարվում է ՀՀ օրենսդրական ակտերի համաձայն և Բանկի կանոնադրությամբ սահմանված կարգով:
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Page 1: Ընդհանուր */}
+        {!isStructure && !isShareholders && (
           <>
             <div className="about-breadcrumb">
               <Link to="/">🏠</Link> &gt; Մեր մասին &gt; Evoca-ի մասին &gt; <strong>Ընդհանուր</strong>
