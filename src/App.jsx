@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import BusinessDetail from './pages/Bussines/BusinessDetail';
 
 import Header from './Components/Header/Header';
 import Nkarker from './Components/AnhatMain/1Nkarker';
@@ -14,7 +13,9 @@ import Mrcanak from './Components/AnhatMain/Mrcanak';
 import Dram from './Components/AnhatMain/Dram';
 import Footerverev from './Components/AnhatMain/Footerverev';
 import Footer from './Components/Header/Footer';
-import AboutGeneral from './pages/AboutGeneral/AboutGeneral';
+
+// 📌 1. ԱՅՍՏԵՂ ԻՄՊՈՐՏ ԱՐԱ ՔՈ ՊԱՏՐԱՍՏԻ «ՄԵՐ ՄԱՍԻՆ» ԷՋԻ COMPONENT-Ը․
+import AboutGeneral from './pages/AboutGeneral/AboutGeneral'; 
 
 import Login from './Login/Login';
 import FloatingChat from './Components/Chat/FloatingChat';
@@ -23,6 +24,8 @@ import BiometricDetail from './pages/biometric/BiometricDetail';
 
 import GorcnkernerPage from './pages/Gorcnkerner/Gorcnkerner';
 import Business from './pages/Bussines/Bussiness';
+import BusinessDetail from './pages/Bussines/BusinessDetail';
+import InstantPayments from './pages/InstantPayments/InstantPayments';
 
 // ScrollToTop component - էջը փոխելիս միշտ վերև բարձրանալու համար
 function ScrollToTop() {
@@ -75,6 +78,9 @@ function App() {
           <Route path="/all-news" element={<AllNewsPage />} />
           <Route path="/login" element={<Login />} />
           
+          {/* Ակնթարթային վճարումներ */}
+          <Route path="/instant-payments" element={<InstantPayments />} />
+
           {/* Քարտերի երթուղիներ */}
           <Route path="/cards" element={<CardDetail />} />
           <Route path="/card-issuance" element={<CardDetail />} />
@@ -86,11 +92,12 @@ function App() {
           <Route path="/news/:cardId" element={<CardDetail />} />
           <Route path="/biometric" element={<BiometricDetail />} />
           
-          {/* «ՄԵՐ ՄԱՍԻՆ» / «EVOCA-Ի ՄԱՍԻՆ» ROUTE-ՆԵՐԸ */}
+          {/* 📌 2. «ՄԵՐ ՄԱՍԻՆ» ROUTE-Ն․ PATH-Ը ԵՎ ELEMENT-Ը ԴԻՐ ՔՈ ՈՒԶԱԾՈՎ */}
           <Route path="/about-general" element={<AboutGeneral />} />
+          
           <Route path="/partners" element={<GorcnkernerPage />} />
           
-          {/* Մյուս SubNav էջերը, որպեսզի սեղմելիս Error չտա */}
+          {/* Մյուս SubNav էջերը */}
           <Route path="/structure" element={<AboutGeneral />} />
           <Route path="/shareholders" element={<AboutGeneral />} />
           <Route path="/management" element={<AboutGeneral />} />
@@ -98,9 +105,7 @@ function App() {
           <Route path="/reviews" element={<AboutGeneral />} />
           <Route path="/csr" element={<AboutGeneral />} />
           <Route path="/business" element={<Business />} />
-
-          <Route path="/business" element={<Business />} />
-<Route path="/business/:id" element={<BusinessDetail />} />
+          <Route path="/business/:id" element={<BusinessDetail />} />
         </Routes>
 
         <FloatingChat />

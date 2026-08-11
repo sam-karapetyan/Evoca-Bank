@@ -1,0 +1,244 @@
+/* Page Background & Base Styles */
+.instant-payments-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f6f5fa;
+  font-family: 'Montserratarm-Regular', 'Helvetica', 'Arial', sans-serif;
+  color: #111111;
+  padding-bottom: 60px;
+}
+
+/* 1. Top Sub Header Bar */
+.webpayment-sub-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e9e6f2;
+  padding: 12px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.webpayment-header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.webpayment-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.webpayment-logo-text {
+  font-size: 26px;
+  font-weight: 800;
+  color: #6400DC;
+  letter-spacing: -0.5px;
+}
+
+.webpayment-tagline {
+  font-size: 15px;
+  color: #777777;
+  font-weight: 500;
+  border-left: 1px solid #dddddd;
+  padding-left: 15px;
+}
+
+.webpayment-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.webpayment-phone {
+  color: #6400DC;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.phone-icon {
+  font-size: 12px;
+}
+
+.webpayment-lang-btn {
+  background: none;
+  border: none;
+  color: #333333;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.webpayment-lang-btn:hover {
+  color: #6400DC;
+}
+
+.webpayment-history-btn {
+  background-color: #6400DC;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 22px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.webpayment-history-btn:hover {
+  background-color: #4f00b3;
+  transform: translateY(-1px);
+}
+
+.history-icon {
+  font-size: 12px;
+}
+
+/* 2. Main Content & Grid */
+.webpayment-main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 0 20px;
+}
+
+.webpayment-main-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 35px;
+}
+
+/* Cards Grid */
+.webpayment-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  justify-content: center;
+}
+
+/* Individual Payment Card */
+.webpayment-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(100, 0, 220, 0.05);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 220px;
+  box-sizing: border-box;
+}
+
+.webpayment-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(100, 0, 220, 0.12);
+}
+
+.webpayment-card-img-wrapper {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.webpayment-card-img-wrapper img {
+  max-width: 100px;
+  max-height: 85px;
+  object-fit: contain;
+}
+
+.webpayment-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222222;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.webpayment-card-title.purple-title {
+  color: #6400DC;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+/* =================================================== */
+/* Media Queries (Responsive & Mobile)                 */
+/* =================================================== */
+
+/* Laptop / Small Desktop */
+@media screen and (max-width: 1024px) {
+  .webpayment-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Tablets (iPad) */
+@media screen and (max-width: 768px) {
+  .webpayment-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .webpayment-main-title {
+    font-size: 26px;
+    margin-bottom: 25px;
+  }
+
+  .webpayment-tagline {
+    display: none;
+  }
+
+  .webpayment-phone {
+    font-size: 13px;
+  }
+}
+
+/* Mobile Phones (iPhone 17 and below) */
+@media screen and (max-width: 480px) {
+  .webpayment-header-container {
+    padding: 0 12px;
+  }
+
+  .webpayment-logo-text {
+    font-size: 22px;
+  }
+
+  .webpayment-cards-grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+  }
+
+  .webpayment-card {
+    min-height: 180px;
+    padding: 20px 15px;
+  }
+
+  .webpayment-phone {
+    display: none;
+  }
+
+  .webpayment-history-btn {
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+}

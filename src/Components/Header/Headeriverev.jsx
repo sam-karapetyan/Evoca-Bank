@@ -12,6 +12,9 @@ import UserMapModal from './UserMapModal';
 function Headeriverev() {
   const [isMapOpen, setIsMapOpen] = useState(false);
 
+  // 📌 1. ԱՅՍՏԵՂ ԳՐԻՐ ՔՈ ԷՋԻ PATH-Ը (ՕՐԻՆԱԿ՝ "/about" ԿԱՄ "/about-us" ԿԱՄ "/about-general")
+  const ABOUT_PAGE_PATH = "/about-general"; 
+
   return (
     <>
       <style>{`
@@ -143,7 +146,10 @@ function Headeriverev() {
           <NavLink to="/" end><span>Անհատ</span></NavLink>
           <NavLink to="/business"><span>Բիզնես</span></NavLink>
           <NavLink to="/instant-payments"><span>Ակնթարթային վճարումներ</span></NavLink>
-          <NavLink to="/about"><span>Մեր մասին</span></NavLink>
+          
+          {/* 📌 2. «ՄԵՐ ՄԱՍԻՆ» ԿՈՃԱԿԸ, ՈՐԸ ՍԵՂՄԵԼԻՍ ՏԱՆՈՒՄ Է ՔՈ ԳՐԱԾ PATH-ՈՎ ԷՋԸ */}
+          <NavLink to={ABOUT_PAGE_PATH}><span>Մեր մասին</span></NavLink>
+          
           <NavLink to="/news"><span>Նորություններ</span></NavLink>
           <NavLink to="/blog"><span>Բլոգ</span></NavLink>
           <NavLink to="/career"><span>Կարիերա</span></NavLink>
@@ -159,7 +165,7 @@ function Headeriverev() {
             <div className='DropdownMenu'>
               <Link to="/online-application-1" className='DropdownItem'>Հայտ 1</Link>
               <Link to="/online-application-2" className='DropdownItem'>Հայտ 2</Link>
-              <Link to="/online-application-3" className='DropdownItem'>Հայt 3</Link>
+              <Link to="/online-application-3" className='DropdownItem'>Հայտ 3</Link>
             </div>
           </div>
 
