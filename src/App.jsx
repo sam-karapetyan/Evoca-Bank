@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import BusinessDetail from './pages/Bussines/BusinessDetail';
 
 import Header from './Components/Header/Header';
 import Nkarker from './Components/AnhatMain/1Nkarker';
@@ -20,8 +21,8 @@ import FloatingChat from './Components/Chat/FloatingChat';
 import CardDetail from './pages/CardDetail/CardDetail';
 import BiometricDetail from './pages/biometric/BiometricDetail'; 
 
-// Գործընկերների էջի import
 import GorcnkernerPage from './pages/Gorcnkerner/Gorcnkerner';
+import Business from './pages/Bussines/Bussiness';
 
 // ScrollToTop component - էջը փոխելիս միշտ վերև բարձրանալու համար
 function ScrollToTop() {
@@ -96,6 +97,10 @@ function App() {
           <Route path="/awards" element={<AboutGeneral />} />
           <Route path="/reviews" element={<AboutGeneral />} />
           <Route path="/csr" element={<AboutGeneral />} />
+          <Route path="/business" element={<Business />} />
+
+          <Route path="/business" element={<Business />} />
+<Route path="/business/:id" element={<BusinessDetail />} />
         </Routes>
 
         <FloatingChat />
