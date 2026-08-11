@@ -65,11 +65,7 @@ function AboutGeneral() {
           <Link to="/about-general" className={`about-nav-item ${!isStructure && !isShareholders ? 'active' : ''}`}>Ընդհանուր</Link>
           <Link to="/structure" className={`about-nav-item ${isStructure ? 'active' : ''}`}>Կառուցվածք</Link>
           <Link to="/shareholders" className={`about-nav-item ${isShareholders ? 'active' : ''}`}>Բաժնետերեր</Link>
-          <Link to="/management" className="about-nav-item">Ղեկավարություն</Link>
           <Link to="/partners" className="about-nav-item">Գործընկերներ</Link>
-          <Link to="/awards" className="about-nav-item">Մրցանակներ</Link>
-          <Link to="/reviews" className="about-nav-item">Կարծիքներ</Link>
-          <Link to="/csr" className="about-nav-item">CSR</Link>
         </div>
       </div>
 
