@@ -28,6 +28,7 @@ import BusinessDetail from './pages/Bussines/BusinessDetail';
 import InstantPayments from './pages/InstantPayments/InstantPayments';
 import NewsPage from './pages/News/NewsPage'; // 📌 Իմպորտ արա NewsPage-ը
 
+import Loans from './pages/Loans/Loans';
 // ScrollToTop component - էջը փոխելիս միշտ վերև բարձրանալու համար
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -100,7 +101,7 @@ function App() {
           <Route path="/about-general" element={<AboutGeneral />} />
           
           <Route path="/partners" element={<GorcnkernerPage />} />
-          
+          <Route path="/loans" element={<Loans />} />
           {/* Մյուս SubNav էջերը */}
           <Route path="/structure" element={<AboutGeneral />} />
           <Route path="/shareholders" element={<AboutGeneral />} />

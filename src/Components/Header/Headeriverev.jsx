@@ -151,8 +151,6 @@ function Headeriverev() {
           <NavLink to={ABOUT_PAGE_PATH}><span>Մեր մասին</span></NavLink>
           
           <NavLink to="/news"><span>Նորություններ</span></NavLink>
-          <NavLink to="/blog"><span>Բլոգ</span></NavLink>
-          <NavLink to="/career"><span>Կարիերա</span></NavLink>
         </div> 
 
         <div className='RightSide'>

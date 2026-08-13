@@ -1,0 +1,120 @@
+.LoansPageContainer {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.LoansList {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.LoanCard {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+  border-bottom: 1px solid #eef0f4;
+  padding-bottom: 40px;
+}
+
+.LoanCard:last-child {
+  border-bottom: none;
+}
+
+.LoanCardImageWrapper {
+  width: 320px;
+  min-width: 320px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.LoanCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.LoanCardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.LoanCardTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 12px 0;
+  line-height: 1.25;
+}
+
+.LoanCardDescription {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666666;
+  margin: 0 0 24px 0;
+  max-width: 800px;
+}
+
+.LoanCardStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px;
+  align-items: flex-start;
+}
+
+.StatItem {
+  display: flex;
+  flex-direction: column;
+  min-width: 110px;
+}
+
+.StatTopLabel {
+  font-size: 12px;
+  color: #8c8c8c;
+  margin-bottom: 2px;
+  min-height: 16px;
+}
+
+.StatValue {
+  font-size: 28px;
+  font-weight: 800;
+  color: #6c11d0;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.StatBottomLabel {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .LoanCard {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .LoanCardImageWrapper {
+    width: 100%;
+    min-width: 100%;
+    height: 220px;
+  }
+
+  .LoanCardStats {
+    gap: 20px;
+  }
+
+  .StatValue {
+    font-size: 22px;
+  }
+}
