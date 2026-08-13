@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import Accounts from './pages/Accounts/Accounts';
 
 import Header from './Components/Header/Header';
 import Nkarker from './Components/AnhatMain/1Nkarker';
@@ -108,6 +109,7 @@ function App() {
           <Route path="/csr" element={<AboutGeneral />} />
           <Route path="/business" element={<Business />} />
           <Route path="/business/:id" element={<BusinessDetail />} />
+          <Route path="/accounts" element={<Accounts />} />
         </Routes>
 
         <FloatingChat />
