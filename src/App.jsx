@@ -26,6 +26,7 @@ import GorcnkernerPage from './pages/Gorcnkerner/Gorcnkerner';
 import Business from './pages/Bussines/Bussiness';
 import BusinessDetail from './pages/Bussines/BusinessDetail';
 import InstantPayments from './pages/InstantPayments/InstantPayments';
+import NewsPage from './pages/News/NewsPage'; // 📌 Իմպորտ արա NewsPage-ը
 
 // ScrollToTop component - էջը փոխելիս միշտ վերև բարձրանալու համար
 function ScrollToTop() {
@@ -77,6 +78,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/all-news" element={<AllNewsPage />} />
           <Route path="/login" element={<Login />} />
+
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/all-news" element={<NewsPage />} />
           
           {/* Ակնթարթային վճարումներ */}
           <Route path="/instant-payments" element={<InstantPayments />} />
