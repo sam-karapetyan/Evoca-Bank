@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FaBars, FaGlobe } from 'react-icons/fa';
 import { auth } from '../../firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
@@ -32,16 +32,30 @@ function Headernerqev({ onOpenBurger }) {
           </Link>
 
           <nav className="HeaderNavLinks">
-            {/* ԱՀԱ ԱՎԵԼԱՑՎԱԾ ԿՈՃԱԿԸ */}
-            
-            <Link to="/loans" className="HeaderNavLink">Վարկեր</Link>
-            <Link to="/cards" className="HeaderNavLink">Քարտեր</Link>
-            <Link to="/deposits" className="HeaderNavLink">Ավանդներ</Link>
-            <Link to="/accounts" className="HeaderNavLink">Հաշիվներ</Link>
-            <Link to="/transfers" className="HeaderNavLink">Փոխանցումներ</Link>
-            <Link to="/investment" className="HeaderNavLink">Արժեթղթեր</Link>
-            <Link to="/evoca-salary" className="HeaderNavLink">EvocaSALARY</Link>
-            <Link to="/evoca-touch" className="HeaderNavLink">EvocaTOUCH</Link>
+            <NavLink to="/loans" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
+              Վարկեր
+            </NavLink>
+            <NavLink to="/cards" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
+              Քարտեր
+            </NavLink>
+            <NavLink to="/deposits" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
+              Ավանդներ
+            </NavLink>
+            <NavLink to="/accounts" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
+              Հաշիվներ
+            </NavLink>
+            <NavLink to="/transfers" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
+              Փոխանցումներ
+            </NavLink>
+            <NavLink to="/investment" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
+              Արժեթղթեր
+            </NavLink>
+            <NavLink to="/evoca-salary" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
+              EvocaSALARY
+            </NavLink>
+            <NavLink to="/evoca-touch" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
+              EvocaTOUCH
+            </NavLink>
           </nav>
         </div>
 

@@ -14,9 +14,7 @@ import Dram from './Components/AnhatMain/Dram';
 import Footerverev from './Components/AnhatMain/Footerverev';
 import Footer from './Components/Header/Footer';
 
-// 📌 1. ԱՅՍՏԵՂ ԻՄՊՈՐՏ ԱՐԱ ՔՈ ՊԱՏՐԱՍՏԻ «ՄԵՐ ՄԱՍԻՆ» ԷՋԻ COMPONENT-Ը․
 import AboutGeneral from './pages/AboutGeneral/AboutGeneral'; 
-
 import Login from './Login/Login';
 import FloatingChat from './Components/Chat/FloatingChat';
 import CardDetail from './pages/CardDetail/CardDetail';
@@ -26,9 +24,12 @@ import GorcnkernerPage from './pages/Gorcnkerner/Gorcnkerner';
 import Business from './pages/Bussines/Bussiness';
 import BusinessDetail from './pages/Bussines/BusinessDetail';
 import InstantPayments from './pages/InstantPayments/InstantPayments';
-import NewsPage from './pages/News/NewsPage'; // 📌 Իմպորտ արա NewsPage-ը
+import NewsPage from './pages/News/NewsPage';
 
+// 📌 ՎԱՐԿԵՐ ԵՎ ԱՎԱՆԴՆԵՐ
+import Deposits from './pages/Deposits/Deposits';
 import Loans from './pages/Loans/Loans';
+
 // ScrollToTop component - էջը փոխելիս միշտ վերև բարձրանալու համար
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -57,15 +58,6 @@ function Home() {
   );
 }
 
-function AllNewsPage() {
-  return (
-    <div style={{ padding: '80px 20px', textAlign: 'center', minHeight: '60vh' }}>
-      <h1>Բոլոր Նորությունների Էջ</h1>
-      <p>Այստեղ կարող ես տեղադրել քո նոր էջի կոդը։</p>
-    </div>
-  );
-}
-
 function App() {
   return (
     <Router>
@@ -77,9 +69,9 @@ function App() {
         <Routes>
           {/* Գլխավոր էջեր */}
           <Route path="/" element={<Home />} />
-          <Route path="/all-news" element={<AllNewsPage />} />
           <Route path="/login" element={<Login />} />
 
+          {/* Նորություններ */}
           <Route path="/news" element={<NewsPage />} />
           <Route path="/all-news" element={<NewsPage />} />
           
@@ -97,11 +89,16 @@ function App() {
           <Route path="/news/:cardId" element={<CardDetail />} />
           <Route path="/biometric" element={<BiometricDetail />} />
           
-          {/* 📌 2. «ՄԵՐ ՄԱՍԻՆ» ROUTE-Ն․ PATH-Ը ԵՎ ELEMENT-Ը ԴԻՐ ՔՈ ՈՒԶԱԾՈՎ */}
+          {/* Մեր մասին */}
           <Route path="/about-general" element={<AboutGeneral />} />
           
+          {/* Գործընկերներ */}
           <Route path="/partners" element={<GorcnkernerPage />} />
+
+          {/* 📌 ՎԱՐԿԵՐ ԵՎ ԱՎԱՆԴՆԵՐ (ՈՒՂՂՎԱԾ) */}
           <Route path="/loans" element={<Loans />} />
+          <Route path="/deposits" element={<Deposits />} />
+
           {/* Մյուս SubNav էջերը */}
           <Route path="/structure" element={<AboutGeneral />} />
           <Route path="/shareholders" element={<AboutGeneral />} />

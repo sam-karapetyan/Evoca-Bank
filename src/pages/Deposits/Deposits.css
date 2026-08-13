@@ -1,0 +1,148 @@
+.DepositsPageContainer {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.DepositsPageMainTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 30px;
+}
+
+.DepositsList {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.DepositCard {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+  border-bottom: 1px solid #eef0f4;
+  padding-bottom: 35px;
+}
+
+.DepositCard:last-child {
+  border-bottom: none;
+}
+
+.DepositCardImageWrapper {
+  width: 320px;
+  min-width: 320px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+}
+
+.DepositCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.DepositCardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.DepositCardTitle {
+  font-size: 26px;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 12px 0;
+}
+
+.DepositCardDescription {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555555;
+  margin: 0 0 24px 0;
+  max-width: 800px;
+}
+
+.DepositCardStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.DepositStatItem {
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+}
+
+.DepositStatTopLabel {
+  font-size: 12px;
+  color: #8c8c8c;
+  margin-bottom: 2px;
+  min-height: 16px;
+}
+
+.DepositStatValue {
+  font-size: 26px;
+  font-weight: 800;
+  color: #6c11d0;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.DepositStatBottomLabel {
+  font-size: 12px;
+  color: #8c8c8c;
+}
+
+/* iPhone և բջջային սարքերի հարմարեցում (Responsive Design) */
+@media (max-width: 768px) {
+  .DepositsPageContainer {
+    padding: 20px 15px;
+  }
+
+  .DepositsPageMainTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .DepositCard {
+    flex-direction: column;
+    gap: 16px;
+    padding-bottom: 30px;
+  }
+
+  .DepositCardImageWrapper {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    aspect-ratio: 415 / 261;
+  }
+
+  .DepositCardTitle {
+    font-size: 20px;
+  }
+
+  .DepositCardDescription {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+
+  .DepositCardStats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .DepositStatValue {
+    font-size: 20px;
+  }
+}
