@@ -28,6 +28,7 @@ import InstantPayments from './pages/InstantPayments/InstantPayments';
 import NewsPage from './pages/News/NewsPage';
 import Transfers from './pages/Transfers/Transfers';
 import Securities from './pages/Securities/Securities';
+import EvocaSalary from './pages/Sallery/EvocaSalary'; // 👈 ԱՎԵԼԱՑՎԱԾ Է
 
 import Deposits from './pages/Deposits/Deposits';
 import Loans from './pages/Loans/Loans';
@@ -112,9 +113,10 @@ function App() {
           <Route path="/business/:id" element={<BusinessDetail />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/transfers" element={<Transfers />} />
-
-          {/* 📌 ԱՐԺԵԹՂԹԵՐ / ՆԵՐԴՐՈՒՄԱՅԻՆ ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ (ԱՎԵԼԱՑՎԱԾ Է) */}
           <Route path="/securities" element={<Securities />} />
+
+          {/* 📌 EVOCA SALARY (ԱՎԵԼԱՑՎԱԾ Է) */}
+          <Route path="/evoca-salary" element={<EvocaSalary />} />
         </Routes>
 
         <FloatingChat />
