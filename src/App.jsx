@@ -29,6 +29,8 @@ import NewsPage from './pages/News/NewsPage';
 import Transfers from './pages/Transfers/Transfers';
 import Securities from './pages/Securities/Securities';
 import EvocaSalary from './pages/Sallery/EvocaSalary'; // 👈 ԱՎԵԼԱՑՎԱԾ Է
+import EvocaTouch from './pages/EvocaTouch/EvocaTouch';
+
 
 import Deposits from './pages/Deposits/Deposits';
 import Loans from './pages/Loans/Loans';
@@ -117,6 +119,8 @@ function App() {
 
           {/* 📌 EVOCA SALARY (ԱՎԵԼԱՑՎԱԾ Է) */}
           <Route path="/evoca-salary" element={<EvocaSalary />} />
+        
+          <Route path="/evoca-touch" element={<EvocaTouch />} />
         </Routes>
 
         <FloatingChat />

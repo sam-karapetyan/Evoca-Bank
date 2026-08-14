@@ -1,0 +1,257 @@
+.touch-page {
+  width: 100%;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.touch-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px 80px 20px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #222222;
+}
+
+/* Breadcrumb */
+.touch-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #888888;
+  margin-bottom: 25px;
+}
+
+.touch-breadcrumbs .separator {
+  color: #ccc;
+}
+
+.touch-breadcrumbs .active {
+  color: #333333;
+  font-weight: 500;
+}
+
+/* Hero Section */
+.touch-hero-card {
+  display: flex;
+  background-color: #f7f8fa;
+  border-radius: 24px;
+  overflow: hidden;
+  align-items: center;
+  margin-bottom: 40px;
+  border: 1px solid #f0f0f5;
+}
+
+.touch-hero-text {
+  flex: 1;
+  padding: 50px 40px;
+}
+
+.touch-hero-text .badge {
+  display: inline-block;
+  background-color: #f0e6ff;
+  color: #6c11d0;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.touch-hero-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.touch-hero-subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4a4a4a;
+  margin: 0;
+}
+
+.touch-hero-img-box {
+  flex: 1;
+  height: 380px;
+}
+
+.touch-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* General Sections */
+.touch-section {
+  margin-bottom: 45px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #6c11d0;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #333333;
+  max-width: 900px;
+}
+
+/* Grid Cards */
+.touch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.touch-card {
+  background-color: #fafafa;
+  border: 1px solid #ebebeb;
+  border-radius: 16px;
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.touch-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(108, 17, 208, 0.08);
+  border-color: #e2d1f8;
+}
+
+.card-icon {
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.touch-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 10px;
+}
+
+.touch-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555555;
+  margin: 0;
+}
+
+/* Info Box */
+.info-box {
+  background-color: #f9f5ff;
+  border: 1px solid #e7d8fc;
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.info-box h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #6c11d0;
+  margin-bottom: 12px;
+}
+
+.info-box p {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+}
+
+/* ========================================================= */
+/* MEDIA QUERIES (iPhone 17 & Mobile Responsiveness)        */
+/* ========================================================= */
+
+@media (max-width: 768px) {
+  .touch-hero-card {
+    flex-direction: column;
+    border-radius: 18px;
+  }
+
+  .touch-hero-text {
+    padding: 30px 20px;
+  }
+
+  .touch-hero-title {
+    font-size: 26px;
+  }
+
+  .touch-hero-img-box {
+    width: 100%;
+    height: 240px;
+  }
+}
+
+/* iPhone 17 / Modern Mobile Phones (<= 430px) */
+@media (max-width: 430px) {
+  .touch-container {
+    padding: 15px 15px 50px 15px;
+  }
+
+  .touch-breadcrumbs {
+    font-size: 11px;
+  }
+
+  .touch-hero-card {
+    border-radius: 14px;
+  }
+
+  .touch-hero-text {
+    padding: 22px 16px;
+  }
+
+  .touch-hero-title {
+    font-size: 22px;
+  }
+
+  .touch-hero-subtitle {
+    font-size: 13.5px;
+  }
+
+  .touch-hero-img-box {
+    height: 200px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .section-desc,
+  .info-box p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .touch-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .touch-card {
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .touch-card h3 {
+    font-size: 15.5px;
+  }
+
+  .touch-card p {
+    font-size: 13px;
+  }
+
+  .info-box {
+    padding: 18px;
+    border-radius: 14px;
+  }
+}
