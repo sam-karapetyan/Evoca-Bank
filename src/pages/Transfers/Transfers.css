@@ -1,0 +1,202 @@
+.TransfersPage {
+  width: 100%;
+}
+
+/* 1. Վերևի մանուշակագույն Navbar */
+.TransfersTopNav {
+  width: 100%;
+  background-color: #6c11d0;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.TopNavContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 10px;
+}
+
+.TopNavTab {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 16px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+}
+
+.TopNavTab:hover {
+  color: #ffffff;
+}
+
+.TopNavTab.active {
+  color: #ffffff;
+  background-color: #580cb0;
+  border-bottom-color: #ffffff;
+}
+
+/* 2. Breadcrumb */
+.Breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #888888;
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.Breadcrumbs .separator {
+  color: #ccc;
+}
+
+.Breadcrumbs .active {
+  color: #333333;
+  font-weight: 500;
+}
+
+.TransfersContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Hero Card */
+.TransfersHeroCard {
+  display: flex;
+  background-color: #f7f8fa;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  align-items: center;
+}
+
+.TransfersTextSection {
+  flex: 1;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.TransfersTitle {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 24px;
+  line-height: 1.2;
+}
+
+.TransfersDescription {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #4a4a4a;
+  margin: 0;
+}
+
+.TransfersImageSection {
+  flex: 1;
+  height: 380px;
+  overflow: hidden;
+}
+
+.TransfersImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Ընդհանուր դրույթներ */
+.TransfersProvisionsSection {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 0 10px;
+}
+
+.ProvisionsTitle {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111111;
+  margin-bottom: 24px;
+}
+
+.ProvisionText {
+  font-size: 14px;
+  line-height: 1.85;
+  color: #444444;
+  margin-bottom: 20px;
+}
+
+.ProvisionsLink {
+  color: #6c11d0;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Banner 1920x530 */
+.TransfersBannerSection {
+  width: 100%;
+  min-height: 380px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  margin-top: 20px;
+}
+
+.TransfersBannerOverlay {
+  width: 100%;
+  min-height: 380px;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.TransfersBannerText {
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  max-width: 850px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Responsive iPhone/Mobile */
+@media (max-width: 768px) {
+  .TopNavTab {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  .Breadcrumbs {
+    font-size: 11px;
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  .TransfersHeroCard {
+    flex-direction: column;
+    border-radius: 18px;
+  }
+
+  .TransfersTextSection {
+    padding: 24px 20px;
+  }
+
+  .TransfersImageSection {
+    width: 100%;
+    height: 240px;
+  }
+}
