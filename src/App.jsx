@@ -27,6 +27,7 @@ import BusinessDetail from './pages/Bussines/BusinessDetail';
 import InstantPayments from './pages/InstantPayments/InstantPayments';
 import NewsPage from './pages/News/NewsPage';
 import Transfers from './pages/Transfers/Transfers';
+import Securities from './pages/Securities/Securities';
 
 import Deposits from './pages/Deposits/Deposits';
 import Loans from './pages/Loans/Loans';
@@ -96,7 +97,7 @@ function App() {
           {/* Գործընկերներ */}
           <Route path="/partners" element={<GorcnkernerPage />} />
 
-          {/* 📌 ՎԱՐԿԵՐ ԵՎ ԱՎԱՆԴՆԵՐ (ՈՒՂՂՎԱԾ) */}
+          {/* ՎԱՐԿԵՐ ԵՎ ԱՎԱՆԴՆԵՐ */}
           <Route path="/loans" element={<Loans />} />
           <Route path="/deposits" element={<Deposits />} />
 
@@ -111,6 +112,9 @@ function App() {
           <Route path="/business/:id" element={<BusinessDetail />} />
           <Route path="/accounts" element={<Accounts />} />
           <Route path="/transfers" element={<Transfers />} />
+
+          {/* 📌 ԱՐԺԵԹՂԹԵՐ / ՆԵՐԴՐՈՒՄԱՅԻՆ ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐ (ԱՎԵԼԱՑՎԱԾ Է) */}
+          <Route path="/securities" element={<Securities />} />
         </Routes>
 
         <FloatingChat />

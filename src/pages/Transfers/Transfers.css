@@ -1,8 +1,10 @@
+/* Ընդհանուր էջի ոճերը */
 .TransfersPage {
   width: 100%;
+  background-color: #fcfcfd;
 }
 
-/* 1. Վերևի մանուշակագույն Navbar */
+/* 1. Top Navbar */
 .TransfersTopNav {
   width: 100%;
   background-color: #6c11d0;
@@ -46,8 +48,8 @@
   gap: 8px;
   font-size: 13px;
   color: #888888;
-  margin-top: 20px;
-  margin-bottom: 25px;
+  margin-top: 25px;
+  margin-bottom: 30px;
 }
 
 .Breadcrumbs .separator {
@@ -63,93 +65,158 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 20px 60px 20px;
   box-sizing: border-box;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Hero Card */
+/* 3. Payment Systems Grid (3 սյունակով քարտեր) */
+.PaymentSystemsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.PaymentSystemCard {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 30px 24px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f0f0f4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.PaymentSystemCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+}
+
+.PaymentCardLogoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90px;
+  margin-bottom: 20px;
+}
+
+.PaymentCardLogo {
+  max-width: 180px;
+  max-height: 80px;
+  object-fit: contain;
+}
+
+.PaymentCardDescription {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: #333333;
+  text-align: center;
+  margin: 0 0 20px 0;
+  white-space: pre-line;
+}
+
+.PaymentCardFooter {
+  margin-top: auto;
+  text-align: center;
+}
+
+.PaymentCardDivider {
+  border: none;
+  border-top: 1px solid #eeeeee;
+  margin: 20px 0;
+}
+
+.FooterSection {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.FooterTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #6c11d0; /* Evoca-ի մանուշակագույն */
+  line-height: 1.4;
+}
+
+.FooterValue {
+  font-size: 13px;
+  color: #444444;
+  font-weight: 500;
+}
+
+.PhoneValue {
+  font-weight: 700;
+  color: #222222;
+  font-size: 14px;
+}
+
+/* Hero & Provisions (1-ին էջ) */
 .TransfersHeroCard {
   display: flex;
   background-color: #f7f8fa;
   border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   align-items: center;
 }
 
 .TransfersTextSection {
   flex: 1;
   padding: 50px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .TransfersTitle {
   font-size: 32px;
   font-weight: 800;
-  color: #111111;
+  color: #111;
   margin-bottom: 24px;
-  line-height: 1.2;
 }
 
 .TransfersDescription {
   font-size: 15px;
   line-height: 1.7;
   color: #4a4a4a;
-  margin: 0;
 }
 
 .TransfersImageSection {
   flex: 1;
   height: 380px;
-  overflow: hidden;
 }
 
 .TransfersImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
-/* Ընդհանուր դրույթներ */
 .TransfersProvisionsSection {
   margin-top: 50px;
-  margin-bottom: 50px;
-  padding: 0 10px;
 }
 
 .ProvisionsTitle {
   font-size: 28px;
   font-weight: 800;
-  color: #111111;
   margin-bottom: 24px;
 }
 
 .ProvisionText {
   font-size: 14px;
   line-height: 1.85;
-  color: #444444;
+  color: #444;
   margin-bottom: 20px;
 }
 
-.ProvisionsLink {
-  color: #6c11d0;
-  font-weight: 700;
-  text-decoration: underline;
-}
-
-/* Banner 1920x530 */
 .TransfersBannerSection {
   width: 100%;
   min-height: 380px;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  margin-top: 20px;
 }
 
 .TransfersBannerOverlay {
@@ -160,43 +227,29 @@
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  box-sizing: border-box;
 }
 
 .TransfersBannerText {
-  color: #ffffff;
+  color: #fff;
   font-size: 26px;
   font-weight: 700;
   text-align: center;
   max-width: 850px;
-  line-height: 1.5;
-  margin: 0;
 }
 
-/* Responsive iPhone/Mobile */
-@media (max-width: 768px) {
-  .TopNavTab {
-    padding: 12px 14px;
-    font-size: 13px;
+/* Responsive UI / Mobile */
+@media (max-width: 992px) {
+  .PaymentSystemsGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  .Breadcrumbs {
-    font-size: 11px;
-    margin-top: 12px;
-    margin-bottom: 16px;
+@media (max-width: 600px) {
+  .PaymentSystemsGrid {
+    grid-template-columns: 1fr;
   }
-
+  
   .TransfersHeroCard {
     flex-direction: column;
-    border-radius: 18px;
-  }
-
-  .TransfersTextSection {
-    padding: 24px 20px;
-  }
-
-  .TransfersImageSection {
-    width: 100%;
-    height: 240px;
   }
 }

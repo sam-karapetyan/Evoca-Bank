@@ -47,9 +47,12 @@ function Headernerqev({ onOpenBurger }) {
             <NavLink to="/transfers" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
               Փոխանցումներ
             </NavLink>
-            <NavLink to="/investment" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
+            
+            {/* 📌 ՈՒՂՂՎԱԾ Է․ /investment -> /securities */}
+            <NavLink to="/securities" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
               Արժեթղթեր
             </NavLink>
+
             <NavLink to="/evoca-salary" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
               EvocaSALARY
             </NavLink>
