@@ -66,7 +66,7 @@ function Home() {
 function App() {
   return (
     <Router>
-      <ScrollToTop />
+      <ScrollToTop ideal popular kent />
       
       <div>
         <Header />
