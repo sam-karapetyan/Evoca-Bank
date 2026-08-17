@@ -32,7 +32,6 @@ function Accounts() {
   return (
     <div className="AccountsPage">
       <div className="AccountsContainer">
-        {/* Վերևի գլխավոր բլոկ (տեքստ + նկար) */}
         <div className="AccountsHeroCard">
           <div className="AccountsTextSection">
             <h1 className="AccountsTitle">{hero?.title}</h1>
@@ -50,13 +49,11 @@ function Accounts() {
           </div>
         </div>
 
-        {/* Ծանուցման / Պայմանագրային տեքստ */}
         <div className="AccountsNoticeSection">
           <p dangerouslySetInnerHTML={{ __html: notice || '' }} />
         </div>
       </div>
 
-      {/* Լայն բանները (Գրասենյակի նկարով և տեքստով) */}
       {banner?.image && (
         <div
           className="AccountsBannerSection"

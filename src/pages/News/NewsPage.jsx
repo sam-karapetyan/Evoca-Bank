@@ -446,7 +446,6 @@ function NewsPage() {
         }
       `}</style>
 
-      {/* 1. Top Header & Tabs Section */}
       <div className="news-header-section">
         <div className="news-breadcrumb">
           <Link to="/">Գլխավոր</Link>
@@ -459,7 +458,6 @@ function NewsPage() {
       </div>
 
       <div className="news-body-content">
-        {/* 2. Top Hero Card */}
         <div className="hero-featured-card">
           <div className="hero-image-box">
             <img src={featuredNewsData.image} alt={featuredNewsData.title} />
@@ -479,7 +477,6 @@ function NewsPage() {
           </div>
         </div>
 
-        {/* 3. Cards Grid */}
         <div className="news-grid">
           {filteredNews.slice(0, visibleCount).map((item) => (
             <div key={item.id} className="news-card">
@@ -506,7 +503,6 @@ function NewsPage() {
           ))}
         </div>
 
-        {/* 4. Load More & Pagination Section */}
         <div className="load-more-container">
           <button 
             className="load-more-btn" 

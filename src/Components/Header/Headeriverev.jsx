@@ -147,7 +147,6 @@ function Headeriverev() {
           <NavLink to="/business"><span>Բիզնես</span></NavLink>
           <NavLink to="/instant-payments"><span>Ակնթարթային վճարումներ</span></NavLink>
           
-          {/* 📌 2. «ՄԵՐ ՄԱՍԻՆ» ԿՈՃԱԿԸ, ՈՐԸ ՍԵՂՄԵԼԻՍ ՏԱՆՈՒՄ Է ՔՈ ԳՐԱԾ PATH-ՈՎ ԷՋԸ */}
           <NavLink to={ABOUT_PAGE_PATH}><span>Մեր մասին</span></NavLink>
           
           <NavLink to="/news"><span>Նորություններ</span></NavLink>

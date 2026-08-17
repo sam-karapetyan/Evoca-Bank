@@ -23,7 +23,6 @@ function GorcnkernerPage() {
   return (
     <div className="partners-page-container">
       
-      {/* Վերևի Sub-Header Նավիգացիան (React Router Link-երով) */}
       <div className="partners-sub-header">
         <div className="partners-sub-header-inner">
           <Link to="/about-general" className="sub-nav-item">Ընդհանուր</Link>
@@ -38,7 +37,6 @@ function GorcnkernerPage() {
       </div>
 
       <div className="partners-content">
-        {/* Breadcrumb path */}
         <div className="partners-breadcrumb">
           <span><Link to="/">🏠</Link> &gt; Մեր մասին &gt; Evoca-ի մասին &gt; </span>
           <strong>Գործընկերներ</strong>
@@ -46,7 +44,6 @@ function GorcnkernerPage() {
 
         <h1 className="partners-main-title">Գործընկերներ</h1>
 
-        {/* 3x3 Grid (9 բլոկ) */}
         <div className="partners-grid">
           {partnersList.map((item) => {
             if (item.isCenterHand) {
@@ -74,7 +71,6 @@ function GorcnkernerPage() {
           })}
         </div>
 
-        {/* Էջադրում (Pagination) */}
         <div className="partners-pagination">
           <button className="pagination-arrow prev-arrow">&larr;</button>
           <span className="pagination-page active-page">1</span>

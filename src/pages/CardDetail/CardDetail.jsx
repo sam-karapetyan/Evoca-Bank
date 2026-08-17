@@ -104,7 +104,6 @@ function CardDetail() {
 
   return (
     <div className="card-detail-page">
-      {/* Subnav Navigation Bar */}
       <div className="card-detail-subnav">
         <div className="card-subnav-inner">
           <button 
@@ -128,7 +127,6 @@ function CardDetail() {
         </div>
       </div>
 
-      {/* ՏԱՐԲԵՐԱԿ 1: ՔԱՐՏԵՐ TAB */}
       {activeTab === 'cards' && (
         <>
           <div className="card-hero-container">
@@ -172,7 +170,6 @@ function CardDetail() {
         </>
       )}
 
-      {/* ՏԱՐԲԵՐԱԿ 2: ՔԱՐՏԵՐԻ ՏՐԱՄԱԴՐՈՒՄ ԵՎ ՍՊԱՍԱՐԿՈՒՄ TAB (ԱԿՈՐԴԵՈՆՆԵՐ) */}
       {activeTab === 'service' && (
         <div className="card-content-section">
           <div className="card-content-container">
@@ -207,11 +204,9 @@ function CardDetail() {
         </div>
       )}
 
-      {/* ՏԱՐԲԵՐԱԿ 3: ՍՈՑԻԱԼԱԿԱՆ ԱՊԱՀՈՎՈՒԹՅԱՆ ՎՃԱՐԱՅԻՆ ՔԱՐՏԵՐ TAB */}
       {activeTab === 'social' && (
         <div className="card-content-section">
           <div className="card-content-container">
-            {/* 1. Hero / Banner բաժին */}
             <div className="social-hero-banner" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', backgroundColor: '#f4effc', borderRadius: '16px', overflow: 'hidden', marginBottom: '30px' }}>
               <div style={{ flex: '1 1 400px', padding: '40px' }}>
                 <h1 style={{ color: '#2b2b2b', fontSize: '28px', marginBottom: '20px', fontWeight: 'bold' }}>
@@ -233,7 +228,6 @@ function CardDetail() {
               </div>
             </div>
 
-            {/* 2. Հիմնական տեքստային տեղեկատվություն */}
             <div style={{ lineHeight: '1.8', color: '#333', marginBottom: '30px', fontSize: '15px' }}>
               <p style={{ marginBottom: '15px' }}>
                 Քարտերը տրամադրում և սպասարկում ենք մեր կողմից հաստատված Կենսաթոշակային քարտերի տրամադրման և սպասարկման սակագների համաձայն:
@@ -254,7 +248,6 @@ function CardDetail() {
               )}
             </div>
 
-            {/* 3. Վճարային քարտերով կատարվող գործառնություններ */}
             {socialData?.operationsList && (
               <div style={{ marginBottom: '35px' }}>
                 <h2 style={{ fontSize: '22px', color: '#2b2b2b', marginBottom: '15px', fontWeight: 'bold' }}>
@@ -269,7 +262,6 @@ function CardDetail() {
               </div>
             )}
 
-            {/* 4. Օգտակար տեղեկատվություն */}
             {socialData?.usefulList && (
               <div style={{ marginBottom: '35px' }}>
                 <h2 style={{ fontSize: '22px', color: '#2b2b2b', marginBottom: '15px', fontWeight: 'bold' }}>
@@ -286,7 +278,6 @@ function CardDetail() {
               </div>
             )}
 
-            {/* 5. Զգուշացում */}
             {socialData?.warningList && (
               <div style={{ marginBottom: '35px' }}>
                 <h2 style={{ fontSize: '22px', color: '#d32f2f', marginBottom: '15px', fontWeight: 'bold' }}>
@@ -303,7 +294,6 @@ function CardDetail() {
         </div>
       )}
 
-      {/* Այլ Նորություններ */}
       <div className="card-content-section" style={{ paddingTop: 0 }}>
         <div className="card-content-container">
           <div className="other-news-section">
@@ -323,7 +313,6 @@ function CardDetail() {
         </div>
       </div>
 
-      {/* Բաններ */}
       <div style={{ marginTop: '40px' }}>
         <NodebukHer />
       </div>

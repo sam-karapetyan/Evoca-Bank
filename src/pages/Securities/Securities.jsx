@@ -45,7 +45,6 @@ function Securities() {
           ))}
         </div>
 
-        {/* Hero Section */}
         <div className="SecuritiesHeroCard">
           <div className="SecuritiesTextSection">
             <h1 className="SecuritiesTitle">{hero?.title}</h1>
@@ -62,7 +61,6 @@ function Securities() {
           </div>
         </div>
 
-        {/* Content Section */}
         <div className="SecuritiesContent">
           <p className="MainParagraph">{content?.mainParagraph}</p>
 
@@ -75,7 +73,6 @@ function Securities() {
 
           <p className="DetailText">{content?.detailText2}</p>
 
-          {/* Contact Details */}
           <div className="ContactSection">
             <div className="ContactGroup">
               <h3 className="ContactTitle">Հասցե`</h3>
@@ -89,7 +86,6 @@ function Securities() {
                 <strong className="PhoneIndent">{contact?.phone2}</strong>
               </p>
               
-              {/* Messengers */}
               <div className="SocialIcons">
                 <span className="SocialIcon whatsapp">💬</span>
                 <span className="SocialIcon telegram">✈️</span>
@@ -107,7 +103,6 @@ function Securities() {
             </div>
           </div>
 
-          {/* Warning Box */}
           <div className="WarningBox">
             <p dangerouslySetInnerHTML={{ __html: warning || '' }} />
           </div>

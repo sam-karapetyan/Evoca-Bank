@@ -4,7 +4,7 @@ import { db } from '../../firebase';
 import './Transfers.css';
 
 function Transfers() {
-  const [activeTab, setActiveTab] = useState('transfers'); // 'transfers' կամ 'payment-systems'
+  const [activeTab, setActiveTab] = useState('transfers'); 
   const [pageData, setPageData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -32,7 +32,6 @@ function Transfers() {
 
   return (
     <div className="TransfersPage">
-      {/* Վերևի մանուշակագույն Navbar */}
       <div className="TransfersTopNav">
         <div className="TopNavContainer">
           <button
@@ -62,7 +61,6 @@ function Transfers() {
           </span>
         </div>
 
-        {/* 1-ԻՆ ԷՋ: ԴՐԱՄԱԿԱՆ ՓՈԽԱՆՑՈՒՄՆԵՐ */}
         {activeTab === 'transfers' && (
           <>
             <div className="TransfersHeroCard">
@@ -93,20 +91,16 @@ function Transfers() {
           </>
         )}
 
-        {/* 2-ՐԴ ԷՋ: ՎՃԱՐԱՅԻՆ ՀԱՄԱԿԱՐԳԵՐ */}
         {activeTab === 'payment-systems' && (
           <div className="PaymentSystemsGrid">
             {paymentSystems?.map((item) => (
               <div className="PaymentSystemCard" key={item.id}>
-                {/* Լոգո */}
                 <div className="PaymentCardLogoContainer">
                   <img src={item.logo} alt="Payment System Logo" className="PaymentCardLogo" />
                 </div>
 
-                {/* Նկարագրություն */}
                 <p className="PaymentCardDescription">{item.description}</p>
 
-                {/* Սպասարկման մանրամասներ */}
                 {(item.phoneTitle || item.scheduleTitle) && (
                   <div className="PaymentCardFooter">
                     <hr className="PaymentCardDivider" />
@@ -141,7 +135,6 @@ function Transfers() {
         )}
       </div>
 
-      {/* Բաններ միայն առաջին էջում */}
       {activeTab === 'transfers' && banner?.image && (
         <div
           className="TransfersBannerSection"

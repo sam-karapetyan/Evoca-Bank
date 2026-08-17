@@ -45,14 +45,12 @@ function Business() {
   return (
     <div className="business-page">
       <div className="business-container">
-        {/* Breadcrumb */}
         <div className="business-breadcrumb">
           <Link to="/">🏠 Գլխավոր</Link> &gt; <span>Բիզնես</span>
         </div>
 
         <h1 className="business-main-title">Բիզնես վարկեր</h1>
 
-        {/* Business Horizontal Cards List */}
         <div className="business-list">
           {businessItems.map((item) => (
             <div key={item.id} className="business-horizontal-card">
@@ -64,7 +62,6 @@ function Business() {
                 <h2>{item.title}</h2>
                 <p className="business-desc">{item.description}</p>
 
-                {/* Stats row */}
                 <div className="business-stats-row">
                   {item.stats.map((stat, idx) => (
                     <div key={idx} className="business-stat-item">

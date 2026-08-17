@@ -44,7 +44,6 @@ const paymentCategories = [
 function InstantPayments() {
   return (
     <div className="instant-payments-wrapper">
-      {/* 1. Top WebPayment Bar */}
       <div className="webpayment-sub-header">
         <div className="webpayment-header-container">
           <div className="webpayment-logo-section">
@@ -66,7 +65,6 @@ function InstantPayments() {
         </div>
       </div>
 
-      {/* 2. Main Payment Grid Content */}
       <div className="webpayment-main-content">
         <h1 className="webpayment-main-title">Գլխավոր</h1>
 

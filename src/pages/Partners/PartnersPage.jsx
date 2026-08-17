@@ -2,12 +2,10 @@ import React, { useEffect } from 'react';
 import NodebukHer from '../../Components/AnhatMain/6NodbukHer';
 
 function PartnersPage() {
-  // Էջը բացվելիս ավտոմատ բարձրանում է վերև
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Քո ուղարկած 8 գործընկերների նկարները
   const partnersList = [
     { id: 1, img: "https://www.evoca.am/images-cache/partners/1/17104032198171/348x150_grayscale.png", name: "Partner 1" },
     { id: 2, img: "https://www.evoca.am/images-cache/partners/1/17077436606929/348x150_grayscale.png", name: "Partner 2" },
@@ -118,7 +116,6 @@ function PartnersPage() {
         </div>
       </div>
 
-      {/* Ներքևի Նոութբուքի Բանները */}
       <div className="partners-bottom-banner">
         <NodebukHer />
       </div>

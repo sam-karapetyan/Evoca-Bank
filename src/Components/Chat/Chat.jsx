@@ -364,7 +364,6 @@ function Chat() {
         </div>
       </div>
 
-      {/* Չաթ */}
       <div className="chat-main">
         {selectedUser ? (
           <>
@@ -428,7 +427,6 @@ function Chat() {
         )}
       </div>
 
-      {/* ՄՈՒՏՔԱԳՐՎՈՂ ԶԱՆԳ */}
       {incomingCall && !activeCall && (
         <div className="call-modal-overlay">
           <div className="incoming-call-card">
@@ -472,7 +470,6 @@ function Chat() {
                 </div>
               )}
 
-              {/* 2. ՔՈ ՏԵՍԱԽՑԻԿԸ (Փոքր պատուհանում) */}
               {activeCall.type === 'video' && (
                 <video 
                   ref={localVideoRef} 

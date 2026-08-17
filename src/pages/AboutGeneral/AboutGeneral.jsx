@@ -59,7 +59,6 @@ function AboutGeneral() {
 
   return (
     <div className="about-general-page">
-      {/* Top Tab Navigation */}
       <div className="about-sub-header">
         <div className="about-sub-header-inner">
           <Link to="/about-general" className={`about-nav-item ${!isStructure && !isShareholders ? 'active' : ''}`}>Ընդհանուր</Link>
@@ -70,7 +69,6 @@ function AboutGeneral() {
       </div>
 
       <div className="about-container">
-        {/* Page 2: Կառուցվածք */}
         {isStructure && (
           <>
             <div className="about-breadcrumb">
@@ -89,7 +87,6 @@ function AboutGeneral() {
           </>
         )}
 
-        {/* Page 3: Բաժնետերեր */}
         {isShareholders && (
           <>
             <div className="about-breadcrumb">
@@ -119,7 +116,6 @@ function AboutGeneral() {
                 </div>
               </div>
 
-              {/* Necessary Information Static Section */}
               <div className="info-section">
                 <h3 className="section-subtitle">ԱՆՀՐԱԺԵՇՏ ՏԵՂԵԿԱՏՎՈՒԹՅՈՒՆ</h3>
                 
@@ -145,7 +141,6 @@ function AboutGeneral() {
           </>
         )}
 
-        {/* Page 1: Ընդհանուր */}
         {!isStructure && !isShareholders && (
           <>
             <div className="about-breadcrumb">

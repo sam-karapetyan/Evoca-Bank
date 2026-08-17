@@ -173,7 +173,7 @@
   }
 }
 .HeaderNavLink.active {
-  color: #1152d4; /* Կամ մանուշակագույն `#6c11d0` */
+  color: #1152d4; 
   border-bottom: 2px solid #1152d4;
   font-weight: 600;
 }

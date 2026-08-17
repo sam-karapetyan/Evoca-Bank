@@ -48,7 +48,6 @@ function Headernerqev({ onOpenBurger }) {
               Փոխանցումներ
             </NavLink>
             
-            {/* 📌 ՈՒՂՂՎԱԾ Է․ /investment -> /securities */}
             <NavLink to="/securities" className={({ isActive }) => isActive ? "HeaderNavLink active" : "HeaderNavLink"}>
               Արժեթղթեր
             </NavLink>

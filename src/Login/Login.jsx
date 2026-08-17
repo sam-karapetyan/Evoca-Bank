@@ -16,7 +16,6 @@ function Login() {
   const [displayName, setDisplayName] = useState('');
   const [error, setError] = useState('');
 
-  // Google-ով մուտք
   const handleGoogleSignIn = async () => {
     try {
       setError('');

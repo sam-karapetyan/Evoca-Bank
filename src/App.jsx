@@ -28,7 +28,7 @@ import InstantPayments from './pages/InstantPayments/InstantPayments';
 import NewsPage from './pages/News/NewsPage';
 import Transfers from './pages/Transfers/Transfers';
 import Securities from './pages/Securities/Securities';
-import EvocaSalary from './pages/Sallery/EvocaSalary'; // 👈 ԱՎԵԼԱՑՎԱԾ Է
+import EvocaSalary from './pages/Sallery/EvocaSalary'; 
 import EvocaTouch from './pages/EvocaTouch/EvocaTouch';
 
 
@@ -51,7 +51,6 @@ function Home() {
     <>
       <Nkarker />
       <NkarDemq />
-      <Ardzancarder />
       <Carder />
       <Hashvich />
       <NodebukHer />
@@ -72,39 +71,33 @@ function App() {
         <Header />
 
         <Routes>
-          {/* Գլխավոր էջեր */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
 
-          {/* Նորություններ */}
+
           <Route path="/news" element={<NewsPage />} />
           <Route path="/all-news" element={<NewsPage />} />
           
-          {/* Ակնթարթային վճարումներ */}
+
           <Route path="/instant-payments" element={<InstantPayments />} />
 
-          {/* Քարտերի երթուղիներ */}
+
           <Route path="/cards" element={<CardDetail />} />
           <Route path="/card-issuance" element={<CardDetail />} />
           <Route path="/social-cards" element={<CardDetail />} />
           <Route path="/evoca-benefits" element={<CardDetail />} />
 
-          {/* Dynamic Routes */}
           <Route path="/card/:cardId" element={<CardDetail />} />
           <Route path="/news/:cardId" element={<CardDetail />} />
           <Route path="/biometric" element={<BiometricDetail />} />
           
-          {/* Մեր մասին */}
           <Route path="/about-general" element={<AboutGeneral />} />
           
-          {/* Գործընկերներ */}
           <Route path="/partners" element={<GorcnkernerPage />} />
 
-          {/* ՎԱՐԿԵՐ ԵՎ ԱՎԱՆԴՆԵՐ */}
           <Route path="/loans" element={<Loans />} />
           <Route path="/deposits" element={<Deposits />} />
 
-          {/* Մյուս SubNav էջերը */}
           <Route path="/structure" element={<AboutGeneral />} />
           <Route path="/shareholders" element={<AboutGeneral />} />
           <Route path="/management" element={<AboutGeneral />} />
@@ -117,7 +110,6 @@ function App() {
           <Route path="/transfers" element={<Transfers />} />
           <Route path="/securities" element={<Securities />} />
 
-          {/* 📌 EVOCA SALARY (ԱՎԵԼԱՑՎԱԾ Է) */}
           <Route path="/evoca-salary" element={<EvocaSalary />} />
         
           <Route path="/evoca-touch" element={<EvocaTouch />} />

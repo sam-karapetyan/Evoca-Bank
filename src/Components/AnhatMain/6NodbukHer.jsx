@@ -269,7 +269,7 @@ function NodebukHer() {
         <h2 className="nodebuk-title">{data.title}</h2>
         <p className="nodebuk-description">{data.description}</p>
         
-        <button className="nodebuk-btn" onClick={() => navigate('/become-client')}>
+        <button className="nodebuk-btn" onClick={() => navigate('/login')}>
           {data.buttonText}
         </button>
 

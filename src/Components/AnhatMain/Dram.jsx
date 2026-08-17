@@ -90,7 +90,6 @@ function Dram() {
             </div>
 
             <div className="dram-content-grid">
-              {/* Փոխարժեքների աղյուսակ */}
               <div className="dram-table">
                 <div className="dram-table-header">
                   <span>Արժույթ</span>
@@ -165,7 +164,6 @@ function Dram() {
               </div>
             </div>
 
-            {/* Ներքևի մասը */}
             <div className="dram-footer-info">
               <span>Թարմացվել է` {dramData.updatedAt}</span>
               <span
@@ -178,7 +176,6 @@ function Dram() {
           </div>
         </div>
 
-        {/* Աջ մաս՝ Քարտեզ */}
         <div className="dram-right">
           <h3 className="dram-map-title">{dramData.locations.title}</h3>
           <p className="dram-map-subtitle">{dramData.locations.subtitle}</p>

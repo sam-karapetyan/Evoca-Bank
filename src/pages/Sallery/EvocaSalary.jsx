@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
-import { db } from '../../firebase'; // Firebase config ֆայլի հղումը
+import { db } from '../../firebase'; 
 import './EvocaSalary.css';
 
 function EvocaSalary() {
@@ -31,7 +31,6 @@ function EvocaSalary() {
 
   return (
     <div className="salary-page">
-      {/* Hero Section */}
       <section className="salary-hero">
         <div className="salary-hero-text">
           <h1 className="salary-title">{hero?.title}</h1>
@@ -47,15 +46,12 @@ function EvocaSalary() {
         </div>
       </section>
 
-      {/* Intro Description */}
       <section className="salary-intro">
         <p dangerouslySetInnerHTML={{ __html: intro || '' }} />
       </section>
 
-      {/* Benefits Sections */}
       <section className="salary-sections">
         
-        {/* Card 1: Mastercard Gold */}
         {mastercardGold && (
           <div className="salary-card">
             <h2>
@@ -70,7 +66,6 @@ function EvocaSalary() {
           </div>
         )}
 
-        {/* Card 2: Evoca Travel Card */}
         {travelCard && (
           <div className="salary-card">
             <h2>
@@ -85,7 +80,6 @@ function EvocaSalary() {
           </div>
         )}
 
-        {/* Card 3: Evoca Benefits */}
         {benefitsCard && (
           <div className="salary-card">
             <h2>
@@ -104,7 +98,6 @@ function EvocaSalary() {
           </div>
         )}
 
-        {/* Card 4: Loans */}
         {loansCard && (
           <div className="salary-card">
             <h2>

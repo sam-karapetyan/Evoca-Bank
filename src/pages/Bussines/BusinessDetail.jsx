@@ -95,14 +95,12 @@ function BusinessDetail() {
 
   return (
     <div className="evoca-detail-page">
-      {/* 1. Purple Header Bar with Badge */}
       <div className="evoca-top-purple-bar">
         <div className="evoca-container">
           <span className="evoca-category-badge">{item.category}</span>
         </div>
       </div>
 
-      {/* 2. Top Hero Banner Section */}
       <div className="evoca-hero-section">
         <div className="evoca-container evoca-hero-container">
           <div className="evoca-hero-text">
@@ -115,13 +113,10 @@ function BusinessDetail() {
         </div>
       </div>
 
-      {/* 3. Main Content Two-Column Grid */}
       <div className="evoca-container evoca-main-grid">
-        {/* Left Column - Detailed Description */}
         <div className="evoca-left-content">
           <p className="evoca-main-desc">{item.description}</p>
 
-          {/* Suitable List */}
           <h3 className="evoca-section-title">{item.suitableTitle}</h3>
           <ul className="evoca-bullet-list">
             {item.suitableList.map((text, idx) => (
@@ -131,7 +126,6 @@ function BusinessDetail() {
             ))}
           </ul>
 
-          {/* Provided List */}
           <h3 className="evoca-section-title">{item.providedTitle}</h3>
           <ul className="evoca-bullet-list">
             {item.providedList.map((row, idx) => (
@@ -152,10 +146,8 @@ function BusinessDetail() {
           </div>
         </div>
 
-        {/* Right Column - Floating Parameter Card */}
         <div className="evoca-right-sidebar">
           <div className="evoca-param-card">
-            {/* Currencies badges */}
             <div className="evoca-currencies-row">
               {item.currencies.map((curr, idx) => (
                 <div key={idx} className="evoca-curr-badge">
@@ -164,7 +156,6 @@ function BusinessDetail() {
               ))}
             </div>
 
-            {/* Stats rows */}
             <div className="evoca-stats-table">
               {item.stats.map((stat, idx) => (
                 <div key={idx} className="evoca-table-row">

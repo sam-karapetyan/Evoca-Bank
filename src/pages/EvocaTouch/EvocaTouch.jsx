@@ -41,14 +41,12 @@ function EvocaTouch() {
     <div className="touch-page">
       <div className="touch-container">
         
-        {/* Breadcrumb Navigation */}
         <div className="touch-breadcrumbs">
           <span>Անհատ</span>
           <span className="separator">›</span>
           <span className="active">EvocaTOUCH</span>
         </div>
 
-        {/* Hero Banner Section */}
         <div className="touch-hero-card">
           <div className="touch-hero-text">
             <span className="badge">{touchData.hero?.badge}</span>
@@ -64,7 +62,6 @@ function EvocaTouch() {
           </div>
         </div>
 
-        {/* What is EvocaTOUCH Section */}
         <section className="touch-section">
           <h2 className="section-title">{touchData.whatIs?.title}</h2>
           <p 
@@ -73,7 +70,6 @@ function EvocaTouch() {
           />
         </section>
 
-        {/* Features / Advantages Grid */}
         <section className="touch-section">
           <h2 className="section-title">{touchData.advantages?.title}</h2>
           
@@ -88,7 +84,6 @@ function EvocaTouch() {
           </div>
         </section>
 
-        {/* How it works / Accepted Cards */}
         <section className="touch-section info-box">
           <h2>{touchData.acceptedCards?.title}</h2>
           <p dangerouslySetInnerHTML={{ __html: touchData.acceptedCards?.desc }} />

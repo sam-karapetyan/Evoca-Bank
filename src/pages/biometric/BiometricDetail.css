@@ -178,7 +178,6 @@
   margin-top: 60px;
 }
 
-/* Mobile Responsive */
 @media screen and (max-width: 768px) {
   .evoca-bio-title {
     font-size: 22px;
