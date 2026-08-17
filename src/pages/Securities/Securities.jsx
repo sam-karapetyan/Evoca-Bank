@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { ref, onValue } from 'firebase/database';
+import { db } from '../../firebase';
 import './Securities.css';
 
 function Securities() {
-  const heroImageUrl = 'https://www.evoca.am/images-cache/menu/1/16781890566687/780x585.jpg';
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const securitiesRef = ref(db, 'securitiesPage');
+    const unsubscribe = onValue(securitiesRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setData(snapshot.val());
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="SecuritiesPage" style={{ padding: '40px', textAlign: 'center' }}>
+        Բեռնվում է...
+      </div>
+    );
+  }
+
+  const { breadcrumbs, hero, content, contact, warning } = data || {};
 
   return (
     <div className="SecuritiesPage">
@@ -10,66 +35,58 @@ function Securities() {
         
         {/* Breadcrumb Navigation */}
         <div className="Breadcrumbs">
-          <span>Անհատ</span>
-          <span className="separator">›</span>
-          <span>Արժեթղթեր</span>
-          <span className="separator">›</span>
-          <span className="active">Ներդրումային ծառայություններ</span>
+          {breadcrumbs?.map((item, index) => (
+            <React.Fragment key={index}>
+              <span className={index === breadcrumbs.length - 1 ? 'active' : ''}>
+                {item}
+              </span>
+              {index < breadcrumbs.length - 1 && <span className="separator">›</span>}
+            </React.Fragment>
+          ))}
         </div>
 
         {/* Hero Section */}
         <div className="SecuritiesHeroCard">
           <div className="SecuritiesTextSection">
-            <h1 className="SecuritiesTitle">Ներդրումային ծառայություններ</h1>
-            <p className="SecuritiesDescription">
-              Evocabank-ն առաջարկում է ներդրումային ծառայություններ և տալիս
-              եկամտի նոր աղբյուրների հնարավորություն՝ ձեր պահանջներին և
-              ցանկություններին համապատասխան:
-            </p>
+            <h1 className="SecuritiesTitle">{hero?.title}</h1>
+            <p className="SecuritiesDescription">{hero?.description}</p>
           </div>
           <div className="SecuritiesImageSection">
-            <img
-              src={heroImageUrl}
-              alt="Ներդրումային ծառայություններ"
-              className="SecuritiesImage"
-            />
+            {hero?.image && (
+              <img
+                src={hero.image}
+                alt={hero.title || 'Ներդրումային ծառայություններ'}
+                className="SecuritiesImage"
+              />
+            )}
           </div>
         </div>
 
         {/* Content Section */}
         <div className="SecuritiesContent">
-          <p className="MainParagraph">
-            Բանկն իր հաճախորդներին ներդրումային ծառայություններ է մատուցում ինչպես
-            տեղական, այնպես էլ՝ միջազգային շուկաներում: Բանկի կողմից առաջարկվող
-            ծառայությունները հասանելի են իրավաբանական և ֆիզիկական անձ հանդիսացող
-            հաճախորդներին:
-          </p>
+          <p className="MainParagraph">{content?.mainParagraph}</p>
 
-          <h2 className="SectionSubheading">Ինչպե՞ս դառնալ հաճախորդ.</h2>
+          <h2 className="SectionSubheading">{content?.howToBecomeTitle}</h2>
 
-          <p className="DetailText">
-            Ներդրումային ծառայություններից օգտվելու համար անհրաժեշտ է Բանկում
-            ունենալ ընթացիկ բանկային հաշիվ, որի բացման համար պահանջվող
-            փաստաթղթերին կարող եք ծանոթանալ <a href="#here" className="PurpleLink">այստեղ:</a>
-          </p>
+          <p 
+            className="DetailText" 
+            dangerouslySetInnerHTML={{ __html: content?.detailText1 || '' }} 
+          />
 
-          <p className="DetailText">
-            Բրոքերային հաշվի բացման համար անհրաժեշտ է այցելել Բանկի գլխամասային
-            գրասենյակ:
-          </p>
+          <p className="DetailText">{content?.detailText2}</p>
 
           {/* Contact Details */}
           <div className="ContactSection">
             <div className="ContactGroup">
               <h3 className="ContactTitle">Հասցե`</h3>
-              <p className="ContactValue">Երևան, Հանրապետության 44/2</p>
+              <p className="ContactValue">{contact?.address}</p>
             </div>
 
             <div className="ContactGroup">
               <h3 className="ContactTitle">Հետադարձ կապ`</h3>
               <p className="ContactValue">
-                Հեռ.` <strong>374 33 777 453</strong> <br />
-                <strong className="PhoneIndent">374 33 603 055</strong>
+                Հեռ.` <strong>{contact?.phone1}</strong> <br />
+                <strong className="PhoneIndent">{contact?.phone2}</strong>
               </p>
               
               {/* Messengers */}
@@ -83,8 +100,8 @@ function Securities() {
             <div className="ContactGroup">
               <p className="ContactValue">
                 Էլ. հասցե`{' '}
-                <a href="mailto:investsecurities@evoca.am" className="PurpleLink underline">
-                  investsecurities@evoca.am
+                <a href={`mailto:${contact?.email}`} className="PurpleLink underline">
+                  {contact?.email}
                 </a>
               </p>
             </div>
@@ -92,12 +109,7 @@ function Securities() {
 
           {/* Warning Box */}
           <div className="WarningBox">
-            <p>
-              <strong>ՈՒՇԱԴՐՈՒԹՅՈՒՆ.</strong> Ֆինանսական շուկաներում
-              գործարքների իրականացման հետ կապված <strong>ՌԻՍԿԸ ԿՐՈՒՄ Է ՀԱՃԱԽՈՐԴԸ:</strong>{' '}
-              Բանկը <strong>ՉԻ ՓՈԽՀԱՏՈՒՑԵԼՈՒ</strong> հաճախորդի վնասները, եթե
-              դրանք չեն պատճառվել Բանկի կողմից անբարեխիղճ վարքագծի արդյունքում:
-            </p>
+            <p dangerouslySetInnerHTML={{ __html: warning || '' }} />
           </div>
 
         </div>
