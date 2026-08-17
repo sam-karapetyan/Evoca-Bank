@@ -1,56 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { ref, onValue } from 'firebase/database';
+import { db } from '../../firebase';
 import './Deposits.css';
 
-const depositsData = [
-  {
-    id: 1,
-    title: 'Դասական ավանդ',
-    description:
-      'Ձեր անհոգ ապագայի համար առաջարկում ենք ավելացնել Ձեր խնայողությունները՝ ներդնելով Դասական ավանդ՝ կայուն և բարձր եկամտաբերությամբ:',
-    image:
-      'https://www.evoca.am/images-cache/deposits/1/1613390220029/415x261.jpg',
-    stats: [
-      { topLabel: 'Սկսած', value: '100,000 ֏', bottomLabel: 'Գումար' },
-      { topLabel: '', value: '31-1,825 օր', bottomLabel: 'Ժամկետ' },
-      { topLabel: 'Մինչև', value: '10.5% ֏', bottomLabel: 'Տոկոսադրույք' },
-      { topLabel: 'սկսած', value: '100,000 ֏', bottomLabel: 'Համալրման հնարավորություն' },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Մանկական ավանդ',
-    description:
-      'Ձեր երեխայի անհոգ ապագայի համար առաջարկում ենք ներդնել «Մանկական» ավանդ: «Մանկական» ժամկետային ավանդն ընդունում ենք ֆիզիկական անձանցից՝ երեխաների անունով ներդնելու պայմանով:',
-    image:
-      'https://www.evoca.am/images-cache/deposits/1/16133900414285/415x261.jpg',
-    stats: [
-      { topLabel: 'Սկսած', value: '100,000 ֏', bottomLabel: 'Գումար' },
-      { topLabel: 'մինչև', value: '18 լրանալը', bottomLabel: 'Ժամկետ' },
-      { topLabel: '', value: '9.5% ֏', bottomLabel: 'Տոկոսադրույք' },
-      { topLabel: 'սկսած', value: '40,000 ֏', bottomLabel: 'Համալրման հնարավորություն' },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Ավանդ Evoca Online',
-    description:
-      'Ցանկանո՞ւմ եք ներդնել ավանդ բարձր տոկոսադրույքով, բայց չունե՞ք ժամանակ: Ձևակերպե՛ք EvocaONLINE ավանդ՝ առանց բանկ այցելելու: Իսկ մենք բոլոր փաստաթղթերը կուղարկենք Ձեր էլ. հասցեին:',
-    image:
-      'https://www.evoca.am/images-cache/deposits/1/16133900122121/415x261.jpg',
-    stats: [
-      { topLabel: 'Սկսած', value: '100,000 ֏', bottomLabel: 'Գումար' },
-      { topLabel: '', value: '31-1,825 օր', bottomLabel: 'Ժամկետ' },
-      { topLabel: 'մինչև', value: '10.75% ֏', bottomLabel: 'Տոկոսադրույք' },
-    ],
-  },
-];
-
 function Deposits() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const depositsRef = ref(db, 'depositsPage');
+    const unsubscribe = onValue(depositsRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setData(snapshot.val());
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="DepositsPageContainer" style={{ padding: '40px', textAlign: 'center' }}>
+        Բեռնվում է...
+      </div>
+    );
+  }
+
+  const { title, deposits } = data || {};
+
   return (
     <div className="DepositsPageContainer">
-      <h1 className="DepositsPageMainTitle">Ավանդներ</h1>
+      <h1 className="DepositsPageMainTitle">{title || 'Ավանդներ'}</h1>
       <div className="DepositsList">
-        {depositsData.map((deposit) => (
+        {deposits?.map((deposit) => (
           <div key={deposit.id} className="DepositCard">
             <div className="DepositCardImageWrapper">
               <img

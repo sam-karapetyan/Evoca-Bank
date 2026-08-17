@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { ref, onValue } from 'firebase/database';
+import { db } from '../../firebase';
 import './Accounts.css';
 
 function Accounts() {
-  const heroImageUrl = 'https://www.evoca.am/images-cache/menu/1/16111691720299/780x585.jpg';
-  const bannerImageUrl = 'https://www.evoca.am/images-cache/menu/1/16111710051163/1920x530.jpg';
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const accountsRef = ref(db, 'accountsPage');
+    const unsubscribe = onValue(accountsRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setData(snapshot.val());
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="AccountsPage" style={{ padding: '40px', textAlign: 'center' }}>
+        Բեռնվում է...
+      </div>
+    );
+  }
+
+  const { hero, notice, banner } = data || {};
 
   return (
     <div className="AccountsPage">
@@ -11,52 +35,38 @@ function Accounts() {
         {/* Վերևի գլխավոր բլոկ (տեքստ + նկար) */}
         <div className="AccountsHeroCard">
           <div className="AccountsTextSection">
-            <h1 className="AccountsTitle">Հաշիվների բացում և սպասարկում</h1>
-            <p className="AccountsDescription">
-              Առաջարկում ենք բացել դրամային և արտարժութային ընթացիկ բանկային հաշիվներ,
-              որոնց սպասարկումն իրականացնում ենք մեր սակագների համաձայն։ Մեզ մոտ հաշիվներ
-              կարող են բացել Հայաստանի ռեզիդենտ և ոչ ռեզիդենտ ֆիզիկական անձինք։
-            </p>
+            <h1 className="AccountsTitle">{hero?.title}</h1>
+            <p className="AccountsDescription">{hero?.description}</p>
           </div>
 
           <div className="AccountsImageSection">
-            <img
-              src={heroImageUrl}
-              alt="Հաշիվների բացում և սպասարկում"
-              className="AccountsImage"
-            />
+            {hero?.image && (
+              <img
+                src={hero.image}
+                alt={hero.title || 'Հաշիվների բացում և սպասարկում'}
+                className="AccountsImage"
+              />
+            )}
           </div>
         </div>
 
         {/* Ծանուցման / Պայմանագրային տեքստ */}
         <div className="AccountsNoticeSection">
-          <p>
-            Մեր և ձեր պայմանագրային փոխհարաբերությունները կարգավորվում են{' '}
-            <strong>ՀԱՄԱԼԻՐ ԲԱՆԿԱՅԻՆ ԾԱՌԱՅՈՒԹՅՈՒՆՆԵՐԻ ՄԱՏՈՒՑՄԱՆ ՊԱՅՄԱՆՆԵՐՈՎ</strong>,
-            որը հրապարակային առաջարկ (օֆերտա) է և ձեր կողմից համարվում է ընդունված այն պահից,
-            երբ առձեռն կամ հեռակառավարման համակարգերի միջոցով մեզ եք ներկայացնում պատշաճ
-            լրացված և վավերացված բանկային ծառայություններից օգտվելու հայտ/դիմում: Համալիր
-            բանկային ծառայությունների մատուցման պայմաններին կարող եք ծանոթանալ{' '}
-            <a href="#" className="AccountsLink">
-              այստեղ
-            </a>
-            :
-          </p>
+          <p dangerouslySetInnerHTML={{ __html: notice || '' }} />
         </div>
       </div>
 
       {/* Լայն բանները (Գրասենյակի նկարով և տեքստով) */}
-      <div
-        className="AccountsBannerSection"
-        style={{ backgroundImage: `url(${bannerImageUrl})` }}
-      >
-        <div className="AccountsBannerOverlay">
-          <h2 className="AccountsBannerText">
-            Հաշիվներ բացելու նպատակով կարող եք դիմել մեր Գլխամասային գրասենյակ
-            կամ ցանկացած մասնաճյուղ (բացառությամբ «Էրեբունի»-ի)։
-          </h2>
+      {banner?.image && (
+        <div
+          className="AccountsBannerSection"
+          style={{ backgroundImage: `url(${banner.image})` }}
+        >
+          <div className="AccountsBannerOverlay">
+            <h2 className="AccountsBannerText">{banner.text}</h2>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
