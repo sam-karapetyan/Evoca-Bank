@@ -211,45 +211,35 @@ function BurgerMenu({ isOpen, onClose }) {
               <div className="animate-item delay-1">
                 <div className="SectionTitle">Վարկեր</div>
                 <Link to="/loans" className="SectionItem" onClick={onClose}>Վարկեր</Link>
-                <Link to="/credit-history" className="SectionItem" onClick={onClose}>Վարկային պատմություն և սքոր</Link>
-                <Link to="/important-info" className="SectionItem" onClick={onClose}>Կարևոր տեղեկատվություն</Link>
               </div>
 
               <div className="animate-item delay-1">
                 <div className="SectionTitle">Քարտեր</div>
                 <Link to="/cards" className="SectionItem" onClick={onClose}>Քարտեր</Link>
-                <Link to="/card-service" className="SectionItem" onClick={onClose}>Քարտերի տրամադրում և սպասարկում</Link>
-                <Link to="/social-cards" className="SectionItem" onClick={onClose}>Սոցիալական ապահովության վճարային քարտեր</Link>
-                <Link to="/evoca-benefits" className="SectionItem" onClick={onClose}>Evoca Benefits</Link>
+                <Link to="/cards" className="SectionItem" onClick={onClose}>Քարտերի տրամադրում և սպասարկում</Link>
+                <Link to="/cards" className="SectionItem" onClick={onClose}>Սոցիալական ապահովության վճարային քարտեր</Link>
               </div>
 
               <div className="animate-item delay-2">
                 <div className="SectionTitle">Ավանդներ</div>
                 <Link to="/deposits" className="SectionItem" onClick={onClose}>Ավանդներ</Link>
-                <Link to="/deposit-info" className="SectionItem" onClick={onClose}>Կարևոր տեղեկատվություն</Link>
+                <Link to="/deposit" className="SectionItem" onClick={onClose}>Կարևոր տեղեկատվություն</Link>
               </div>
 
               <div className="animate-item delay-2">
                 <div className="SectionTitle">Հաշիվներ</div>
                 <Link to="/accounts" className="SectionItem" onClick={onClose}>Հաշիվների բացում և սպասարկում</Link>
-                <Link to="/metal-accounts" className="SectionItem" onClick={onClose}>Առարկայազուրկ մետաղական հաշիվներ</Link>
-                <Link to="/non-resident" className="SectionItem" onClick={onClose}>Ոչ ռեզիդենտ հաճախորդների հեռավար սպասարկում</Link>
-                <Link to="/safes" className="SectionItem" onClick={onClose}>Պահատուփեր</Link>
               </div>
 
               <div className="animate-item delay-3">
                 <div className="SectionTitle">Փոխանցումներ</div>
                 <Link to="/transfers" className="SectionItem" onClick={onClose}>Դրամական փոխանցումներ</Link>
-                <Link to="/payment-systems" className="SectionItem" onClick={onClose}>Վճարային համակարգեր</Link>
+                <Link to="/transfers" className="SectionItem" onClick={onClose}>Վճարային համակարգեր</Link>
               </div>
 
               <div className="animate-item delay-3">
                 <div className="SectionTitle">Արժեթղթեր</div>
                 <Link to="/investment" className="SectionItem" onClick={onClose}>Ներդրումային ծառայություններ</Link>
-                <Link to="/bonds" className="SectionItem" onClick={onClose}>Պարտատոմսեր</Link>
-                <Link to="/hkd-services" className="SectionItem" onClick={onClose}>ՀԿԴ ծառայություններ</Link>
-                <Link to="/repo" className="SectionItem" onClick={onClose}>Ռեպո/Հակադարձ Ռեպո գործարքներ</Link>
-                <Link to="/evocainvest" className="SectionItem" onClick={onClose}>EvocaINVEST</Link>
               </div>
 
               <div className="animate-item delay-4">
